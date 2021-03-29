@@ -11,8 +11,6 @@ You can request for a free trial license online. [Get a trial license >](https:/
 
 Without a valid license, the SDK can work but will not return a full result.
 
-<kbd><img src="http://www.codepool.biz/wp-content/uploads/2017/04/react-native-barcode-license.png" width="50%">
-
 ## Dependencies
 ```bash
 Node, Python2, JDK, Watchman, Xcode and Android Studio. 
