@@ -1,0 +1,81 @@
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+buildscript {
+  // The Android Gradle plugin is only required when opening the android folder stand-alone.
+  // This avoids unnecessary downloads and potential conflicts when the library is included as a
+  // module dependency in an application project.
+  if (project == rootProject) {
+    repositories {
+      google()
+      jcenter()
+    }
+
+    dependencies {
+      //noinspection GradleDependency
+      classpath("com.android.tools.build:gradle:3.5.3")
+    }
+  }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion safeExtGet('compileSdkVersion', 28)
+  buildToolsVersion safeExtGet('buildToolsVersion', '28.0.3')
+
+  defaultConfig {
+    minSdkVersion safeExtGet('minSdkVersion', 16)
+    targetSdkVersion safeExtGet('targetSdkVersion', 28)
+  }
+
+  flavorDimensions "react-native-dbr"
+
+  productFlavors {
+    general {
+      dimension "react-native-dbr"
+    }
+    mlkit {
+      dimension "react-native-dbr"
+    }
+  }
+
+  lintOptions {
+    abortOnError false
+    warning 'InvalidPackage'
+  }
+
+  packagingOptions {
+    exclude 'META-INF/androidx.exifinterface_exifinterface.version'
+    exclude 'META-INF/proguard/androidx-annotations.pro'
+  }
+}
+
+repositories {
+  google()
+  jcenter()
+  mavenCentral()
+  maven { url "https://jitpack.io" }
+  maven {
+    // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+    url "$rootDir/../node_modules/react-native/android"
+  }
+  maven {
+    url "http://download2.dynamsoft.com/maven/dbr/aar"
+  }
+}
+
+dependencies {
+  def googlePlayServicesVisionVersion = safeExtGet('googlePlayServicesVisionVersion', safeExtGet('googlePlayServicesVersion', '17.0.2'))
+
+  //noinspection GradleDynamicVersion
+  implementation 'com.facebook.react:react-native:+'  // From node_modules
+  implementation "com.google.zxing:core:3.3.3"
+  implementation "com.drewnoakes:metadata-extractor:2.11.0"
+  generalImplementation "com.google.android.gms:play-services-vision:$googlePlayServicesVisionVersion"
+  implementation "androidx.exifinterface:exifinterface:1.0.0"
+  implementation "androidx.annotation:annotation:1.0.0"
+  implementation "androidx.legacy:legacy-support-v4:1.0.0"
+  implementation 'com.dynamsoft:dynamsoftbarcodereader:latest.release@aar'
+}
