@@ -20,8 +20,8 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
-
+*.xcworkspace
+*.xcscheme
 # Android/IntelliJ
 #
 build/

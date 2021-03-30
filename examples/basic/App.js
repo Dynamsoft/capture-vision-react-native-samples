@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-import { RNCamera } from 'RN-mobile-barcode-scanner';
+import { RNCamera } from 'rn-mobile-barcode-scanner';
 import Canvas from 'react-native-canvas';
 const deviceH = Dimensions.get('window').height
 const deviceW = Dimensions.get('window').width
@@ -70,9 +70,7 @@ class CameraScreen extends React.Component {
   renderBarcodes = () => (
     <React.Fragment key={this.state.barcodes.length}>
       {this.state.barcodes.map((barcodes)=><Canvas style={[styles.overlay]} ref={cvs=>this.handleCanvas(cvs,barcodes)}/>)}
-      <View style={{alignSelf:'flex-start'}}>
-        <Text style={styles.textBlock}>{this.state.barcodes[0] ?'result:'+ this.state.barcodes[0].data:'result: null'}</Text>
-      </View>
+      <Text style={styles.textBlock}>{this.state.barcodes[0] ?'result:'+ this.state.barcodes[0].data:'result: null'}</Text>
     </React.Fragment>
   );
 
@@ -155,7 +153,8 @@ const styles = StyleSheet.create({
     height: 'auto',
     color: 'white',
     textAlign: 'center',
-    padding: 10
+    padding: 10,
+    flexWrap: 'wrap'
   },
   overlay: {
     flex: 1,

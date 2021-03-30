@@ -13,7 +13,7 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-canvas": "^0.1.37",
-    "RN-mobile-barcode-scanner": "file:../../",
+    "rn-mobile-barcode-scanner": "file:../../",
     "react-native-webview": "^11.2.0"
   },
   "devDependencies": {
