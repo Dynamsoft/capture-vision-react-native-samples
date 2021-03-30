@@ -36,8 +36,7 @@ react-native run-android
 ```
 
 ### Screenshots
-
-
+<kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
 ## How to Use the Barcode Scanning Module
 
