@@ -12,22 +12,21 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 - Android Studio. 
 
 ## Quick Start
-1. Install the barcode scanner module:
+1. Find the examples/basic folder:
 
     ```bash
-    npm install rn-mobile-barcode-scanner
+    yarn(recommend) or npm install 
     ```
 
-2. Find the basic example located under `node_modules/rn-mobile-barcode-scanner/examples/basic`.
+2. for iOS, find the examples/basic/ios, run `pod install`.
 3. Build and run the demo:
 
     ```bash
-    npm install
     npx react-native run-android
     npx react-native run-ios
     ```
 
-    ### Screenshots
+### Screenshots
     <kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
 ## How to Use the Barcode Scanner Module
@@ -37,9 +36,14 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     ```bash
     react-native init NewProject
     ```
-
-2. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
-
+2. Mostly automatic install with autolinking (RN > 0.60)
+    1). `npm install react-native-camera --save`
+    2). Run `cd ios && pod install && cd ..`
+    Mostly automatic install with react-native link (RN < 0.60)
+    1). `npm install react-native-camera --save`
+    2). `react-native link react-native-camera`
+    
+3. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
     ```json
     "dependencies": {
         "react": "16.9.0",
@@ -48,8 +52,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     },
     ```
 
-3. Use the module in `App.js`.
-
+4. Use the module in `App.js`.
     ```js
     import {NativeModules} from 'react-native';
     import { RNCamera } from 'rn-mobile-barcode-scanner';

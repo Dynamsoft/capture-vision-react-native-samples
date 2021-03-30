@@ -111,14 +111,12 @@
 @end
 #else
 @interface DBRManager ()
-@property(nonatomic, strong) DynamsoftBarcodeReader *barcodeReader;
 @end
 
 @implementation DBRManager
 
 - (instancetype)init {
     self = [super init];
-    _barcodeReader = [[DynamsoftBarcodeReader alloc] initWithLicense:_dbrLicense];
     return self;
 }
 
@@ -127,16 +125,15 @@
 }
 
 - (void)setLicense:(NSString *)license{
-    [self.barcodeReader setLicense:license];
 }
 
 - (void)findBarcodesInFrame:(NSData *)buffer width:(int)width height:(int)height stride:(int)stride completed:(void (^)(NSArray *result))completed;
 {
     NSMutableDictionary *barcode = [NSMutableDictionary dictionaryWithDictionary:@{
-        @"type" : @"test type",
-        @"data" : @"test data",
+        @"type" : @"no DynamsoftBarcodeReader",
+        @"data" : @"no DynamsoftBarcodeReader",
         @"format" : [NSNumber numberWithInteger:0],
-        @"localizationResult" : @[0, 0, 0, 0, 0, 0, 0, 0],
+        @"localizationResult" : @[@0],
         }
     ];
     NSArray *barcodes = @[barcode];

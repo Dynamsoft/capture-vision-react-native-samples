@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41F0D7C26130E5100E2197E /* DynamsoftBarcodeReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41F0D7B26130E5100E2197E /* DynamsoftBarcodeReader.framework */; };
 		C439EAD525A2C3A0003B83B3 /* DBRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EACE25A2C3A0003B83B3 /* DBRManager.m */; };
 		C439EAD625A2C3A0003B83B3 /* RNCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD025A2C3A0003B83B3 /* RNCamera.m */; };
 		C439EAD725A2C3A0003B83B3 /* RNCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD225A2C3A0003B83B3 /* RNCameraManager.m */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		4107012F1ACB723B00C6AA39 /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNCamera.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C41F0D7B26130E5100E2197E /* DynamsoftBarcodeReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DynamsoftBarcodeReader.framework; sourceTree = "<group>"; };
 		C439EACD25A2C3A0003B83B3 /* DBRManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRManager.h; sourceTree = "<group>"; };
 		C439EACE25A2C3A0003B83B3 /* DBRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRManager.m; sourceTree = "<group>"; };
 		C439EACF25A2C3A0003B83B3 /* RNCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCamera.h; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41F0D7C26130E5100E2197E /* DynamsoftBarcodeReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +54,7 @@
 		03E3A82C7527EE01C6852CA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C41F0D7B26130E5100E2197E /* DynamsoftBarcodeReader.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,10 +201,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) .DS_Store CVS .svn .git .hg *.pbproj *.pbxproj node_modules";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Pods",
-					"$(SRCROOT)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -216,13 +217,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
+					"$(SRCROOT)/../examples/basic/ios/Pods/**",
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -260,10 +261,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = "";
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.framework *.gch *.xcode* *.xcassets (*) .DS_Store CVS .svn .git .hg *.pbproj *.pbxproj node_modules";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Pods",
-					"$(SRCROOT)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -272,13 +270,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../ios/Pods/Headers/Public/**",
+					"$(SRCROOT)/../examples/basic/ios/Pods/**",
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(inherited)",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
