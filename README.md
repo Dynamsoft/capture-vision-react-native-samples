@@ -12,13 +12,15 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 - Android Studio. 
 
 ## Quick Start
-1. Find the examples/basic folder:
+1. Find the `examples/basic` folder and install dependencies via `yarn` or `npm`:
 
     ```bash
-    yarn(recommend) or npm install 
+    yarn install 
+    # or
+    npm install 
     ```
 
-2. for iOS, find the examples/basic/ios, run `pod install`.
+   For iOS, change directory to `examples/basic/ios` and run `pod install`.
 3. Build and run the demo:
 
     ```bash
@@ -27,7 +29,8 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     ```
 
 ### Screenshots
-    <kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
+
+<kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
 ## How to Use the Barcode Scanner Module
 
