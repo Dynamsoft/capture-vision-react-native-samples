@@ -27,12 +27,12 @@ Frameworks Search Paths = "${PODS_ROOT}/DynamsoftBarcodeReader"
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/DynamsoftBarcodeReader/DynamsoftBarcodeReader.framework/Headers"
 OTHER_LDFLAGS = $(inherited) -ObjC -framework "DynamsoftBarcodeReader"
 ```
-Then `react-native run-ios`.
+Then `npx react-native run-ios`.
 
 ### Android
 ```bash
 npm install or yarn (npm install -g yarn)
-react-native run-android
+npx react-native run-android
 ```
 
 ### Screenshots
@@ -54,15 +54,15 @@ react-native run-android
     "dependencies": {
         "react": "16.9.0",
         "react-native": "^0.61.1",
-        "react-native-dbr": "^8.2.0"
+        "RN-mobile-barcode-scanner": "^8.2.0"
     },
     ```
 
 3. On `android/settings.gradle`.
 
     ```
-    include(':react-native-dbr')
-    project(':react-native-dbr').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-dbr/android')
+    include(':RN-mobile-barcode-scanner')
+    project(':RN-mobile-barcode-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/RN-mobile-barcode-scanner/android')
     include(':react-native-webview')
     project(':react-native-webview').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webview/android')
    ```
@@ -71,7 +71,7 @@ react-native run-android
 
     ```
     dependencies {
-        implementation project(path: ':react-native-dbr')
+        implementation project(path: ':RN-mobile-barcode-scanner')
     }
     ```
 5. On the MainApplication of your Android project add the import of BarcodeReaderPackage line to:
@@ -94,7 +94,7 @@ react-native run-android
 
     ```javascript
     import {NativeModules} from 'react-native';
-    import { RNCamera } from 'react-native-dbr';
+    import { RNCamera } from 'RN-mobile-barcode-scanner';
     import Canvas from 'react-native-canvas';
     
     state = {

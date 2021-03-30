@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-import { RNCamera } from 'react-native-dbr';
+import { RNCamera } from 'RN-mobile-barcode-scanner';
 import Canvas from 'react-native-canvas';
 const deviceH = Dimensions.get('window').height
 const deviceW = Dimensions.get('window').width
