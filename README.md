@@ -37,7 +37,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 1. Create a new React Native project:
 
     ```bash
-    react-native init NewProject
+    npx react-native init NewProject
     ```
 2. Mostly automatic install with autolinking (RN > 0.60)
     1). `npm install react-native-camera --save`
