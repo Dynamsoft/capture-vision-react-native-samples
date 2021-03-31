@@ -28,12 +28,9 @@ import org.reactnative.barcodedetector.RNBarcodeDetector;
 import org.reactnative.camera.tasks.*;
 import java.io.ByteArrayOutputStream;
 
-import com.google.android.cameraview.HUDCanvasView;
-
 public class RNCameraView extends CameraView implements LifecycleEventListener {
   private ThemedReactContext mThemedReactContext;
   private boolean mDetectedImageInEvent = false;
-  private HUDCanvasView canvasView;
 
   private ScaleGestureDetector mScaleGestureDetector;
 
@@ -70,7 +67,6 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
     mThemedReactContext = themedReactContext;
     themedReactContext.addLifecycleEventListener(this);
 
-    canvasView = findViewById(R.id.hud_view);
     mDensity = getResources().getDisplayMetrics().density;
 
     addCallback(new Callback() {
@@ -133,24 +129,11 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
         serializedBarcode.putString("type", barcode.barcodeFormatString);
       }
       serializedBarcode.putString("data", barcode.barcodeText);
-
-      Log.e("dynamsoft", "mPreviewScale: "+mPreviewScale+" dependOnWid:"+dependOnWid+" w "+getWidth()+" h "+getHeight()+"，mw:"+width+",mh:"+height + canvasView);
       serializedBarcode.putArray("localizationResult", handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,height,width));
       barcodesList.pushMap(serializedBarcode);
-      if (barcode.localizationResult.resultPoints != null) {
-        drawDocumentBox(handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,height,width), barcodes);
-      } else {
-        canvasView.clear();
-      }
     }
 
     return barcodesList;
-  }
-
-  private void drawDocumentBox(WritableArray resultPoint, TextResult[] results) {
-    canvasView.clear();
-    canvasView.setBoundaryPoints(resultPoint, results);
-    canvasView.invalidate();
   }
 
   public WritableArray handlePoints(com.dynamsoft.dbr.Point[] dbrpoint, double previewScale, int srcBitmapHeight, int srcBitmapWidth) {
@@ -169,8 +152,9 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
       }
     }else {
       for (int j = 0; j < 4; j++) {
-        point.x = (int)((srcBitmapHeight - dbrpoint[j].y) * previewScale - (srcBitmapHeight * previewScale - getWidth()) / 2);
-        point.y = (int)(dbrpoint[j].x * previewScale);
+        point.x = (int)(getWidth() / mDensity - dbrpoint[j].y * previewScale);
+        // point.x = (int)((srcBitmapHeight - dbrpoint[j].y) * previewScale - (srcBitmapHeight * previewScale - getWidth()) / 2);
+        point.y = (int)(dbrpoint[j].x * previewScale / mDensity);
         rectCoord.pushInt(point.x);
         rectCoord.pushInt(point.y);
       }

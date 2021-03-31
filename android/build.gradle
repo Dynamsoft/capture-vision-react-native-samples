@@ -14,7 +14,7 @@ buildscript {
 
     dependencies {
       //noinspection GradleDependency
-      classpath("com.android.tools.build:gradle:3.5.3")
+      classpath("com.android.tools.build:gradle:3.2.1")
     }
   }
 }
@@ -30,17 +30,6 @@ android {
     targetSdkVersion safeExtGet('targetSdkVersion', 28)
   }
 
-  flavorDimensions "react-native-dbr"
-
-  productFlavors {
-    general {
-      dimension "react-native-dbr"
-    }
-    mlkit {
-      dimension "react-native-dbr"
-    }
-  }
-
   lintOptions {
     abortOnError false
     warning 'InvalidPackage'
@@ -53,16 +42,17 @@ android {
 }
 
 repositories {
+
   google()
   jcenter()
   mavenCentral()
+  maven {
+    url "http://download2.dynamsoft.com/maven/dbr/aar"
+  }
   maven { url "https://jitpack.io" }
   maven {
     // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
     url "$rootDir/../node_modules/react-native/android"
-  }
-  maven {
-    url "http://download2.dynamsoft.com/maven/dbr/aar"
   }
 }
 
@@ -71,9 +61,8 @@ dependencies {
 
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'  // From node_modules
-  implementation "com.google.zxing:core:3.3.3"
   implementation "com.drewnoakes:metadata-extractor:2.11.0"
-  generalImplementation "com.google.android.gms:play-services-vision:$googlePlayServicesVisionVersion"
+  implementation "com.google.android.gms:play-services-vision:$googlePlayServicesVisionVersion"
   implementation "androidx.exifinterface:exifinterface:1.0.0"
   implementation "androidx.annotation:annotation:1.0.0"
   implementation "androidx.legacy:legacy-support-v4:1.0.0"
