@@ -6,7 +6,7 @@
   "author": {
     "name": "Dynamsoft",
     "email": "support@dynamsoft.com",
-    "url": "http://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx"
+    "url": "https://www.dynamsoft.com/barcode-reader/sdk-mobile/"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,11 @@
     "PDF417",
     "linear barcode",
     "MaxiCode",
-    "multi-code"
+    "DotCode"
+    "multi-code",
+    "barcode scanner",
+    "barcode reader",
+    "barcode SDK"
   ],
   "scripts": {
     "android": "react-native run-android",
