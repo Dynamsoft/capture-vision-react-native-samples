@@ -2,8 +2,6 @@
 
 A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
 
-
-
 ## Development Requirements
 
 - Node
@@ -12,20 +10,22 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 - Android Studio. 
 
 ## Quick Start
-1. Find the examples/basic folder:
+1. Find the `examples/basic` folder and install dependencies via `yarn` or `npm`:
 
     ```bash
-    yarn(recommend) or npm install 
+    yarn install 
+    # or
+    npm install 
     ```
 
-2. for iOS, find the examples/basic/ios, run `pod install`.
-3. Build and run the demo:
+   For iOS, change directory to `examples/basic/ios` and run `pod install`.
+2. Build and run the demo:
 
     ```bash
     npx react-native run-android
     npx react-native run-ios
     ```
-
+    
 ### Screenshots
 <kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
@@ -34,7 +34,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 1. Create a new React Native project:
 
     ```bash
-    react-native init NewProject
+    npx react-native init NewProject
     ```
 2. Mostly automatic install with autolinking (RN > 0.60)
     1). `npm install react-native-camera --save`
@@ -44,7 +44,6 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     2). `react-native link react-native-camera`
     
 3. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
-
     ```json
     "dependencies": {
         "react": "16.9.0",
@@ -54,7 +53,6 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     ```
 
 4. Use the module in `App.js`.
-
     ```js
     import {NativeModules} from 'react-native';
     import { RNCamera } from 'rn-mobile-barcode-scanner';
@@ -107,10 +105,19 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
         </View>
       </RNCamera>  
     ```
+## Try Barcode Scanner Demo App
+
+[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/Google-play.svg" width="50%">](https://play.google.com/store/apps/details?id=com.dynamsoft.demo.dynamsoftbarcodereaderdemo)
+    
+![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/google-play-qrcode.png)
+
+[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/apple-store.svg" width="50%">](https://itunes.apple.com/us/app/barcode-scanner-x/id1120581630?mt=8)
+    
+![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/app-store-qrcode.png)
 
 ## License Key
 
-You can get a [30-day FREE Trial License](https://www.dynamsoft.com/customer/license/trialLicense) online. Without a valid license, the SDK can work but only return obfuscated results.
+You can get a [30-day FREE Trial License](https://www.dynamsoft.com/customer/license/trialLicense/?product=dbr&utm_source=github&package=rn) online. Without a valid license, the SDK can work but only return obfuscated results.
 
 ## Contact Us
 If there are any questions, please feel free to contact support@dynamsoft.com.
