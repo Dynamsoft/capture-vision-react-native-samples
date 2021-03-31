@@ -1,4 +1,5 @@
 # React Native Mobile Barcode Scanner
+![version](https://img.shields.io/npm/v/rn-mobile-barcode-scanner.svg)
 
 A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
 
