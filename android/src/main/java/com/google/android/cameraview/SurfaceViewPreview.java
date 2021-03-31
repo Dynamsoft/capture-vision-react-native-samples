@@ -29,12 +29,10 @@ import org.reactnative.camera.R;
 class SurfaceViewPreview extends PreviewImpl {
 
     final SurfaceView mSurfaceView;
-    public HUDCanvasView canvasView;
 
     SurfaceViewPreview(Context context, ViewGroup parent) {
         final View view = View.inflate(context, R.layout.surface_view, parent);
         mSurfaceView = (SurfaceView) view.findViewById(R.id.surface_view);
-        canvasView = view.findViewById(R.id.hud_view);
 
         final SurfaceHolder holder = mSurfaceView.getHolder();
         //noinspection deprecation

@@ -15,7 +15,6 @@ import org.reactnative.camera.utils.ImageDimensions;
 import org.reactnative.frame.RNFrame;
 import org.reactnative.frame.RNFrameFactory;
 import org.reactnative.barcodedetector.RNBarcodeDetector;
-import com.google.android.cameraview.HUDCanvasView;
 
 public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, TextResult[]> {
 
