@@ -8,6 +8,7 @@
     "email": "support@dynamsoft.com",
     "url": "https://www.dynamsoft.com/barcode-reader/sdk-mobile/"
   },
+  "homepage": "https://www.dynamsoft.com/barcode-reader/sdk-mobile/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dynamsoft/RN-mobile-barcode-scanner.git"
