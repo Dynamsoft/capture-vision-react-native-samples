@@ -21,6 +21,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url "http://download2.dynamsoft.com/maven/dbr/aar"
+        }
         mavenLocal()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
