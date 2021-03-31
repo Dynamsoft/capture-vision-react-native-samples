@@ -2,8 +2,6 @@
 
 A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
 
-
-
 ## Development Requirements
 
 - Node
@@ -119,7 +117,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 
 ## License Key
 
-You can get a [30-day FREE Trial License](https://www.dynamsoft.com/customer/license/trialLicense) online. Without a valid license, the SDK can work but only return obfuscated results.
+You can get a [30-day FREE Trial License](https://www.dynamsoft.com/customer/license/trialLicense/?product=dbr&utm_source=github&package=rn) online. Without a valid license, the SDK can work but only return obfuscated results.
 
 ## Contact Us
 If there are any questions, please feel free to contact support@dynamsoft.com.
