@@ -38,12 +38,13 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     npx react-native init NewProject
     ```
 2. Mostly automatic install with autolinking (RN > 0.60)
-    1). `npm install react-native-camera --save`
+    ```bash
+    1). `npm install RN-mobile-barcode-scanner --save`
     2). Run `cd ios && pod install && cd ..`
     Mostly automatic install with react-native link (RN < 0.60)
-    1). `npm install react-native-camera --save`
-    2). `react-native link react-native-camera`
-    
+    1). `npm install RN-mobile-barcode-scanner --save`
+    2). `react-native link RN-mobile-barcode-scanner`
+    ```
 3. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
     ```json
     "dependencies": {
