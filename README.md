@@ -23,7 +23,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 
     ```bash
     npx react-native run-android
-    npx react-native run-ios
+    npx react-native run-ios or Open the basic.xcworkspace project with xcode and run(recommend)
     ```
 
 ### Screenshots
