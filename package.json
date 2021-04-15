@@ -1,6 +1,6 @@
 {
   "name": "RN-mobile-barcode-scanner",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "Dynamsoft Barcode Reader for React Native",
   "main": "index.js",
   "author": {
