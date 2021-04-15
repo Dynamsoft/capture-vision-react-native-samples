@@ -21,7 +21,7 @@ buildscript {
 
 allprojects {
     repositories {
-	maven {
+        maven {
             url "http://download2.dynamsoft.com/maven/dbr/aar"
         }
         mavenLocal()
