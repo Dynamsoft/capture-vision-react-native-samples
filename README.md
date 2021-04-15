@@ -24,7 +24,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     ```bash
     Android: npx react-native run-android
     
-    iOS: cd ios & xcodebuild -workspace basic.xcworkspace -configuration Debug -scheme RNCamera -sdk iphoneos ONLY_ACTIVE_ARCH=YES build
+    iOS: xcodebuild -workspace basic.xcworkspace -configuration Debug -scheme RNCamera -sdk iphoneos ONLY_ACTIVE_ARCH=YES build
          thhen cd .. & npx react-native run-ios
     ```
 
