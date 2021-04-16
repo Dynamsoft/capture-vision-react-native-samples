@@ -29,6 +29,8 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
          then cd .. & npx react-native run-ios
     ```
     
+    Note: Please don't run the application on the simulator because of the camera requirement.
+    
 ### Screenshots
 <kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
