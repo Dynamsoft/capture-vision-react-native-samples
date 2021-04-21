@@ -16,7 +16,7 @@
 - (instancetype)init
 {
   if (self = [super init]) {
-      self.barcodeReader = [[DynamsoftBarcodeReader alloc] initWithLicense:_dbrLicense];
+      self.barcodeReader = [[DynamsoftBarcodeReader alloc] init];
       self.settings = [self.barcodeReader getRuntimeSettings:nil];
       self.h = UIScreen.mainScreen.bounds.size.height;
       self.w = UIScreen.mainScreen.bounds.size.width;
@@ -30,9 +30,11 @@
 }
 
 - (void)setDbrLicense:(NSString *)dbrLicense{
-    [self.barcodeReader setLicense:dbrLicense];
-    self.settings.expectedBarcodesCount = 1;
-    [self.barcodeReader updateRuntimeSettings:self.settings error:nil];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self.barcodeReader setLicense:dbrLicense];
+        self.settings.expectedBarcodesCount = 1;
+        [self.barcodeReader updateRuntimeSettings:self.settings error:nil];
+    });
 }
 
 - (void)setFormat:(id)json queue:(dispatch_queue_t)sessionQueue {
