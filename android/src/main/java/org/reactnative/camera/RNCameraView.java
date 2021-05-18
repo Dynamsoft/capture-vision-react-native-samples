@@ -159,7 +159,6 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
         rectCoord.pushInt(point.y);
       }
     }
-    Log.e("dynamsoft", "rectCoord: "+rectCoord+ " de "+mDensity);
     return rectCoord;
   }
 
@@ -171,7 +170,7 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
     }
     float width = right - left;
     float height = bottom - top;
-    float ratio = getAspectRatio().toFloat();
+    float ratio = getAspectRatio() == null ? Constants.DEFAULT_ASPECT_RATIO.toFloat() : getAspectRatio().toFloat();
     int orientation = getResources().getConfiguration().orientation;
     int correctHeight;
     int correctWidth;
@@ -247,7 +246,7 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
     if (shouldDetectBarcodes && mDynamsoftBarcodeReader == null) {
         mDynamsoftBarcodeReader = new RNBarcodeDetector();
         mDynamsoftBarcodeReader.setBarcodeFormat(mBarcodeFormat);
-      mDynamsoftBarcodeReader.setBarcodeFormat2(mBarcodeFormat2);
+        mDynamsoftBarcodeReader.setBarcodeFormat2(mBarcodeFormat2);
     }
     this.mShouldDetectBarcodes = shouldDetectBarcodes;
     setScanning(mShouldDetectBarcodes);
@@ -268,30 +267,19 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
   }
 
   public void setLicense(String license) {
-    mLicense = license;
-    RNBarcodeDetector.license = license;
+    if (mDynamsoftBarcodeReader != null) {
+      mLicense = license;
+      RNBarcodeDetector.license = license;
+      mDynamsoftBarcodeReader = new RNBarcodeDetector();
+      mDynamsoftBarcodeReader.setBarcodeFormat(mBarcodeFormat);
+      mDynamsoftBarcodeReader.setBarcodeFormat2(mBarcodeFormat2);
+    }
   }
 
   public void onBarcodesDetected(WritableArray barcodesDetected) {
     if (!mShouldDetectBarcodes) {
       return;
     }
-
-    // See discussion in https://github.com/react-native-community/react-native-camera/issues/2786
-//    final byte[] compressedImage;
-//    if (mDetectedImageInEvent) {
-//      try {
-//        // https://stackoverflow.com/a/32793908/122441
-//        final YuvImage yuvImage = new YuvImage(imageData, ImageFormat.NV21, width, height, null);
-//        final ByteArrayOutputStream imageStream = new ByteArrayOutputStream();
-//        yuvImage.compressToJpeg(new Rect(0, 0, width, height), 100, imageStream);
-//        compressedImage = imageStream.toByteArray();
-//      } catch (Exception e) {
-//        throw new RuntimeException(String.format("Error decoding imageData from NV21 format (%d bytes)", imageData.length), e);
-//      }
-//    } else {
-//      compressedImage = null;
-//    }
 
     RNCameraViewHelper.emitBarcodesDetectedEvent(this, barcodesDetected);
   }
