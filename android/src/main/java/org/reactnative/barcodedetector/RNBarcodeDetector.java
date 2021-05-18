@@ -69,7 +69,7 @@ public class RNBarcodeDetector {
     }
 
     public void setBarcodeFormat2(int barcodeFormat2) {
-        if (barcodeFormat2 != mBarcodeFormat) {
+        if (barcodeFormat2 != mBarcodeFormat2) {
             mSettings.barcodeFormatIds_2 = barcodeFormat2;
             mBarcodeFormat2 = barcodeFormat2;
             try{
