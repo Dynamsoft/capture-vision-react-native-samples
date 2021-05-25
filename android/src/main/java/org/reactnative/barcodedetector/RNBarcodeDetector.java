@@ -32,13 +32,6 @@ public class RNBarcodeDetector {
     }
 
     public TextResult[] detect(byte[] data, int width, int height) {
-        // If the frame has different dimensions, create another barcode detector.
-        // Otherwise we will most likely get nasty "inconsistent image dimensions" error from detector
-        // and no barcode will be detected.
-//        if (!frame.getDimensions().equals(mPreviousDimensions)) {
-//            releaseBarcodeDetector();
-//        }
-
         if (mBarcodeReader == null) {
             createBarcodeDetector();
 //            mPreviousDimensions = frame.getDimensions();
@@ -88,8 +81,6 @@ public class RNBarcodeDetector {
         releaseBarcodeDetector();
         mPreviousDimensions = null;
     }
-
-    // Lifecycle methods
 
     private void releaseBarcodeDetector() {
         if (mBarcodeReader != null) {

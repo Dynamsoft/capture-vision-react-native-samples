@@ -2,7 +2,6 @@ package org.reactnative.camera.tasks;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.util.Log;
 import android.content.Context;
 
 import com.dynamsoft.dbr.EnumBarcodeFormat_2;
@@ -12,8 +11,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.dynamsoft.dbr.TextResult;
 
 import org.reactnative.camera.utils.ImageDimensions;
-import org.reactnative.frame.RNFrame;
-import org.reactnative.frame.RNFrameFactory;
 import org.reactnative.barcodedetector.RNBarcodeDetector;
 
 public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, TextResult[]> {
@@ -69,8 +66,6 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
     if (isCancelled() || mDelegate == null || mBarcodeDetector == null) {
       return null;
     }
-
-//    RNFrame frame = RNFrameFactory.buildFrame(mImageData, mWidth, mHeight, mRotation);
     return mBarcodeDetector.detect(mImageData,mWidth,mHeight);
   }
 
@@ -102,8 +97,7 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
       serializedBarcode.putString("data", barcode.barcodeText);
       mPreviewScale = mScaleX > mScaleY ? mScaleX:mScaleY;
       dependOnWid = mScaleX > mScaleY;
-      Log.e("dynamsoft", "mPreviewScale: "+mPreviewScale+" dependOnWid:"+dependOnWid+"w "+mViewWidth+"h "+mViewHeight+"，mw:"+mWidth+",mh:"+mHeight);
-//      serializedBarcode.putArray("localizationResult", handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,mHeight,mWidth));
+      serializedBarcode.putArray("localizationResult", handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,mHeight,mWidth));
       barcodesList.pushMap(serializedBarcode);
     }
 
@@ -138,5 +132,30 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
     bounds.putMap("origin", origin);
     bounds.putMap("size", size);
     return bounds;
+  }
+
+  public WritableArray handlePoints(com.dynamsoft.dbr.Point[] dbrpoint, double previewScale, int srcBitmapHeight, int srcBitmapWidth) {
+    if (dbrpoint == null) {
+      return null;
+    }
+
+    WritableArray rectCoord = Arguments.createArray();
+    Point point = new Point(0,0);
+    if (dependOnWid){
+      for (int j = 0; j < 4; j++) {
+        point.x = (int)((srcBitmapHeight - dbrpoint[j].y) * previewScale - (srcBitmapHeight * previewScale - mViewWidth) / 2);
+        point.y = (int)(dbrpoint[j].x * previewScale - (srcBitmapWidth * previewScale - mViewHeight / 2));
+        rectCoord.pushInt(point.x);
+        rectCoord.pushInt(point.y);
+      }
+    }else {
+      for (int j = 0; j < 4; j++) {
+        point.x = (int)(mViewWidth / mDensity - dbrpoint[j].y * previewScale);
+        point.y = (int)(dbrpoint[j].x * previewScale / mDensity);
+        rectCoord.pushInt(point.x);
+        rectCoord.pushInt(point.y);
+      }
+    }
+    return rectCoord;
   }
 }
