@@ -6,15 +6,11 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.YuvImage;
 import android.os.Build;
 import androidx.core.content.ContextCompat;
 
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -25,10 +21,10 @@ import com.facebook.react.bridge.*;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.google.android.cameraview.CameraView;
 import org.reactnative.barcodedetector.RNBarcodeDetector;
-import org.reactnative.camera.tasks.*;
-import java.io.ByteArrayOutputStream;
+import org.reactnative.camera.tasks.BarcodeDetectorAsyncTask;
+import org.reactnative.camera.tasks.BarcodeDetectorAsyncTaskDelegate;
 
-public class RNCameraView extends CameraView implements LifecycleEventListener {
+public class RNCameraView extends CameraView implements LifecycleEventListener, BarcodeDetectorAsyncTaskDelegate {
   private ThemedReactContext mThemedReactContext;
   private boolean mDetectedImageInEvent = false;
 
@@ -39,7 +35,7 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
   private boolean mUseNativeZoom=false;
 
   // Concurrency lock for scanners to avoid flooding the runtime
-  public volatile boolean googleBarcodeDetectorTaskLock = false;
+  public volatile boolean barcodeTaskLock = false;
 
   // Scanning-related properties
   private RNBarcodeDetector mDynamsoftBarcodeReader;
@@ -83,8 +79,8 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
       @Override
       public void onFramePreview(CameraView cameraView, byte[] data, int width, int height, int rotation) {
         int correctRotation = RNCameraViewHelper.getCorrectCameraRotation(rotation, getFacing(), getCameraOrientation());
-        boolean willCallGoogleBarcodeTask = mShouldDetectBarcodes && !googleBarcodeDetectorTaskLock;
-        if (!willCallGoogleBarcodeTask) {
+        boolean callBarcodeTask = mShouldDetectBarcodes && !barcodeTaskLock;
+        if (!callBarcodeTask) {
             return;
         }
 
@@ -92,22 +88,21 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
             return;
         }
 
-        if (willCallGoogleBarcodeTask) {
-            googleBarcodeDetectorTaskLock = true;
-            TextResult[] barcodes = mDynamsoftBarcodeReader.detect(data,width,height);
-            if (barcodes == null) {
-                onBarcodeDetectionError(mDynamsoftBarcodeReader);
-            } else {
-                if (barcodes.length > 0) {
-                  onBarcodesDetected(serializeEventData(barcodes, height, width));
-                }
-                googleBarcodeDetectorTaskLock = false;
-            }
-
-//            BarcodeDetectorAsyncTaskDelegate delegate = (BarcodeDetectorAsyncTaskDelegate) cameraView;
-//            new BarcodeDetectorAsyncTask(delegate, mDynamsoftBarcodeReader, data, width, height,
-//                    correctRotation, getResources().getDisplayMetrics().density, getFacing(),
-//                    getWidth(), getHeight(), mPaddingX, mPaddingY).execute();
+        if (callBarcodeTask) {
+          barcodeTaskLock = true;
+//            TextResult[] barcodes = mDynamsoftBarcodeReader.detect(data,width,height);
+//            if (barcodes == null) {
+//                onBarcodeDetectionError(mDynamsoftBarcodeReader);
+//            } else {
+//                if (barcodes.length > 0) {
+//                  onBarcodesDetected(serializeEventData(barcodes, height, width));
+//                }
+//              barcodeTaskLock = false;
+//            }
+            BarcodeDetectorAsyncTaskDelegate delegate = (BarcodeDetectorAsyncTaskDelegate) cameraView;
+            new BarcodeDetectorAsyncTask(delegate, mDynamsoftBarcodeReader, data, width, height,
+                    correctRotation, getResources().getDisplayMetrics().density, getFacing(),
+                    getWidth(), getHeight(), mPaddingX, mPaddingY).execute();
           }
       }
     });
@@ -267,14 +262,13 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
   }
 
   public void setLicense(String license) {
-    if (mDynamsoftBarcodeReader != null) {
-      mLicense = license;
-      RNBarcodeDetector.license = license;
-      mDynamsoftBarcodeReader = new RNBarcodeDetector();
-      mDynamsoftBarcodeReader.setBarcodeFormat(mBarcodeFormat);
-      mDynamsoftBarcodeReader.setBarcodeFormat2(mBarcodeFormat2);
-    }
+    mLicense = license;
+    RNBarcodeDetector.license = license;
+    mDynamsoftBarcodeReader = new RNBarcodeDetector();
+    mDynamsoftBarcodeReader.setBarcodeFormat(mBarcodeFormat);
+    mDynamsoftBarcodeReader.setBarcodeFormat2(mBarcodeFormat2);
   }
+
 
   public void onBarcodesDetected(WritableArray barcodesDetected) {
     if (!mShouldDetectBarcodes) {
@@ -284,7 +278,7 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
     RNCameraViewHelper.emitBarcodesDetectedEvent(this, barcodesDetected);
   }
 
-  private void onBarcodeDetectionError(RNBarcodeDetector barcodeDetector) {
+  public void onBarcodeDetectionError(RNBarcodeDetector barcodeDetector) {
     if (!mShouldDetectBarcodes) {
       return;
     }
@@ -292,8 +286,17 @@ public class RNCameraView extends CameraView implements LifecycleEventListener {
     RNCameraViewHelper.emitBarcodeDetectionErrorEvent(this, barcodeDetector);
   }
 
-  private void onBarcodeDetectingTaskCompleted() {
-    googleBarcodeDetectorTaskLock = false;
+  @Override
+  public void onBarcodesDetected(WritableArray barcodes, int width, int height, byte[] imageData) {
+    if (!mShouldDetectBarcodes) {
+      return;
+    }
+
+    RNCameraViewHelper.emitBarcodesDetectedEvent(this, barcodes);
+  }
+
+  public void onBarcodeDetectingTaskCompleted() {
+    barcodeTaskLock = false;
   }
 
   @Override
