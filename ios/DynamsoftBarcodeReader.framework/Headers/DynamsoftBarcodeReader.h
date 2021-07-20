@@ -213,7 +213,7 @@ typedef NS_ENUM(NSInteger, EnumErrorCode)
     /**Falied to bind device. */
     EnumErrorCode_BIND_DEVICE_FAILED             = -20005,
     
-    /**Interface InitLicenseFromLTS can not be used together with other license initiation interfaces. */
+    /**Interface InitLicenseFromDLS can not be used together with other license initiation interfaces. */
     EnumErrorCode_LICENSE_INTERFACE_CONFLICT     = -20006,
     
     /**License Client dll is missing.*/
@@ -222,14 +222,14 @@ typedef NS_ENUM(NSInteger, EnumErrorCode)
     /**Instance count is over limited.*/
     EnumErrorCode_INSTANCE_COUNT_OVER_LIMITED    = -20008,
 
-    /**Interface InitLicenseFromLTS has to be called before creating any SDK objects. */
+    /**Interface InitLicenseFromDLS has to be called before creating any SDK objects. */
     EnumErrorCode_LICENSE_INIT_SEQUENCE_FAILED   = -20009,
     
     /**Trial License*/
     EnumErrorCode_TRIAL_LICENSE                  = -20010,
 
     /**Failed to reach License Tracking Server.*/
-    EnumErrorCode_FAILED_TO_REACH_LTS            = -20200
+    EnumErrorCode_FAILED_TO_REACH_DLS            = -20200
 };
 
 /**
@@ -1073,6 +1073,12 @@ typedef NS_ENUM(NSInteger,EnumDeblurMode)
     
     /**Performs deblur process using the sharpening algorithm.*/
     EnumDeblurModeSharpening = 0x40,
+    
+    /**Performs deblur process based on the binary image from the localization process.*/
+    EnumDeblurModeBasedOnLocBin = 0x80,
+    
+    /**Performs deblur process using the sharpening and smoothing algorithm.*/
+    EnumDeblurModeSharpeningSmoothing = 0x100,
 
     /**Reserved setting for deblur mode.*/
     EnumDeblurModeRev = -2147483648,
@@ -1174,6 +1180,31 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
     EnumDMChargeWayConcurrentInstanceCount = 10
 };
 
+/**
+* @enum EnumProduct
+*
+* Describes the Product.
+*/
+typedef NS_ENUM(NSInteger,EnumProduct)
+{
+    /**Dynamsoft Barcode Reader.*/
+    EnumProductDBR = 0x01,
+
+    /**Dynamsoft Label Recognition.*/
+    EnumProductDLR = 0x02,
+    
+    /**Dynamic Web Twain.*/
+    EnumProductDWT = 0x04,
+
+    /**Dynamsoft Camera Enhancer.*/
+    EnumProductDCE = 0x08,
+
+    /**Dynamsoft Panorama.*/
+    EnumProductDPS = 0x10,
+    
+    /**All Product.*/
+    EnumProductALL = 0xffff
+};
 
 /**
  * @} defgroup Enum Enumerations
@@ -1959,6 +1990,20 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
 
 
 /**
+* Stores the text result
+*
+*/
+@interface iTextResultEx : iTextResult
+
+/** DPM mark*/
+@property (nonatomic, assign) NSInteger isDPM;
+
+/** Mirror flag*/
+@property (nonatomic, assign) NSInteger isMirrored;
+
+@end
+
+/**
 * Stores the OneD code details
 *
 */
@@ -2408,12 +2453,13 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  */
 - (void)licenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error;
 
-
 @end
 
 /**
  * Protocol for a delegate to handle callback when license verification message returned.
  */
+
+DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use DMDLSLicenseVerificationDelegate instead.")
 @protocol DMLTSLicenseVerificationDelegate <NSObject>
 
 @required
@@ -2436,8 +2482,35 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
      }
  * @endcode
  */
-- (void)LTSLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error;
+- (void)LTSLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use DLSLicenseVerificationCallback: instead.");
 
+@end
+
+/**
+ * Protocol for a delegate to handle callback when license verification message returned.
+ */
+@protocol DMDLSLicenseVerificationDelegate <NSObject>
+
+@required
+/**
+ * The callback of license server.
+ *
+ * @param [in,out] isSuccess Whether the license verification was successful.
+ * @param [in,out] error The error message from license server.
+ *
+ * @par Code Snippet:
+ * @code
+     DynamsoftBarcodeReader *barcodeReader;
+     iDMDLSConnectionParameters* parameters = [[iDMDLSConnectionParameters alloc] init];
+     parameters.handshakeCode = @"*****-hs-****";
+     barcodeReader = [[DynamsoftBarcodeReader alloc] initLicenseFromDLS:lts verificationDelegate:self];
+     - (void)DLSLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error
+     {
+         //TODO add your code for license verification
+     }
+ * @endcode
+ */
+- (void)DLSLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error;
 
 @end
 
@@ -2445,34 +2518,95 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
 * iDMLTSConnectionParameters
 *
 */
+DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectionParameters: instead.")
 @interface iDMLTSConnectionParameters : NSObject
 
-/** mainServerURL */
+/** The URL of the  license tracking server. */
 @property (nonatomic, nullable) NSString* mainServerURL;
 
-/** standbyServerURL */
+/** The URL of the  standby license tracking server. */
 @property (nonatomic, nullable) NSString* standbyServerURL;
 
-/** organization */
+/** Set the organization ID. */
 @property (nonatomic, nullable) NSString* organizationID;
 
-/** handshakeCode */
+/** The handshake code. */
 @property (nonatomic, nullable) NSString* handshakeCode;
 
-/** sessionPassword */
+/** The session password of the handshake code set in license tracking server. */
 @property (nonatomic, nullable) NSString* sessionPassword;
 
-/** EnumDMChargeWay */
+/** Set the charge way. */
 @property (nonatomic, assign) EnumDMChargeWay chargeWay;
 
-/** EnumDMUUIDGenerationMethod */
+/** Set the method to generate UUID. */
 @property (nonatomic, assign) EnumDMUUIDGenerationMethod UUIDGenerationMethod;
 
-/** maxBufferDays */
+/** Set the max days to buffer the license info. */
 @property (nonatomic, assign) NSInteger maxBufferDays;
 
-/** limitedLicenseModules */
+/** Set the count of license modules to use. */
 @property (nonatomic, nullable) NSArray* limitedLicenseModules;
+
+/** Set the products. A combined value of Product Enumration items. */
+@property (nonatomic, assign) EnumProduct products;
+
+@end
+
+/**
+* iDMDLSConnectionParameters
+*
+*/
+@interface iDMDLSConnectionParameters : NSObject
+
+/** The URL of the  license tracking server. */
+@property (nonatomic, nullable) NSString* mainServerURL;
+
+/** The URL of the  standby license tracking server. */
+@property (nonatomic, nullable) NSString* standbyServerURL;
+
+/** Set the organization ID. */
+@property (nonatomic, nullable) NSString* organizationID;
+
+/** The handshake code. */
+@property (nonatomic, nullable) NSString* handshakeCode;
+
+/** The session password of the handshake code set in license tracking server. */
+@property (nonatomic, nullable) NSString* sessionPassword;
+
+/** Set the charge way. */
+@property (nonatomic, assign) EnumDMChargeWay chargeWay;
+
+/** Set the method to generate UUID. */
+@property (nonatomic, assign) EnumDMUUIDGenerationMethod UUIDGenerationMethod;
+
+/** Set the max days to buffer the license info. */
+@property (nonatomic, assign) NSInteger maxBufferDays;
+
+/** Set the count of license modules to use. */
+@property (nonatomic, nullable) NSArray* limitedLicenseModules;
+
+/** Set the products. A combined value of Product Enumration items. */
+@property (nonatomic, assign) EnumProduct products;
+
+@end
+
+/**
+ * DCESettingParameters
+ *
+*/
+
+@interface iDCESettingParameters : NSObject
+
+@property (nonatomic, assign, nullable) id cameraInstance;
+
+@property (nonatomic, weak, nullable) id<DBRTextResultDelegate> textResultDelegate;
+
+@property (nonatomic, weak, nullable) id<DBRIntermediateResultDelegate> intermediateResultDelegate;
+
+@property (nonatomic, assign, nullable) NSObject* textResultData;
+
+@property (nonatomic, assign, nullable) NSObject* intermediateResultData;
 
 @end
 
@@ -2504,6 +2638,20 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
 @property (nonatomic, nonnull) NSString* license;
 
 /**
+ *
+ */
+@property (nonatomic, assign) BOOL enableResultVerification;
+
+/**
+ *
+ */
+@property (nonatomic, assign) BOOL enableDuplicateFilter;
+
+- (BOOL)getEnabledResultVerificationStatus;
+
+- (BOOL)getEnabledDuplicateFilterStatus;
+
+/**
  * @name Initiation Functions
  * @{
  */
@@ -2523,7 +2671,7 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (instancetype _Nonnull)init;
- 
+
  /**
   * Initializes DynamsoftBarcodeReader with a license.
   *
@@ -2563,7 +2711,9 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 
-- (instancetype _Nonnull)initWithLicenseFromServer:(NSString* _Nullable)licenseSeServer licenseKey:(NSString* _Nonnull)licenseKey verificationDelegate:(id _Nullable)connectionDelegate;
+- (instancetype _Nonnull)initWithLicenseFromServer:(NSString* _Nullable)licenseSeServer
+                                        licenseKey:(NSString* _Nonnull)licenseKey
+                              verificationDelegate:(id _Nullable)connectionDelegate;
 
 /**
  * Initializes the barcode reader license and connects to the specified server for online verification.
@@ -2588,7 +2738,33 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 
-- (instancetype _Nonnull)initLicenseFromLTS:(iDMLTSConnectionParameters* _Nullable)ltsConnectionParameters verificationDelegate:(id _Nullable)connectionDelegate;
+- (instancetype _Nonnull)initLicenseFromLTS:(iDMLTSConnectionParameters* _Nullable)ltsConnectionParameters
+                       verificationDelegate:(id _Nullable)connectionDelegate DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use initLicenseFromDLS: instead.");
+
+/**
+ * Initializes the barcode reader license and connects to the specified server for online verification.
+ *
+ * @param [in] dlsConnectionParameters The struct DMDLSConnectionParameters with customized settings.
+ * @param [in,out] connectionDelegate The delegate to handle callback when license server returns.
+ *
+ * @return The instance of DynamsoftBarcodeReader.
+ *
+ * @par Code Snippet:
+ * @code
+     DynamsoftBarcodeReader *barcodeReader;
+     iDMDLSConnectionParameters* parameters = [[iDMDLSConnectionParameters alloc] init];
+     parameters.handshakeCode = @"*****-hs-****";
+     barcodeReader = [[DynamsoftBarcodeReader alloc] initLicenseFromDLS:lts verificationDelegate:self];
+ 
+     - (void)DLSLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error
+     {
+         //TODO add your code for license verification
+     }
+ * @endcode
+ */
+
+- (instancetype _Nonnull)initLicenseFromDLS:(iDMDLSConnectionParameters* _Nullable)dlsConnectionParameters
+                       verificationDelegate:(id _Nullable)connectionDelegate;
 
 /**
  * Outputs the license content as an encrypted string from the license server to be used for offline license verification.
@@ -2723,10 +2899,10 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 -(void)setModeArgument:(NSString* _Nonnull)modeName
-                     index:(NSInteger)index 
-                     argumentName:(NSString* _Nonnull)argumentName
-                     argumentValue:(NSString* _Nonnull)argumentValue
-                     error:(NSError* _Nullable * _Nullable)error;
+                 index:(NSInteger)index
+          argumentName:(NSString* _Nonnull)argumentName
+         argumentValue:(NSString* _Nonnull)argumentValue
+                 error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Gets the optional argument for a specified mode in Modes parameters.
@@ -2754,9 +2930,9 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 -(NSString* _Nonnull)getModeArgument:(NSString* _Nonnull)modeName
-                        index:(NSInteger)index
+                               index:(NSInteger)index
                         argumentName:(NSString* _Nonnull)argumentName
-                        error:(NSError* _Nullable * _Nullable)error;
+                               error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * @}
@@ -2810,8 +2986,8 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (NSArray<iTextResult*>* _Nullable)decodeBase64:(NSString* _Nonnull)base64
-                                   withTemplate:(NSString* _Nonnull)templateName
-                                          error:(NSError* _Nullable * _Nullable)error;
+                                    withTemplate:(NSString* _Nonnull)templateName
+                                           error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Decodes barcodes from an image file in memory.
@@ -2832,8 +3008,8 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (NSArray<iTextResult*>* _Nullable)decodeImage:(UIImage* _Nonnull)image
-                                  withTemplate:(NSString* _Nonnull)templateName
-                                         error:(NSError* _Nullable * _Nullable)error;
+                                   withTemplate:(NSString* _Nonnull)templateName
+                                          error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Decodes barcodes from the memory buffer containing image pixels in the defined format.
@@ -2862,12 +3038,12 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (NSArray<iTextResult*>* _Nullable)decodeBuffer:(NSData* _Nonnull)buffer
-                                      withWidth:(NSInteger)width
-                                         height:(NSInteger)height
-                                         stride:(NSInteger)stride
-                                         format:(EnumImagePixelFormat)format
-                                   templateName:(NSString* _Nonnull)templateName
-                                          error:(NSError* _Nullable * _Nullable)error;
+                                       withWidth:(NSInteger)width
+                                          height:(NSInteger)height
+                                          stride:(NSInteger)stride
+                                          format:(EnumImagePixelFormat)format
+                                    templateName:(NSString* _Nonnull)templateName
+                                           error:(NSError* _Nullable * _Nullable)error;
 
 
  /**
@@ -2888,8 +3064,8 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
   * @endcode
   */
 - (NSArray<iTextResult*>* _Nullable)decodeFileWithName:(NSString* _Nonnull)name
-                                         templateName:(NSString* _Nonnull)templateName
-                                                error:(NSError* _Nullable * _Nullable)error;
+                                          templateName:(NSString* _Nonnull)templateName
+                                                 error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Starts a new thread to decode barcodes from the inner frame queue.
@@ -2913,13 +3089,13 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 -(void)startFrameDecoding:(NSInteger)maxQueueLength
-                     maxResultQueueLength:(NSInteger)maxResultQueueLength
-                     width:(NSInteger)width
-                     height:(NSInteger)height
-                     stride:(NSInteger)stride
-                     format:(EnumImagePixelFormat)format
-                     templateName:(NSString* _Nonnull)templateName
-                     error:(NSError* _Nullable * _Nullable)error;
+     maxResultQueueLength:(NSInteger)maxResultQueueLength
+                    width:(NSInteger)width
+                   height:(NSInteger)height
+                   stride:(NSInteger)stride
+                   format:(EnumImagePixelFormat)format
+             templateName:(NSString* _Nonnull)templateName
+                    error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Starts a new thread to decode barcodes from the inner frame queue.
@@ -2944,8 +3120,8 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 -(void)startFrameDecodingEx:(iFrameDecodingParameters* _Nullable) parameters
-                    templateName:(NSString* _Nonnull)templateName
-                    error:(NSError* _Nullable __autoreleasing* _Nullable)error;
+               templateName:(NSString* _Nonnull)templateName
+                      error:(NSError* _Nullable __autoreleasing* _Nullable)error;
 
 
 /**
@@ -3075,8 +3251,8 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (void)initRuntimeSettingsWithString:(NSString* _Nonnull)content
-						  conflictMode:(EnumConflictMode)conflictMode
-								 error:(NSError* _Nullable * _Nullable)error;
+                         conflictMode:(EnumConflictMode)conflictMode
+                                error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Appends a new template file to the current runtime settings.
@@ -3163,7 +3339,7 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  */
 - (void)outputSettingsToFile:(NSString *_Nullable)filePath 
 				settingsName:(NSString*_Nonnull)settingsName 
-					error:(NSError*_Nullable *_Nullable)error;
+                       error:(NSError*_Nullable *_Nullable)error;
 
 /**
  * @}
@@ -3265,7 +3441,7 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @endcode
  */
 - (iIntermediateResult *_Nullable)createIntermediateResult:(EnumIntermediateResultType)type
-                                                 error:(NSError *_Nullable *_Nullable)error;
+                                                     error:(NSError *_Nullable *_Nullable)error;
 
 /**
  * delete the handshakeCode cache.
@@ -3273,15 +3449,31 @@ typedef NS_ENUM(NSInteger,EnumDMChargeWay)
  * @return Returns  a BOOL result.
  *
  * @par Code Snippet:
- * @code]
+ * @code
      DynamsoftBarcodeReader *barcodeReader = [[DynamsoftBarcodeReader alloc] init];
-     iDMLTSConnectionParameters* lts = [[iDMLTSConnectionParameters alloc] init];
-     lts.handshakeCode = @"*****-hs-****";
-     lts.sessionPassword = @"******";
-     BOOL res = [barcodeReader clearCache:lts];
+     BOOL res = [barcodeReader clearCache];
  * @endcode
  */
-- (BOOL)clearCache:(iDMLTSConnectionParameters *_Nonnull)lts;
+- (BOOL)clearCache;
+
+/**
+ * Set camera enhancer to DynamsoftBarcodeReader, get the barcode results in callback `textResultCallback:results:userData: `
+ *
+ *
+ * @par Code Snippet:
+ * @code
+     DynamsoftBarcodeReader *barcodeReader = [[DynamsoftBarcodeReader alloc] init];
+    
+     DCECaptureView *scanView = [DCECaptureView captureWithFrame:self.view.bounds];
+     DynamsoftCameraEnhancer *cameraEnhancer = [[DynamsoftCameraEnhancer alloc] initWithView:scanView];
+     iDCESettingParameters *parameters = [[iDCESettingParameters alloc] init];
+     para.cameraInstance = cameraEnhancer;
+     para.textResultDelegate = self;
+     [barcodeReader setCameraEnhancerPara:parameters];
+ * @endcode
+ */
+- (void)setCameraEnhancerPara:(iDCESettingParameters* _Nonnull)parameters;
+
 /**
 * @}
 */
