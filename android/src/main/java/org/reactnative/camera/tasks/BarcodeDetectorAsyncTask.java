@@ -31,6 +31,7 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
   public boolean dependOnWid;
   private double mPreviewScale;
   private float mDensity;
+  private int mRotation;
 
   public BarcodeDetectorAsyncTask(
           BarcodeDetectorAsyncTaskDelegate delegate,
@@ -54,6 +55,7 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
     mScaleX = (double) (viewWidth) / (mImageDimensions.getWidth() * density);
     mScaleY = (double) (viewHeight) / (mImageDimensions.getHeight() * density);
     mDensity = density;
+    mRotation = rotation;
     mViewWidth = viewWidth;
     mViewHeight = viewHeight;
     mPaddingLeft = viewPaddingLeft;
@@ -97,7 +99,7 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
       serializedBarcode.putString("data", barcode.barcodeText);
       mPreviewScale = mScaleX > mScaleY ? mScaleX:mScaleY;
       dependOnWid = mScaleX > mScaleY;
-      serializedBarcode.putArray("localizationResult", handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,mHeight,mWidth));
+      serializedBarcode.putArray("localizationResult", handlePoints(barcode.localizationResult.resultPoints,mPreviewScale,mHeight,mWidth,mRotation));
       barcodesList.pushMap(serializedBarcode);
     }
 
@@ -134,24 +136,31 @@ public class BarcodeDetectorAsyncTask extends android.os.AsyncTask<Void, Void, T
     return bounds;
   }
 
-  public WritableArray handlePoints(com.dynamsoft.dbr.Point[] dbrpoint, double previewScale, int srcBitmapHeight, int srcBitmapWidth) {
+  public WritableArray handlePoints(com.dynamsoft.dbr.Point[] dbrpoint, double previewScale, int srcBitmapHeight, int srcBitmapWidth, int rotation) {
     if (dbrpoint == null) {
       return null;
     }
 
     WritableArray rectCoord = Arguments.createArray();
     Point point = new Point(0,0);
-    if (dependOnWid){
+    if (rotation == 0){
       for (int j = 0; j < 4; j++) {
-        point.x = (int)((srcBitmapHeight - dbrpoint[j].y) * previewScale - (srcBitmapHeight * previewScale - mViewWidth) / 2);
-        point.y = (int)(dbrpoint[j].x * previewScale - (srcBitmapWidth * previewScale - mViewHeight / 2));
+        point.x = (int)((dbrpoint[j].x*previewScale) + mPaddingLeft/mDensity);
+        point.y = (int)((dbrpoint[j].y * previewScale)+ mPaddingTop/mDensity);
         rectCoord.pushInt(point.x);
         rectCoord.pushInt(point.y);
       }
-    }else {
+    }else if(rotation == 90) {
       for (int j = 0; j < 4; j++) {
-        point.x = (int)(mViewWidth / mDensity - dbrpoint[j].y * previewScale);
-        point.y = (int)(dbrpoint[j].x * previewScale / mDensity);
+        point.x = (int)((mViewWidth / mDensity - dbrpoint[j].y * previewScale) - mPaddingLeft/mDensity);
+        point.y = (int)((dbrpoint[j].x * previewScale)+ mPaddingTop/mDensity);
+        rectCoord.pushInt(point.x);
+        rectCoord.pushInt(point.y);
+      }
+    } else if (rotation == 180){
+      for (int j = 0; j < 4; j++) {
+        point.x = (int)((mViewWidth / mDensity-dbrpoint[j].x*previewScale) - mPaddingLeft/mDensity);
+        point.y = (int)((mViewHeight / mDensity-dbrpoint[j].y * previewScale)- mPaddingTop/mDensity);
         rectCoord.pushInt(point.x);
         rectCoord.pushInt(point.y);
       }
