@@ -39,7 +39,7 @@ public class RNBarcodeDetector {
 
         TextResult[] textResults = null;
         try{
-            textResults = mBarcodeReader.decodeBuffer(data, width, height,width*4,EnumImagePixelFormat.IPF_NV21,"");
+            textResults = mBarcodeReader.decodeBuffer(data, width, height,width,EnumImagePixelFormat.IPF_NV21,"");
         } catch (BarcodeReaderException e){
             Log.e("dynamsoft", "getErrorCode " + e.getErrorCode());
         } catch (Exception e) {
