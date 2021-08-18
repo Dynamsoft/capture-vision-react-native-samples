@@ -69,7 +69,7 @@ class CameraScreen extends React.Component {
 
   renderBarcodes = () => (
     <React.Fragment key={this.state.barcodes.length}>
-      {this.state.barcodes.map((barcodes)=><Canvas style={[styles.overlay]} ref={cvs=>this.handleCanvas(cvs,barcodes)}/>)}
+      {this.state.barcodes.map((barcodes)=><Canvas style={[styles.overlay]} ref={cvs=>this.handleCanvas(cvs,barcodes)} key={this.state.barcodes.length}/>)}
       <Text style={styles.textBlock}>{this.state.barcodes[0] ?'result:'+ this.state.barcodes[0].data:'result: null'}</Text>
     </React.Fragment>
   );
