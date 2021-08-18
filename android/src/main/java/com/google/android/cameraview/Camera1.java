@@ -113,7 +113,7 @@ class Camera1 extends CameraViewImpl implements MediaRecorder.OnInfoListener,
 
     private int mFlash;
 
-    private float mExposure = 0.5;
+    private float mExposure = 0.5f;
 
     private int mDisplayOrientation;
 
