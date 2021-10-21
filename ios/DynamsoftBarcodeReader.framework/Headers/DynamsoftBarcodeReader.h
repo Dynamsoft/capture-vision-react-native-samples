@@ -692,6 +692,9 @@ typedef NS_ENUM(NSInteger, EnumLocalizationMode)
     /** Localizes barcodes from the centre of the image. Check @ref LM for available argument settings. */
     EnumLocalizationModeCentre = 0x80,
     
+    /** Localizes 1D barcodes fast. Check @ref LM for available argument settings. */
+    EnumLocalizationModeOneDFastScan = 0x100,
+    
 	/** Skips the localization. */
 	EnumLocalizationModeSkip = 0x00,
     
@@ -1986,15 +1989,6 @@ typedef NS_ENUM(NSInteger,EnumProduct)
 /** Exception*/
 @property (nonatomic, nullable) NSString* exception;
 
-@end
-
-
-/**
-* Stores the text result
-*
-*/
-@interface iTextResultEx : iTextResult
-
 /** DPM mark*/
 @property (nonatomic, assign) NSInteger isDPM;
 
@@ -2002,6 +1996,7 @@ typedef NS_ENUM(NSInteger,EnumProduct)
 @property (nonatomic, assign) NSInteger isMirrored;
 
 @end
+
 
 /**
 * Stores the OneD code details
@@ -2637,19 +2632,9 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
   */
 @property (nonatomic, nonnull) NSString* license;
 
-/**
- *
- */
 @property (nonatomic, assign) BOOL enableResultVerification;
 
-/**
- *
- */
 @property (nonatomic, assign) BOOL enableDuplicateFilter;
-
-- (BOOL)getEnabledResultVerificationStatus;
-
-- (BOOL)getEnabledDuplicateFilterStatus;
 
 /**
  * @name Initiation Functions
@@ -2690,7 +2675,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
 /**
  * Initializes DynamsoftBarcodeReader with a license and connects to the specified server for online verification.
  * 
- * @param [in] licenseSeServer The name/IP of the license server.		   
+ * @param [in] licenseServer The name/IP of the license server.		   
  * @param [in] licenseKey The license key.
  * @param [in,out] connectionDelegate The delegate to handle callback when license server returns.
  *
@@ -2711,7 +2696,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
  * @endcode
  */
 
-- (instancetype _Nonnull)initWithLicenseFromServer:(NSString* _Nullable)licenseSeServer
+- (instancetype _Nonnull)initWithLicenseFromServer:(NSString* _Nullable)licenseServer
                                         licenseKey:(NSString* _Nonnull)licenseKey
                               verificationDelegate:(id _Nullable)connectionDelegate;
 
@@ -2967,7 +2952,6 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
 - (NSArray<iTextResult*>* _Nullable)decodeIntermediateResults:(NSArray<iIntermediateResult*>* _Nullable)array
                                                  withTemplate:(NSString* _Nonnull)templateName
                                                         error:(NSError *_Nullable *_Nullable)error;
-
 /**
  * Decodes barcodes from an image file encoded as a base64 string.
  *
@@ -3230,7 +3214,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
  */
 - (void)initRuntimeSettingsWithFile:(NSString* _Nonnull)fileName
                        conflictMode:(EnumConflictMode)conflictMode
-	                          error:(NSError* _Nullable * _Nullable)error;
+                              error:(NSError* _Nullable * _Nullable)error;
 
 /**
  * Initialize runtime settings with the _Nullable settings in the given JSON string.
@@ -3274,7 +3258,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
  */
 - (void)appendTplFileToRuntimeSettings:(NSString * _Nonnull)fileName
 					      conflictMode:(EnumConflictMode)conflictMode
-								 error:(NSError * _Nullable *_Nullable)error;
+                                 error:(NSError * _Nullable *_Nullable)error;
 
 /**
  * Appends a new template string to the current runtime settings.
@@ -3297,7 +3281,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
  */
 - (void)appendTplStringToRuntimeSettings:(NSString * _Nonnull)content
 							conflictMode:(EnumConflictMode)conflictMode
-								   error:(NSError *_Nullable *_Nullable)error;
+                                   error:(NSError *_Nullable *_Nullable)error;
 
 /**
  * Outputs runtime settings to a string.
@@ -3444,19 +3428,6 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
                                                      error:(NSError *_Nullable *_Nullable)error;
 
 /**
- * delete the handshakeCode cache.
- *
- * @return Returns  a BOOL result.
- *
- * @par Code Snippet:
- * @code
-     DynamsoftBarcodeReader *barcodeReader = [[DynamsoftBarcodeReader alloc] init];
-     BOOL res = [barcodeReader clearCache];
- * @endcode
- */
-- (BOOL)clearCache;
-
-/**
  * Set camera enhancer to DynamsoftBarcodeReader, get the barcode results in callback `textResultCallback:results:userData: `
  *
  *
@@ -3464,7 +3435,7 @@ DEPRECATED_MSG_ATTRIBUTE("Will be removed in dbr9.0 release, use iDMDLSConnectio
  * @code
      DynamsoftBarcodeReader *barcodeReader = [[DynamsoftBarcodeReader alloc] init];
     
-     DCECaptureView *scanView = [DCECaptureView captureWithFrame:self.view.bounds];
+     DCECameraView *scanView = [DCECameraView cameraWithFrame:self.view.bounds];
      DynamsoftCameraEnhancer *cameraEnhancer = [[DynamsoftCameraEnhancer alloc] initWithView:scanView];
      iDCESettingParameters *parameters = [[iDCESettingParameters alloc] init];
      para.cameraInstance = cameraEnhancer;
