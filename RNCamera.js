@@ -106,7 +106,7 @@ const CameraStatus: { [key: Status]: Status } = {
   NOT_AUTHORIZED: 'NOT_AUTHORIZED',
 };
 
-const CameraManager: Object = NativeModules.RNCameraManager || 
+const CameraManager: Object = NativeModules.DBRRNCameraManager || 
   NativeModules.RNCameraModule || {
     Type: {
       back: 1,
@@ -350,7 +350,7 @@ export default class Camera extends React.Component<PropsType, StateType> {
     if (this.state.isAuthorized || this.hasFaCC()) {
       return (
         <View style={style}>
-          <RNCamera
+          <DBRRNCamera
             {...nativeProps}
             style={StyleSheet.absoluteFill}
             ref={this._setReference}
@@ -390,7 +390,7 @@ export default class Camera extends React.Component<PropsType, StateType> {
 
 export const Constants = Camera.Constants;
 
-const RNCamera = requireNativeComponent('RNCamera', Camera, {
+const DBRRNCamera = requireNativeComponent('DBRRNCamera', Camera, {
   nativeOnly: {
     accessibilityComponentType: true,
     accessibilityLabel: true,

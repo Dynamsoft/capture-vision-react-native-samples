@@ -4,9 +4,9 @@
 #import <UIKit/UIKit.h>
 #import "DBRManager.h"
 
-@class RNCamera;
+@class DBRRNCamera;
 NS_ASSUME_NONNULL_BEGIN
-@interface RNCamera : UIView <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface DBRRNCamera : UIView <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property(nonatomic, strong) dispatch_queue_t sessionQueue;
 @property(nonatomic, strong) AVCaptureSession *session;

@@ -14,15 +14,15 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-import { RNCamera } from 'rn-mobile-barcode-scanner';
+import { DBRRNCamera } from 'rn-mobile-barcode-scanner';
 import Canvas from 'react-native-canvas';
 const deviceH = Dimensions.get('window').height
 const deviceW = Dimensions.get('window').width
 class CameraScreen extends React.Component {
   state = {
     license: '-- put your license here -- ',
-    barcodeFormat: RNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
-    barcodeFormat2: RNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
+    barcodeFormat: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
+    barcodeFormat2: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
     type: 'back',
     canDetectBarcode: false,
     barcodes: [{
@@ -77,7 +77,7 @@ class CameraScreen extends React.Component {
   renderCamera() {
     const { canDetectBarcode } = this.state;
     return (
-        <RNCamera
+        <DBRRNCamera
           ref={ref => {
             this.camera = ref;
           }}
@@ -110,7 +110,7 @@ class CameraScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-        </RNCamera>
+        </DBRRNCamera>
     );
   }
 

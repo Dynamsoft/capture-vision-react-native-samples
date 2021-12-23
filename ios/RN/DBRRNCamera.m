@@ -1,11 +1,11 @@
-#import "RNCamera.h"
-#import "RNCameraUtils.h"
+#import "DBRRNCamera.h"
+#import "DBRRNCameraUtils.h"
 #import <React/RCTEventDispatcher.h>
 #import <React/RCTLog.h>
 #import <React/RCTUtils.h>
 #import <React/UIView+React.h>
 
-@interface RNCamera ()
+@interface DBRRNCamera ()
 
 @property (nonatomic, weak) RCTBridge *bridge;
 @property (nonatomic, strong) id barcodeDetector;
@@ -14,9 +14,9 @@
 
 @end
 
-@implementation RNCamera
+@implementation DBRRNCamera
 
-BOOL _sessionInterrupted = NO;
+BOOL _dbrsessionInterrupted = NO;
 
 
 - (id)initWithBridge:(RCTBridge *)bridge
@@ -35,7 +35,7 @@ BOOL _sessionInterrupted = NO;
         self.exposure = -1;
         self.presetCamera = AVCaptureDevicePositionUnspecified;
         self.cameraId = nil;
-        _sessionInterrupted = NO;
+        _dbrsessionInterrupted = NO;
     }
     return self;
 }
@@ -124,10 +124,10 @@ BOOL _sessionInterrupted = NO;
 {
     AVCaptureDevice *captureDevice;
     if(self.cameraId != nil){
-        captureDevice = [RNCameraUtils deviceWithCameraId:self.cameraId];
+        captureDevice = [DBRRNCameraUtils deviceWithCameraId:self.cameraId];
     }
     else{
-        captureDevice = [RNCameraUtils deviceWithMediaType:AVMediaTypeVideo preferringPosition:self.presetCamera];
+        captureDevice = [DBRRNCameraUtils deviceWithMediaType:AVMediaTypeVideo preferringPosition:self.presetCamera];
     }
     return captureDevice;
 
@@ -350,7 +350,7 @@ BOOL _sessionInterrupted = NO;
             return;
         }
 
-        _sessionInterrupted = NO;
+        _dbrsessionInterrupted = NO;
         [self.session startRunning];
     });
 }
@@ -410,7 +410,7 @@ BOOL _sessionInterrupted = NO;
             interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         });
 
-        AVCaptureVideoOrientation orientation = [RNCameraUtils videoOrientationForInterfaceOrientation:interfaceOrientation];
+        AVCaptureVideoOrientation orientation = [DBRRNCameraUtils videoOrientationForInterfaceOrientation:interfaceOrientation];
 
 
         [self.session beginConfiguration];
@@ -521,7 +521,7 @@ BOOL _sessionInterrupted = NO;
 - (void)sessionWasInterrupted:(NSNotification *)notification
 {
     // Mark session interruption
-    _sessionInterrupted = YES;
+    _dbrsessionInterrupted = YES;
 
     // get event info and fire RN event if our session was interrupted
     // due to audio being taken away.
@@ -534,16 +534,16 @@ BOOL _sessionInterrupted = NO;
 // update flash and our interrupted flag on session resume
 - (void)sessionDidStartRunning:(NSNotification *)notification
 {
-    //NSLog(@"sessionDidStartRunning Was interrupted? %d", _sessionInterrupted);
+    //NSLog(@"sessionDidStartRunning Was interrupted? %d", _dbrsessionInterrupted);
 
-    if(_sessionInterrupted){
+    if(_dbrsessionInterrupted){
         // resume flash value since it will be resetted / turned off
         dispatch_async(self.sessionQueue, ^{
             [self updateFlashMode];
         });
     }
 
-    _sessionInterrupted = NO;
+    _dbrsessionInterrupted = NO;
 }
 
 - (void)sessionRuntimeError:(NSNotification *)notification
@@ -551,7 +551,7 @@ BOOL _sessionInterrupted = NO;
     // Manually restarting the session since it must
     // have been stopped due to an error.
     dispatch_async(self.sessionQueue, ^{
-         _sessionInterrupted = NO;
+         _dbrsessionInterrupted = NO;
         [self.session startRunning];
     });
 }
@@ -565,7 +565,7 @@ BOOL _sessionInterrupted = NO;
 - (void)changePreviewOrientation:(UIInterfaceOrientation)orientation
 {
     __weak typeof(self) weakSelf = self;
-    AVCaptureVideoOrientation videoOrientation = [RNCameraUtils videoOrientationForInterfaceOrientation:orientation];
+    AVCaptureVideoOrientation videoOrientation = [DBRRNCameraUtils videoOrientationForInterfaceOrientation:orientation];
     dispatch_async(dispatch_get_main_queue(), ^{
         __strong typeof(self) strongSelf = weakSelf;
         if (strongSelf && strongSelf.previewLayer.connection.isVideoOrientationSupported) {

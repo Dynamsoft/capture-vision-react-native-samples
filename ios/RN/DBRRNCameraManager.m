@@ -1,5 +1,5 @@
-#import "RNCamera.h"
-#import "RNCameraManager.h"
+#import "DBRRNCamera.h"
+#import "DBRRNCameraManager.h"
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTEventDispatcher.h>
@@ -7,9 +7,9 @@
 #import <React/RCTUtils.h>
 #import <React/UIView+React.h>
 
-@implementation RNCameraManager
+@implementation DBRRNCameraManager
 
-RCT_EXPORT_MODULE(RNCameraManager);
+RCT_EXPORT_MODULE(DBRRNCameraManager);
 RCT_EXPORT_VIEW_PROPERTY(onMountError, RCTDirectEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onDynamsoftBarcodesReader, RCTDirectEventBlock);
 
@@ -21,7 +21,7 @@ RCT_EXPORT_VIEW_PROPERTY(onDynamsoftBarcodesReader, RCTDirectEventBlock);
 
 - (UIView *)view
 {
-    return [[RNCamera alloc] initWithBridge:self.bridge];
+    return [[DBRRNCamera alloc] initWithBridge:self.bridge];
 }
 
 - (NSDictionary *)constantsToExport
@@ -101,7 +101,7 @@ RCT_EXPORT_VIEW_PROPERTY(onDynamsoftBarcodesReader, RCTDirectEventBlock);
 #endif
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(type, NSInteger, RNCamera)
+RCT_CUSTOM_VIEW_PROPERTY(type, NSInteger, DBRRNCamera)
 {
     NSInteger newType = [RCTConvert NSInteger:json];
     if (view.presetCamera != newType) {
@@ -110,7 +110,7 @@ RCT_CUSTOM_VIEW_PROPERTY(type, NSInteger, RNCamera)
     }
 }
 
-//RCT_CUSTOM_VIEW_PROPERTY(cameraId, NSString, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(cameraId, NSString, DBRRNCamera)
 //{
 //    NSString *newId = [RCTConvert NSString:json];
 //
@@ -123,52 +123,52 @@ RCT_CUSTOM_VIEW_PROPERTY(type, NSInteger, RNCamera)
 //    }
 //}
 
-//RCT_CUSTOM_VIEW_PROPERTY(flashMode, NSInteger, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(flashMode, NSInteger, DBRRNCamera)
 //{
 //    [view setFlashMode:[RCTConvert NSInteger:json]];
 //    [view updateFlashMode];
 //}
 
-//RCT_CUSTOM_VIEW_PROPERTY(autoFocus, NSInteger, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(autoFocus, NSInteger, DBRRNCamera)
 //{
 //    [view setAutoFocus:[RCTConvert NSInteger:json]];
 //    [view updateFocusMode];
 //}
 
-//RCT_CUSTOM_VIEW_PROPERTY(zoom, NSNumber, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(zoom, NSNumber, DBRRNCamera)
 //{
 //    [view setZoom:[RCTConvert CGFloat:json]];
 //    [view updateZoom];
 //}
 
-//RCT_CUSTOM_VIEW_PROPERTY(exposure, NSNumber, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(exposure, NSNumber, DBRRNCamera)
 //{
 //    [view setExposure:[RCTConvert float:json]];
 //    [view updateExposure];
 //}
 
-//RCT_CUSTOM_VIEW_PROPERTY(pictureSize, NSString *, RNCamera)
+//RCT_CUSTOM_VIEW_PROPERTY(pictureSize, NSString *, DBRRNCamera)
 //{
 //    [view setPictureSize:[[self class] pictureSizes][[RCTConvert NSString:json]]];
 //    [view updatePictureSize];
 //}
 
-RCT_CUSTOM_VIEW_PROPERTY(barcodeFormat, NSString, RNCamera)
+RCT_CUSTOM_VIEW_PROPERTY(barcodeFormat, NSString, DBRRNCamera)
 {
     [view updateBarcodeFormat:json];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(barcodeFormat2, NSString, RNCamera)
+RCT_CUSTOM_VIEW_PROPERTY(barcodeFormat2, NSString, DBRRNCamera)
 {
     [view updateBarcodeFormat2:json];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(license, NSString *, RNCamera)
+RCT_CUSTOM_VIEW_PROPERTY(license, NSString *, DBRRNCamera)
 {
     [view setLicense:json];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(dynamsoftBarcodeReaderEnabled, BOOL, RNCamera)
+RCT_CUSTOM_VIEW_PROPERTY(dynamsoftBarcodeReaderEnabled, BOOL, DBRRNCamera)
 {
     view.canDetectBarcodes = [RCTConvert BOOL:json];
     [view setupOrDisableBarcodeDetector];
@@ -178,7 +178,7 @@ RCT_EXPORT_METHOD(checkVideoAuthorizationStatus:(RCTPromiseResolveBlock)resolve
                   reject:(__unused RCTPromiseRejectBlock)reject) {
 #ifdef DEBUG
     if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSCameraUsageDescription"]) {
-        RCTLogWarn(@"Checking video permissions without having key 'NSCameraUsageDescription' defined in your Info.plist. If you do not add it your app will crash when being built in release mode. You will have to add it to your Info.plist file, otherwise RNCamera is not allowed to use the camera.");
+        RCTLogWarn(@"Checking video permissions without having key 'NSCameraUsageDescription' defined in your Info.plist. If you do not add it your app will crash when being built in release mode. You will have to add it to your Info.plist file, otherwise DBRRNCamera is not allowed to use the camera.");
         resolve(@(NO));
         return;
     }
@@ -194,10 +194,10 @@ RCT_EXPORT_METHOD(checkVideoAuthorizationStatus:(RCTPromiseResolveBlock)resolve
 //#if TARGET_IPHONE_SIMULATOR
 //    return;
 //#endif
-//    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RNCamera *> *viewRegistry) {
-//        RNCamera *view = viewRegistry[reactTag];
-//        if (![view isKindOfClass:[RNCamera class]]) {
-//            RCTLogError(@"Invalid view returned from registry, expecting RNCamera, got: %@", view);
+//    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, DBRRNCamera *> *viewRegistry) {
+//        DBRRNCamera *view = viewRegistry[reactTag];
+//        if (![view isKindOfClass:[DBRRNCamera class]]) {
+//            RCTLogError(@"Invalid view returned from registry, expecting DBRRNCamera, got: %@", view);
 //        } else {
 //            [view resumePreview];
 //        }
@@ -209,10 +209,10 @@ RCT_EXPORT_METHOD(checkVideoAuthorizationStatus:(RCTPromiseResolveBlock)resolve
 //#if TARGET_IPHONE_SIMULATOR
 //    return;
 //#endif
-//    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RNCamera *> *viewRegistry) {
-//        RNCamera *view = viewRegistry[reactTag];
-//        if (![view isKindOfClass:[RNCamera class]]) {
-//            RCTLogError(@"Invalid view returned from registry, expecting RNCamera, got: %@", view);
+//    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, DBRRNCamera *> *viewRegistry) {
+//        DBRRNCamera *view = viewRegistry[reactTag];
+//        if (![view isKindOfClass:[DBRRNCamera class]]) {
+//            RCTLogError(@"Invalid view returned from registry, expecting DBRRNCamera, got: %@", view);
 //        } else {
 //            [view pausePreview];
 //        }

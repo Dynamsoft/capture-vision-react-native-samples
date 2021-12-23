@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
-#import "RNCameraManager.h"
+#import "DBRRNCameraManager.h"
 
-@interface RNCameraUtils : NSObject
+@interface DBRRNCameraUtils : NSObject
 
 // Camera utilities
 + (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position;

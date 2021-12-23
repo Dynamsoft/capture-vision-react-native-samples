@@ -11,6 +11,8 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		842C0086277475500096EE85 /* DynamsoftBarcodeReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842C0084277475500096EE85 /* DynamsoftBarcodeReader.framework */; };
+		842C0087277475500096EE85 /* DynamsoftBarcodeReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 842C0084277475500096EE85 /* DynamsoftBarcodeReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A97F77A2DA1F4307594A1A0B /* libPods-basic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D858A239F2545A30E3C35B6 /* libPods-basic.a */; };
 		C4AD11182626FE1100BD766D /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4AD11172626FE0900BD766D /* libRNCamera.a */; };
 /* End PBXBuildFile section */
@@ -24,6 +26,20 @@
 			remoteInfo = RNCamera;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		842C0088277475500096EE85 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				842C0087277475500096EE85 /* DynamsoftBarcodeReader.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -41,6 +57,7 @@
 		51FD4A722C62A20C5B22352B /* libPods-basic-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-basic-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		594A60587E3A6FE43B2D407D /* Pods-basic-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic-tvOS.release.xcconfig"; path = "Target Support Files/Pods-basic-tvOS/Pods-basic-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		647D438E70A417BC4F7A499B /* Pods-basic-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-basic-tvOSTests/Pods-basic-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		842C0084277475500096EE85 /* DynamsoftBarcodeReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamsoftBarcodeReader.framework; path = ../../../ios/DynamsoftBarcodeReader.framework; sourceTree = "<group>"; };
 		99D94EC8605A86740A791839 /* Pods-basic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic.release.xcconfig"; path = "Target Support Files/Pods-basic/Pods-basic.release.xcconfig"; sourceTree = "<group>"; };
 		AD004B7BC5B1CD50A93EF156 /* libPods-basicTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-basicTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0F88E2DB9905FDAA5B60B2 /* libPods-basic-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-basic-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +75,7 @@
 			files = (
 				C4AD11182626FE1100BD766D /* libRNCamera.a in Frameworks */,
 				A97F77A2DA1F4307594A1A0B /* libPods-basic.a in Frameworks */,
+				842C0086277475500096EE85 /* DynamsoftBarcodeReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +114,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				842C0084277475500096EE85 /* DynamsoftBarcodeReader.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				3D858A239F2545A30E3C35B6 /* libPods-basic.a */,
@@ -157,6 +176,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				842C0088277475500096EE85 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,6 +350,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = basic;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -352,6 +373,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = basic;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		C41F0D7C26130E5100E2197E /* DynamsoftBarcodeReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C41F0D7B26130E5100E2197E /* DynamsoftBarcodeReader.framework */; };
 		C439EAD525A2C3A0003B83B3 /* DBRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EACE25A2C3A0003B83B3 /* DBRManager.m */; };
-		C439EAD625A2C3A0003B83B3 /* RNCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD025A2C3A0003B83B3 /* RNCamera.m */; };
-		C439EAD725A2C3A0003B83B3 /* RNCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD225A2C3A0003B83B3 /* RNCameraManager.m */; };
-		C439EAD825A2C3A0003B83B3 /* RNCameraUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD425A2C3A0003B83B3 /* RNCameraUtils.m */; };
+		C439EAD625A2C3A0003B83B3 /* DBRRNCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD025A2C3A0003B83B3 /* DBRRNCamera.m */; };
+		C439EAD725A2C3A0003B83B3 /* DBRRNCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD225A2C3A0003B83B3 /* DBRRNCameraManager.m */; };
+		C439EAD825A2C3A0003B83B3 /* DBRRNCameraUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C439EAD425A2C3A0003B83B3 /* DBRRNCameraUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,12 +31,12 @@
 		C41F0D7B26130E5100E2197E /* DynamsoftBarcodeReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DynamsoftBarcodeReader.framework; sourceTree = "<group>"; };
 		C439EACD25A2C3A0003B83B3 /* DBRManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRManager.h; sourceTree = "<group>"; };
 		C439EACE25A2C3A0003B83B3 /* DBRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRManager.m; sourceTree = "<group>"; };
-		C439EACF25A2C3A0003B83B3 /* RNCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCamera.h; sourceTree = "<group>"; };
-		C439EAD025A2C3A0003B83B3 /* RNCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCamera.m; sourceTree = "<group>"; };
-		C439EAD125A2C3A0003B83B3 /* RNCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCameraManager.h; sourceTree = "<group>"; };
-		C439EAD225A2C3A0003B83B3 /* RNCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCameraManager.m; sourceTree = "<group>"; };
-		C439EAD325A2C3A0003B83B3 /* RNCameraUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCameraUtils.h; sourceTree = "<group>"; };
-		C439EAD425A2C3A0003B83B3 /* RNCameraUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCameraUtils.m; sourceTree = "<group>"; };
+		C439EACF25A2C3A0003B83B3 /* DBRRNCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRRNCamera.h; sourceTree = "<group>"; };
+		C439EAD025A2C3A0003B83B3 /* DBRRNCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRRNCamera.m; sourceTree = "<group>"; };
+		C439EAD125A2C3A0003B83B3 /* DBRRNCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRRNCameraManager.h; sourceTree = "<group>"; };
+		C439EAD225A2C3A0003B83B3 /* DBRRNCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRRNCameraManager.m; sourceTree = "<group>"; };
+		C439EAD325A2C3A0003B83B3 /* DBRRNCameraUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRRNCameraUtils.h; sourceTree = "<group>"; };
+		C439EAD425A2C3A0003B83B3 /* DBRRNCameraUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRRNCameraUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,12 +81,12 @@
 			children = (
 				C439EACD25A2C3A0003B83B3 /* DBRManager.h */,
 				C439EACE25A2C3A0003B83B3 /* DBRManager.m */,
-				C439EACF25A2C3A0003B83B3 /* RNCamera.h */,
-				C439EAD025A2C3A0003B83B3 /* RNCamera.m */,
-				C439EAD125A2C3A0003B83B3 /* RNCameraManager.h */,
-				C439EAD225A2C3A0003B83B3 /* RNCameraManager.m */,
-				C439EAD325A2C3A0003B83B3 /* RNCameraUtils.h */,
-				C439EAD425A2C3A0003B83B3 /* RNCameraUtils.m */,
+				C439EACF25A2C3A0003B83B3 /* DBRRNCamera.h */,
+				C439EAD025A2C3A0003B83B3 /* DBRRNCamera.m */,
+				C439EAD125A2C3A0003B83B3 /* DBRRNCameraManager.h */,
+				C439EAD225A2C3A0003B83B3 /* DBRRNCameraManager.m */,
+				C439EAD325A2C3A0003B83B3 /* DBRRNCameraUtils.h */,
+				C439EAD425A2C3A0003B83B3 /* DBRRNCameraUtils.m */,
 			);
 			path = RN;
 			sourceTree = "<group>";
@@ -147,10 +147,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C439EAD825A2C3A0003B83B3 /* RNCameraUtils.m in Sources */,
-				C439EAD625A2C3A0003B83B3 /* RNCamera.m in Sources */,
+				C439EAD825A2C3A0003B83B3 /* DBRRNCameraUtils.m in Sources */,
+				C439EAD625A2C3A0003B83B3 /* DBRRNCamera.m in Sources */,
 				C439EAD525A2C3A0003B83B3 /* DBRManager.m in Sources */,
-				C439EAD725A2C3A0003B83B3 /* RNCameraManager.m in Sources */,
+				C439EAD725A2C3A0003B83B3 /* DBRRNCameraManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

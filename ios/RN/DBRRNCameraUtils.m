@@ -1,6 +1,6 @@
-#import "RNCameraUtils.h"
+#import "DBRRNCameraUtils.h"
 
-@implementation RNCameraUtils
+@implementation DBRRNCameraUtils
 
 # pragma mark - Camera utilities
 
