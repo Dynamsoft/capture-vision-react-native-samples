@@ -107,7 +107,7 @@ const CameraStatus: { [key: Status]: Status } = {
 };
 
 const CameraManager: Object = NativeModules.DBRRNCameraManager || 
-  NativeModules.RNCameraModule || {
+  NativeModules.DBRRNCameraModule || {
     Type: {
       back: 1,
     },
