@@ -54,6 +54,18 @@ repositories {
     // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
     url "$rootDir/../node_modules/react-native/android"
   }
+
+  flatDir {
+    dirs 'libs'
+  }
+}
+
+rootProject.allprojects {
+    repositories {
+        flatDir {
+            dirs "$rootDir/../node_modules/rn-mobile-barcode-scanner/android/libs"
+        }
+   }
 }
 
 dependencies {
@@ -66,5 +78,5 @@ dependencies {
   implementation "androidx.exifinterface:exifinterface:1.0.0"
   implementation "androidx.annotation:annotation:1.0.0"
   implementation "androidx.legacy:legacy-support-v4:1.0.0"
-  implementation 'com.dynamsoft:dynamsoftbarcodereader:latest.release@aar'
+  implementation(name: 'DynamsoftBarcodeReaderAndroid', ext: 'aar')
 }
