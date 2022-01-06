@@ -11,10 +11,11 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 
 - Node
 - JDK
-- Xcode 
-- Android Studio. 
+- Xcode
+- Android Studio
 
 ## Quick Start
+
 1. Find the `examples/basic` folder and install dependencies via `yarn` or `npm`:
 
     ```bash
@@ -23,7 +24,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     npm install 
     ```
 
-   For iOS, change directory to `examples/basic/ios` and run `pod install`.
+   For iOS, change the directory to `examples/basic/ios` and run `pod install`.
 2. Build and run the demo:
 
     ```bash
@@ -32,10 +33,11 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     iOS: xcodebuild -workspace basic.xcworkspace -configuration Debug -scheme RNCamera -sdk iphoneos ONLY_ACTIVE_ARCH=YES build
          then cd .. & npx react-native run-ios
     ```
-    
+
     Note: Please don't run the application on the simulator because of the camera requirement.
-    
+
 ### Screenshots
+
 <kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
 
 ## How to Use the Barcode Scanner Module
@@ -45,33 +47,38 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
     ```bash
     npx react-native init NewProject
     ```
+
 2. Mostly automatic install with autolinking (RN > 0.60)
+
     ```bash
-    1). `npm install RN-mobile-barcode-scanner --save`
+    1). `npm install rn-mobile-barcode-scanner --save`
     2). Run `cd ios && pod install && cd ..`
     Mostly automatic install with react-native link (RN < 0.60)
-    1). `npm install RN-mobile-barcode-scanner --save`
-    2). `react-native link RN-mobile-barcode-scanner`
+    1). `npm install rn-mobile-barcode-scanner --save`
+    2). `react-native link rn-mobile-barcode-scanner`
     ```
+
 3. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
+
     ```json
     "dependencies": {
-        "react": "16.9.0",
-        "react-native": "^0.61.1",
-        "rn-mobile-barcode-scanner": "^8.2.0"
+      "react": "17.0.2",
+      "react-native": "0.66.4",
+      "rn-mobile-barcode-scanner": "^8.9.0"
     },
     ```
 
 4. Use the module in `App.js`.
+
     ```js
-    import {NativeModules} from 'react-native';
-    import { RNCamera } from 'rn-mobile-barcode-scanner';
+    import { NativeModules } from 'react-native';
+    import { DBRRNCamera } from 'rn-mobile-barcode-scanner';
     import Canvas from 'react-native-canvas';
     
     state = {
         license: '-- put your license here -- ',
-        barcodeFormat: RNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
-        barcodeFormat2: RNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
+        barcodeFormat: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
+        barcodeFormat2: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
         type: 'back',
         canDetectBarcode: false,
         barcodes: [{
@@ -80,7 +87,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
           localizationResult: []
         }]
       };
-      <RNCamera
+      <DBRRNCamera
         ref={ref => {
           this.camera = ref;
         }}
@@ -113,18 +120,19 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
             </TouchableOpacity>
           </View>
         </View>
-      </RNCamera>  
+      </DBRRNCamera>  
     ```
+
 ## Try Barcode Scanner Demo App
 
 [<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/Google-play.svg" width="50%">](https://play.google.com/store/apps/details?id=com.dynamsoft.demo.dynamsoftbarcodereaderdemo)
-    
+
 ![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/google-play-qrcode.png)
 
 [<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/apple-store.svg" width="50%">](https://itunes.apple.com/us/app/barcode-scanner-x/id1120581630?mt=8)
-    
+
 ![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/app-store-qrcode.png)
 
-
 ## Contact Us
+
 If there are any questions, please feel free to contact support@dynamsoft.com.
