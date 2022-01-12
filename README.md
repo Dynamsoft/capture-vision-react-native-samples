@@ -1,5 +1,5 @@
 # React Native Mobile Barcode Scanner
-![version](https://img.shields.io/npm/v/rn-mobile-barcode-scanner.svg)
+<!--![version](https://img.shields.io/npm/v/rn-mobile-barcode-scanner.svg)-->
 
 A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
 
@@ -16,12 +16,10 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 
 ## Quick Start
 
-1. Find the `examples/basic` folder and install dependencies via `yarn` or `npm`:
+1. Find the `examples/basic` folder and install dependencies via `yarn`:
 
     ```bash
     yarn install 
-    # or
-    npm install 
     ```
 
    For iOS, change the directory to `examples/basic/ios` and run `pod install`.
@@ -51,10 +49,10 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 2. Mostly automatic install with autolinking (RN > 0.60)
 
     ```bash
-    1). `npm install rn-mobile-barcode-scanner --save`
+    1). `yarn add rn-mobile-barcode-scanner --save`
     2). Run `cd ios && pod install && cd ..`
     Mostly automatic install with react-native link (RN < 0.60)
-    1). `npm install rn-mobile-barcode-scanner --save`
+    1). `yarn add rn-mobile-barcode-scanner --save`
     2). `react-native link rn-mobile-barcode-scanner`
     ```
 
