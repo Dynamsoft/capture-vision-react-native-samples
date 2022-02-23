@@ -47,7 +47,7 @@ repositories {
   jcenter()
   mavenCentral()
   maven {
-    url "http://download2.dynamsoft.com/maven/dbr/aar"
+    url "https://download2.dynamsoft.com/maven/dbr/aar"
   }
   maven { url "https://jitpack.io" }
   maven {
@@ -78,5 +78,6 @@ dependencies {
   implementation "androidx.exifinterface:exifinterface:1.0.0"
   implementation "androidx.annotation:annotation:1.0.0"
   implementation "androidx.legacy:legacy-support-v4:1.0.0"
-  implementation(name: 'DynamsoftBarcodeReaderAndroid', ext: 'aar')
+  implementation "com.dynamsoft:dynamsoftbarcodereader:8.9.1@aar"
+  //implementation fileTree(include: ['*.aar'], dir: 'libs')
 }
