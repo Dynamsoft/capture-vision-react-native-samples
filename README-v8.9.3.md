@@ -16,7 +16,7 @@ A barcode scanner component for React Native built on top of [Dynamsoft Mobile B
 
 ## Getting Started
 
-### Run Android on Windows
+### Preparations
 
 1. Create a new React Native project.
 
@@ -44,51 +44,7 @@ yarn install
 
 In the **node-modules**, you will find the folder **rn-mobile-barcode-scanner**
 
-4. Run the project on your device.
-
-```bash
-npx react-native run-android
-```
-
-### Run iOS on macOS
-
-1. Create a new React Native project.
-
-```bash
-npx react-native init newBarcodeScanner
-```
-
-2. Open the project folder and find **package.json**. In the file, add the library to your project dependencies.
-
-```json
-"dependencies": {
-    "react": "16.9.0",
-    "react-native": "0.61.1",
-    "react-native-canvas": "^0.1.37",
-    "rn-mobile-barcode-scanner": "^8.9.3",
-    "react-native-webview": "^11.2.0"
-}
-```
-
-3. In the command line, open your project folder and run yarn install.
-
-```bash
-yarn install
-```
-
-In the **node-modules**, you will find the folder **rn-mobile-barcode-scanner**
-
-4. Go to the **ios** folder in your project, run pod install
-
-```bash
-cd ios
-```
-
-```bash
-pod install
-```
-
-5. Return to the project folder. In **App.js**, use the following code to replace the original code.
+4. Return to the project folder. In **App.js**, use the following code to replace the original code.
 
 ```js
 import React from 'react';
@@ -249,7 +205,31 @@ const styles = StyleSheet.create({
 export default CameraScreen;
 ```
 
-6. Run the project.
+### Run Android on Windows
+
+If you have completed the preparations, use the following command to run the project on your device.
+
+```bash
+npx react-native run-android
+```
+
+### Run iOS on macOS
+
+1. Go to the **ios** folder in your project, run pod install
+
+```bash
+cd ios
+```
+
+```bash
+pod install
+```
+
+2. Go back to the project folder and run the project.
+
+```bash
+cd ..
+```
 
 ```bash
 yarn react-native run-ios
