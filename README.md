@@ -1,136 +1,234 @@
 # React Native Mobile Barcode Scanner
-<!--![version](https://img.shields.io/npm/v/rn-mobile-barcode-scanner.svg)-->
 
-A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/). 
+A barcode scanner component for React Native built on top of [Dynamsoft Mobile Barcode SDK](https://www.dynamsoft.com/barcode-reader/sdk-mobile/).
 
 ## What You Should Know
+
 - [![](https://img.shields.io/badge/Download-Offline%20SDK-orange)](https://www.dynamsoft.com/barcode-reader/downloads)
 - [![](https://img.shields.io/badge/Get-30--day%20FREE%20Trial%20License-blue)](https://www.dynamsoft.com/customer/license/trialLicense/?product=dbr)
 
-## Development Requirements
+## Required Environment
 
 - Node
 - JDK
 - Xcode
 - Android Studio
 
-## Quick Start
+## Getting Started
 
-1. Find the `examples/basic` folder and install dependencies via `yarn`:
+### Preparations
 
-    ```bash
-    yarn install 
-    ```
+1. Create a new React Native project.
 
-   For iOS, change the directory to `examples/basic/ios` and run `pod install`.
-2. Build and run the demo:
+```bash
+npx react-native init newBarcodeScanner
+```
 
-    ```bash
-    Android: npx react-native run-android
-    
-    iOS: xcodebuild -workspace basic.xcworkspace -configuration Debug -scheme RNCamera -sdk iphoneos ONLY_ACTIVE_ARCH=YES build
-         then cd .. & npx react-native run-ios
-    ```
+2. Open the project folder and find **package.json**. In the file, add the library to your project dependencies.
 
-    Note: Please don't run the application on the simulator because of the camera requirement.
+```json
+"dependencies": {
+    "react": "16.9.0",
+    "react-native": "0.61.1",
+    "react-native-canvas": "^0.1.37",
+    "rn-mobile-barcode-scanner": "^8.9.3",
+    "react-native-webview": "^11.2.0"
+}
+```
 
-### Screenshots
+3. In the command line, open your project folder and run yarn install.
 
-<kbd><img src="https://www.dynamsoft.com/codepool/img/2021/react-native-barcode-scanner.png" width="50%">
+```bash
+yarn install
+```
 
-## How to Use the Barcode Scanner Module
+4. Return to the project folder. In **App.js**, use the following code to replace the original code.
 
-1. Create a new React Native project:
+```js
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions
+} from 'react-native';
+import { DBRRNCamera } from 'rn-mobile-barcode-scanner';
+import Canvas from 'react-native-canvas';
+const deviceH = Dimensions.get('window').height
+const deviceW = Dimensions.get('window').width
+class CameraScreen extends React.Component {
+  state = {
+    license: '-- put your license here -- ',
+    barcodeFormat: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
+    barcodeFormat2: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
+    type: 'back',
+    canDetectBarcode: false,
+    barcodes: [{
+      type: '',
+      data: '',
+      localizationResult: []
+    }]
+  };
 
-    ```bash
-    npx react-native init NewProject
-    ```
+  toggle = value => () => this.setState(prevState => ({ [value]: !prevState[value] }));
 
-2. Mostly automatic install with autolinking (RN > 0.60)
+  barcodeRecognized = ({ barcodes }) => {
+    this.setState({
+      barcodes: barcodes
+    });
+  }
 
-    ```bash
-    1). `yarn add rn-mobile-barcode-scanner --save`
-    2). Run `cd ios && pod install && cd ..`
-    Mostly automatic install with react-native link (RN < 0.60)
-    1). `yarn add rn-mobile-barcode-scanner --save`
-    2). `react-native link rn-mobile-barcode-scanner`
-    ```
+  handleCanvas = (canvas,barcodes) => {
+    if (canvas) {
+      canvas.width = deviceW
+      canvas.height = deviceH
+      const ctx = canvas.getContext('2d')
+      ctx.fillStyle = 'green'
+      ctx.lineWidth = 1
+      ctx.globalAlpha = 0.5
+      for(let res of this.state.barcodes){
+        if (res.localizationResult.length > 0) {
+          let loc = res.localizationResult
+          // console.log('canvas', res.data)
+          ctx.beginPath()
+          ctx.moveTo(loc[0], loc[1])
+          ctx.lineTo(loc[2], loc[3])
+          ctx.lineTo(loc[4], loc[5])
+          ctx.lineTo(loc[6], loc[7])
+          ctx.fill()
+          ctx.closePath()
+          ctx.stroke()
+        }
+      }
+    }else{
+      // console.log('no canvas')
+    }
+  }
 
-3. Install the latest `rn-mobile-barcode-scanner` and save it to `package.json`.
+  renderBarcodes = () => (
+    <React.Fragment key={this.state.barcodes.length}>
+      {this.state.barcodes.map((barcodes)=><Canvas style={[styles.overlay]} ref={cvs=>this.handleCanvas(cvs,barcodes)} key={this.state.barcodes.length}/>)}
+      <Text style={styles.textBlock}>{this.state.barcodes[0] ?'result:'+ this.state.barcodes[0].data:'result: null'}</Text>
+    </React.Fragment>
+  );
 
-    ```json
-    "dependencies": {
-      "react": "17.0.2",
-      "react-native": "0.66.4",
-      "rn-mobile-barcode-scanner": "^8.9.0"
-    },
-    ```
-
-4. Use the module in `App.js`.
-
-    ```js
-    import { NativeModules } from 'react-native';
-    import { DBRRNCamera } from 'rn-mobile-barcode-scanner';
-    import Canvas from 'react-native-canvas';
-    
-    state = {
-        license: '-- put your license here -- ',
-        barcodeFormat: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat.ALL,
-        barcodeFormat2: DBRRNCamera.Constants.DynamsoftBarcodeFormats.BarcodeFormat2.NULL,
-        type: 'back',
-        canDetectBarcode: false,
-        barcodes: [{
-          type: '',
-          data: '',
-          localizationResult: []
-        }]
-      };
-      <DBRRNCamera
-        ref={ref => {
-          this.camera = ref;
-        }}
-        style={{
-          flex: 1,
-          justifyContent: 'space-between',
-        }}
-        type={this.state.type}
-        license={this.state.license}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        onDynamsoftBarcodesReader={canDetectBarcode ? this.barcodeRecognized : null}
-        barcodeFormat={this.state.barcodeFormat}
-        barcodeFormat2={this.state.barcodeFormat2}
-      >
-        <View style={{height:'100%'}}>
-          <View style={{height:'90%'}}>
-          {!!canDetectBarcode && this.renderBarcodes()}
+  renderCamera() {
+    const { canDetectBarcode } = this.state;
+    return (
+        <DBRRNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={{
+            flex: 1,
+            justifyContent: 'space-between',
+          }}
+          type={this.state.type}
+          license={this.state.license}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          onDynamsoftBarcodesReader={canDetectBarcode ? this.barcodeRecognized : null}
+          barcodeFormat={this.state.barcodeFormat}
+          barcodeFormat2={this.state.barcodeFormat2}
+        >
+          <View style={{height:'100%'}}>
+            <View style={{height:'90%'}}>
+            {!!canDetectBarcode && this.renderBarcodes()}
+            </View>
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+              <TouchableOpacity 
+                onPress={this.toggle('canDetectBarcode')}
+                style={[styles.flipButton, { flex: 0.5, alignSelf: 'center' }]}
+              >
+                <Text style={styles.flipText}>{!canDetectBarcode ? 'Decode' : 'Decoding'}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-            <TouchableOpacity 
-              onPress={this.toggle('canDetectBarcode')}
-              style={[styles.flipButton, { flex: 0.5, alignSelf: 'center' }]}
-            >
-              <Text style={styles.flipText}>{!canDetectBarcode ? 'Decode' : 'Decoding'}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </DBRRNCamera>  
-    ```
+        </DBRRNCamera>
+    );
+  }
 
-## Try Barcode Scanner Demo App
+  render() {
+    return (
+    <View style={styles.container}>{this.renderCamera()}</View>
+    )
+  }
+}
 
-[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/Google-play.svg" width="50%">](https://play.google.com/store/apps/details?id=com.dynamsoft.demo.dynamsoftbarcodereaderdemo)
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  flipButton: {
+    flex: 0.3,
+    height: 40,
+    marginHorizontal: 2,
+    borderRadius: 8,
+    borderColor: 'white',
+    borderWidth: 1,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  flipText: {
+    color: 'white',
+    fontSize: 15,
+  },
+  text: {
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 2,
+    position: 'absolute',
+    borderColor: '#F00',
+    justifyContent: 'center',
+  },
+  textBlock: {
+    height: 'auto',
+    color: 'white',
+    textAlign: 'center',
+    padding: 10,
+    flexWrap: 'wrap'
+  },
+  overlay: {
+    flex: 1,
+  },
+});
 
-![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/google-play-qrcode.png)
+export default CameraScreen;
+```
 
-[<kbd><img src="https://www.dynamsoft.com/webres/wwwroot/images/icons/apple-store.svg" width="50%">](https://itunes.apple.com/us/app/barcode-scanner-x/id1120581630?mt=8)
+### Build And Run Android
 
-![Barcode Scanner X](https://www.dynamsoft.com/webres/wwwroot/images/icons/app-store-qrcode.png)
+If you have completed the preparations, use the following command to run the project on your device.
 
-## Contact Us
+```bash
+npx react-native run-android
+```
 
-If there are any questions, please feel free to contact support@dynamsoft.com.
+### Build And Run iOS
+
+1. Go to the **ios** folder in your project, run pod install
+
+```bash
+cd ios
+```
+
+```bash
+pod install
+```
+
+2. Go back to the project folder and run the project.
+
+```bash
+cd ..
+```
+
+```bash
+npx react-native run-ios
+```
