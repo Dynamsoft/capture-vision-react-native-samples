@@ -1,0 +1,22 @@
+
+{
+  "name": "dynamsoft-captrue-vision-react-native",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "",
+  "license": "",
+  "peerDependencies": {
+    "react-native": "^0.61.5"
+  },
+  "devDependencies": {
+    "prop-types": "^15.8.1",
+    "typescript": "^3.8.3"
+  }
+}
