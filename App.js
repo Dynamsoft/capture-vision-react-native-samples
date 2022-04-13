@@ -8,7 +8,7 @@ import {
     Region,
     EnumBarcodeFormat,
     DBRRuntimeSettings
-} from 'dynamsoft-capture-vision-react-native';
+} from 'henry-capture-vision-react-native';
 
 
 class App extends React.Component {
