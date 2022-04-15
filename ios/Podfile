@@ -1,4 +1,4 @@
-require_relative '../node_modules/react-native/scripts/react_native_pods'
+
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 platform :ios, '11.0'
@@ -38,25 +38,45 @@ target 'DynamsoftRnSample' do
   # pod 'henry-capture-vision-react-native', :podspec => '../node_modules/react-native/henry-capture-vision-react-native/henry-capture-vision-react-native.podspec'
   use_native_modules!
 
-  use_react_native!(
-    :path => config[:reactNativePath],
-    # to enable hermes on iOS, change `false` to `true` and then install pods
-    :hermes_enabled => false
-  )
+  # use_react_native!(
+  #   :path => config[:reactNativePath],
+  #   # to enable hermes on iOS, change `false` to `true` and then install pods
+  #   :hermes_enabled => false
+  # )
 
-  target 'DynamsoftRnSampleTests' do
-    inherit! :complete
-    # Pods for testing
-  end
+  # target 'DynamsoftRnSampleTests' do
+  #   inherit! :complete
+  #   # Pods for testing
+  # end
 
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
+  # use_flipper!()
 
+  # post_install do |installer|
+  #   react_native_post_install(installer)
+  #   __apply_Xcode_12_5_M1_post_install_workaround(installer)
+  # end
   post_install do |installer|
-    react_native_post_install(installer)
-    __apply_Xcode_12_5_M1_post_install_workaround(installer)
+  ## Fix for XCode 12.5
+      find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
+        "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
+      find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
+        "RCTBridgeModuleNameForClass(module))", "RCTBridgeModuleNameForClass(Class(module)))")
+    end
+
+  def find_and_replace(dir, findstr, replacestr)
+    Dir[dir].each do |name|
+        text = File.read(name)
+        replace = text.gsub(findstr,replacestr)
+        if text != replace
+            puts "Fix: " + name
+            File.open(name, "w") { |file| file.puts replace }
+            STDOUT.flush
+        end
+    end
+    Dir[dir + '*/'].each(&method(:find_and_replace))
   end
 end
