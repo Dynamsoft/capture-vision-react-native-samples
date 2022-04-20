@@ -11,8 +11,8 @@ import {
 const propTypes = {
     name: 'DYSCameraView',
     propTypes: {
-        isScanRegionVisible: PropTypes.bool,
-        isOverlayVisible: PropTypes.bool,
+        scanRegionVisible: PropTypes.bool,
+        overlayVisible: PropTypes.bool,
         scanRegion: PropTypes.shape({
             regionLeft: PropTypes.number,
             regionRight: PropTypes.number,
@@ -53,8 +53,8 @@ export class DynamsoftCameraView extends React.Component {
                     ref={(ref) => {
                         this.references = ref
                     }}
-                    isOverlayVisible={this.props.isOverlayVisible}
-                    isScanRegionVisible={this.props.isScanRegionVisible}
+                    overlayVisible={this.props.overlayVisible}
+                    scanRegionVisible={this.props.scanRegionVisible}
                     scanRegion={this.props.scanRegion}
                 />
                 {this.renderChildren()}

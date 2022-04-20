@@ -3,7 +3,7 @@ export class DynamsoftCameraView extends React.Component {
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): boolean;
-    isScanRegionVisible: boolean;
-    isOverlayVisible: boolean;
+    scanRegionVisible: boolean;
+    overlayVisible: boolean;
     scanRegion: any;
 }

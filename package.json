@@ -1,7 +1,7 @@
 
 {
-  "name": "dynamsoft-captrue-vision-react-native",
-  "version": "1.0.0",
+  "name": "henry-captrue-vision-react-native",
+  "version": "1.0.1",
   "description": "",
   "main": "js/index.js",
   "scripts": {

@@ -82,13 +82,13 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
         return new RNDCECameraView(reactContext, mReactApplicationContext);
     }
 
-    @ReactProp(name = "isOverlayVisible")
-    public void isOverlayVisible(RNDCECameraView view, boolean isVisible) {
+    @ReactProp(name = "overlayVisible")
+    public void setOverlayVisible(RNDCECameraView view, boolean isVisible) {
         view.setOverlayVisible(isVisible);
     }
 
-    @ReactProp(name = "isScanRegionVisible")
-    public void isScanRegionVisible(RNDCECameraView view, boolean isVisible) {
+    @ReactProp(name = "scanRegionVisible")
+    public void setScanRegionVisible(RNDCECameraView view, boolean isVisible) {
         mCamera.setScanRegionVisible(isVisible);
     }
 

@@ -29,8 +29,8 @@ RCT_EXPORT_MODULE(DYSCameraView)
     return [[DYSCameraView alloc] init];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(isScanRegionVisible, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(isOverlayVisible, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(scanRegionVisible, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(overlayVisible, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(scanRegion, NSDictionary)
 
 RCT_EXPORT_METHOD(open:(nonnull NSNumber *)reactTag) {
