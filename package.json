@@ -1,8 +1,9 @@
 
 {
-  "name": "henry-captrue-vision-react-native",
-  "version": "1.0.3",
-  "description": "",
+  "name": "henry-capture-vision-react-native",
+  "version": "1.0.4",
+  "description": "Dynamsoft capture vision react native sdk",
+  "homepage": "https://www.dynamsoft.com",
   "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

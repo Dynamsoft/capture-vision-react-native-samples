@@ -30,7 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		841E4B6227E9B890006D0011 /* libRCTDynamsoftBarcodeReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTDynamsoftBarcodeReader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		841E4B6227E9B890006D0011 /* libRNDynamsoftCaptureVision.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNDynamsoftCaptureVision.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E4B6527E9B890006D0011 /* RCTDynamsoftBarcodeReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTDynamsoftBarcodeReader.h; sourceTree = "<group>"; };
 		841E4B6627E9B890006D0011 /* RCTDynamsoftBarcodeReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTDynamsoftBarcodeReader.m; sourceTree = "<group>"; };
 		841E4B6E27E9B8EE006D0011 /* DYSCameraView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYSCameraView.h; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 		841E4B5927E9B890006D0011 = {
 			isa = PBXGroup;
 			children = (
-				841E4B6427E9B890006D0011 /* RCTDynamsoftBarcodeReader */,
+				841E4B6427E9B890006D0011 /* RNDynamsoftCaptureVision */,
 				841E4B6327E9B890006D0011 /* Products */,
 				841E4B7427E9BB1A006D0011 /* Frameworks */,
 			);
@@ -68,12 +68,12 @@
 		841E4B6327E9B890006D0011 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				841E4B6227E9B890006D0011 /* libRCTDynamsoftBarcodeReader.a */,
+				841E4B6227E9B890006D0011 /* libRNDynamsoftCaptureVision.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		841E4B6427E9B890006D0011 /* RCTDynamsoftBarcodeReader */ = {
+		841E4B6427E9B890006D0011 /* RNDynamsoftCaptureVision */ = {
 			isa = PBXGroup;
 			children = (
 				841E4B6527E9B890006D0011 /* RCTDynamsoftBarcodeReader.h */,
@@ -85,7 +85,7 @@
 				8489B57727EB2042001314E0 /* StaticClass.h */,
 				8489B57827EB2042001314E0 /* StaticClass.m */,
 			);
-			path = RCTDynamsoftBarcodeReader;
+			path = RNDynamsoftCaptureVision;
 			sourceTree = "<group>";
 		};
 		841E4B7427E9BB1A006D0011 /* Frameworks */ = {
@@ -100,9 +100,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		841E4B6127E9B890006D0011 /* RCTDynamsoftBarcodeReader */ = {
+		841E4B6127E9B890006D0011 /* RNDynamsoftCaptureVision */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 841E4B6B27E9B890006D0011 /* Build configuration list for PBXNativeTarget "RCTDynamsoftBarcodeReader" */;
+			buildConfigurationList = 841E4B6B27E9B890006D0011 /* Build configuration list for PBXNativeTarget "RNDynamsoftCaptureVision" */;
 			buildPhases = (
 				841E4B5E27E9B890006D0011 /* Sources */,
 				841E4B5F27E9B890006D0011 /* Frameworks */,
@@ -112,9 +112,9 @@
 			);
 			dependencies = (
 			);
-			name = RCTDynamsoftBarcodeReader;
-			productName = RCTDynamsoftBarcodeReader;
-			productReference = 841E4B6227E9B890006D0011 /* libRCTDynamsoftBarcodeReader.a */;
+			name = RNDynamsoftCaptureVision;
+			productName = RNDynamsoftCaptureVision;
+			productReference = 841E4B6227E9B890006D0011 /* libRNDynamsoftCaptureVision.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -131,7 +131,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 841E4B5D27E9B890006D0011 /* Build configuration list for PBXProject "RCTDynamsoftBarcodeReader" */;
+			buildConfigurationList = 841E4B5D27E9B890006D0011 /* Build configuration list for PBXProject "RNDynamsoftCaptureVision" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -144,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				841E4B6127E9B890006D0011 /* RCTDynamsoftBarcodeReader */,
+				841E4B6127E9B890006D0011 /* RNDynamsoftCaptureVision */,
 			);
 		};
 /* End PBXProject section */
@@ -313,7 +313,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		841E4B5D27E9B890006D0011 /* Build configuration list for PBXProject "RCTDynamsoftBarcodeReader" */ = {
+		841E4B5D27E9B890006D0011 /* Build configuration list for PBXProject "RNDynamsoftCaptureVision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				841E4B6927E9B890006D0011 /* Debug */,
@@ -322,7 +322,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		841E4B6B27E9B890006D0011 /* Build configuration list for PBXNativeTarget "RCTDynamsoftBarcodeReader" */ = {
+		841E4B6B27E9B890006D0011 /* Build configuration list for PBXNativeTarget "RNDynamsoftCaptureVision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				841E4B6C27E9B890006D0011 /* Debug */,
