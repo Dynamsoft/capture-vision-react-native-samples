@@ -211,7 +211,7 @@ RCT_EXPORT_METHOD(stopBarcodeScanning) {
             [barcodes addObject:barcode];
         }
         if (hasListeners) {
-            [self sendEventWithName:@"resultEvent" body:@{@"barcodeResult": barcodes}];
+            [self sendEventWithName:@"resultEvent" body:[barcodes copy]];
         }
     }
 }
