@@ -75,6 +75,8 @@ class App extends React.Component {
                 }}
                 ref = {(ref)=>{this.scanner = ref}}
                 overlayVisible={true}
+                scanRegionVisible={true}
+                scanRegion={region}
             >
                 <Text style={{
                     flex: 0.9,
