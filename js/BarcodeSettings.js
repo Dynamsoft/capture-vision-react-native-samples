@@ -14,7 +14,7 @@ var EnumDBRPresetTemplate;
 
 var EnumBarcodeFormat;
 (function (EnumBarcodeFormat) {
-    EnumBarcodeFormat["BF_ALL"] = 0xFE3FFFFF;
+    EnumBarcodeFormat["BF_ALL"] = 0xFE3FFFFF | 0;
     EnumBarcodeFormat["BF_ONED"] = 0x3007FF;
     EnumBarcodeFormat["BF_GS1_DATABAR"] = 0x3F800;
     EnumBarcodeFormat["BF_CODE_39"] = 0x1;
@@ -40,11 +40,11 @@ var EnumBarcodeFormat;
     EnumBarcodeFormat["BF_PDF417"] = 0x2000000;
     EnumBarcodeFormat["BF_QR_CODE"] = 0x4000000;
     EnumBarcodeFormat["BF_DATAMATRIX"] = 0x8000000;
-    EnumBarcodeFormat["BF_AZTEC"] = 0x10000000;
-    EnumBarcodeFormat["BF_MAXICODE"] = 0x20000000;
-    EnumBarcodeFormat["BF_MICRO_QR"] = 0x40000000;
+    EnumBarcodeFormat["BF_AZTEC"] = 0x10000000 | 0;
+    EnumBarcodeFormat["BF_MAXICODE"] = 0x20000000 | 0;
+    EnumBarcodeFormat["BF_MICRO_QR"] = 0x40000000 | 0;
     EnumBarcodeFormat["BF_MICRO_PDF417"] = 0x80000;
-    EnumBarcodeFormat["BF_GS1_COMPOSITE"] = 0x80000000;
+    EnumBarcodeFormat["BF_GS1_COMPOSITE"] = 0x80000000 | 0;
     EnumBarcodeFormat["BF_MSI_CODE"] = 0x100000;
     EnumBarcodeFormat["BF_NULL"] = 0x00;
 })(EnumBarcodeFormat = exports.EnumBarcodeFormat || (exports.EnumBarcodeFormat = {}));
