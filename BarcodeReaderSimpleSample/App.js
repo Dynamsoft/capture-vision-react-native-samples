@@ -26,13 +26,13 @@ class App extends React.Component {
 
 
             this.reader = await DynamsoftBarcodeReader.createInstance();
-            await this.reader.updateDBRRuntimeSettings(EnumDBRPresetTemplate.DEFAULT);
-            let settings: DBRRuntimeSettings = await this.reader.getDBRRuntimeSettings();
+            await this.reader.updateRuntimeSettings(EnumDBRPresetTemplate.DEFAULT);
+            let settings: DBRRuntimeSettings = await this.reader.getRuntimeSettings();
             // Set the expected barcode count to 0 when you are not sure how many barcodes you are scanning.
             // Set the expected barcode count to 1 can maximize the barcode decoding speed.
             settings.expectedBarcodesCount = 0;
             settings.barcodeFormatIds = EnumBarcodeFormat.BF_ONED | EnumBarcodeFormat.BF_QR_CODE;
-            await this.reader.updateDBRRuntimeSettings(settings)
+            await this.reader.updateRuntimeSettings(settings)
 
             await this.reader.startScanning();
             this.reader.addResultListener((results: BarcodeResult[]) => {
