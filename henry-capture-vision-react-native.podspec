@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   s.requires_arc            = true
   s.module_name             = "RNDynamsoftCaptureVision"
   s.header_dir              = "RNDynamsoftCaptureVision"
-  s.dependency 'DynamsoftCameraEnhancer', '= 2.1.3'
-  s.dependency 'DynamsoftBarcodeReader', '= 9.0.0'
+  s.dependency 'DynamsoftCameraEnhancer', '= 2.1.4'
+  s.dependency 'DynamsoftBarcodeReader', '= 9.0.2'
 
   s.dependency "React"
 end

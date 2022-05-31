@@ -32,10 +32,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven {
-        url "https://download2.dynamsoft.com/maven/dce/aar"
-    }
-    flatDir {
-        dirs 'libs'
+        url "https://download2.dynamsoft.com/maven/aar"
     }
     maven {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
@@ -44,7 +41,9 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'com.dynamsoft:dynamsoftcameraenhancer:2.1.4@aar'
+    implementation 'com.dynamsoft:dynamsoftbarcodereader:9.0.2@aar'
+
     implementation 'com.facebook.react:react-native:+'
 }
   
