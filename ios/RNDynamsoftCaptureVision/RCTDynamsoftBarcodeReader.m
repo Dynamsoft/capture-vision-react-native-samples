@@ -58,7 +58,7 @@ RCT_EXPORT_METHOD(createInstance) {
 }
 
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getVersion) {
-    return [[StaticClass instance].dbr getVersion];
+    return [DynamsoftBarcodeReader getVersion];
 }
 
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getInternalVersion) {
