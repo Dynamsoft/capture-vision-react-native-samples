@@ -28,19 +28,19 @@ export class DynamsoftBarcodeReader {
         return DBRModule.getVersion()
     }
 
-    getDBRRuntimeSettings():Promise<DBRRuntimeSettings> {
+    getRuntimeSettings():Promise<DBRRuntimeSettings> {
         return DBRModule.getSettings()
     }
 
-    resetDBRRuntimeSettings():Promise<boolean>{
+    resetRuntimeSettings():Promise<boolean>{
         return DBRModule.resetSettings()
     }
 
-    outputDBRRuntimeSettingsToString():Promise<String>{
+    outputRuntimeSettingsToString():Promise<String>{
         return DBRModule.outputSettings()
     }
 
-    updateDBRRuntimeSettings(settings: DBRRuntimeSettings | number |EnumDBRPresetTemplate | String):Promise<boolean>{
+    updateRuntimeSettings(settings: DBRRuntimeSettings | number |EnumDBRPresetTemplate | String):Promise<boolean>{
         if (typeof settings === 'object') {
             return DBRModule.updateSettingsFromDictionary(settings)
         } else if (typeof settings === 'number') {
