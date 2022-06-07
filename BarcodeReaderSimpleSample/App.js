@@ -46,7 +46,7 @@ class App extends React.Component {
 
     async componentWillUnmount() {
         await this.reader.stopScanning()
-        this.reader.removeResultListener()
+        this.reader.removeAllResultListeners()
     }
 
 
