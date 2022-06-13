@@ -5,7 +5,7 @@ Dynamsoft Capture Vision (DCV) is an aggregating SDK of a series of specific fun
 - Dynamsoft Barcode Reader (DBR) which provides barcode decoding algorithm and APIs.
 - Dynamsoft Label Recognizer (DLR) which provides label content recognizing algorithm and APIs.
 - Dynamsoft Document Normalizer (DDN) which provides document scanning algorithms and APIs.
-- Dynamsoft Camera Enhancer (DCE) which provides camera enhancements and UI configuration.
+- Dynamsoft Camera Enhancer (DCE) which provides camera enhancements and UI configuration APIs.
 
 ## Environment
 
