@@ -25,6 +25,10 @@ RCT_EXPORT_MODULE(DYSCameraView)
     return self;
 }
 
++ (BOOL)requiresMainQueueSetup{
+    return YES;
+}
+
 - (UIView *)view {
     return [[DYSCameraView alloc] init];
 }
