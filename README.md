@@ -9,28 +9,51 @@ Dynamsoft Capture Vision (DCV) is an aggregating SDK of a series of specific fun
 
 ## Environment
 
-- Node
-- JDK
-- Xcode
-- Android Studio
+React Native:
+
+- React Native: 0.60+
+
+Android:
+
+- Supported OS: Android 5.0+ (API Level 21).
+- Supported ABI: armeabi-v7a, arm64-v8a, x86 and x86_64.
+- Development Environment: Android Studio 3.4+ (Android Studio 4.2+ recommended).
+
+iOS:
+
+- Supported OS: iOS 10.0 or higher.
+- Supported ABI: arm64 and x86_64.
+- Development Environment: Xcode 7.1 and above (Xcode 13.0+ recommended).
+
+Other:
+
+- Node: 16.15.1 recommended
+- JDK: 1.8+
 
 ## Quick Deployment
 
 In this section, you will be guided on how to work with DCV on a new project.
 
-Firstly, in the newly created project, open the **package.json** file and add the dependency of DCV.
+Firstly, use the following command to create a new React Native project.
 
-```json
-"dependencies": {
-   "react": "17.0.2",
-   "react-native": "0.65.0",
-   "dynamsoft-capture-vision-react-native": "1.0.0"
-}
+```bash
+npx react-native init [your-project-name]
 ```
 
-In the command line, use yarn or npm to add the library.
+Still in the command line, use yarn or npm to add the library.
+
+```bash
+# Use Yarn to add the library
+yarn add dynamsoft-capture-vision-react-native
+# Or use NPM to add the library
+npm install dynamsoft-capture-vision-react-native
+```
 
 Now, the DCV library is added to your project. You can add the following code to activate barcode decoding, label recognizing or document scanning features in your project.
+
+### Remarks
+
+The library was created based on react 17.0.2 and react-native 0.65.0. You might have to update your react and react-native to the above or higher versions to make this library compatible with your project.
 
 ### Add Code for Barcode Decoding
 
@@ -47,7 +70,7 @@ import {
    Region,
    EnumBarcodeFormat,
    DBRRuntimeSettings
-} from 'henry-capture-vision-react-native';
+} from 'dynamsoft-capture-vision-react-native';
 
 class App extends React.Component {
    state = {
