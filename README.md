@@ -240,6 +240,6 @@ View the API reference of DCV React Native Edition to explore the full feature o
 
 - You can also request an extension for your trial license in the [customer portal](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github)
 
-## Contact Us
+## Contact
 
 https://www.dynamsoft.com/company/contact/
