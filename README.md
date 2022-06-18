@@ -12,46 +12,46 @@
 - Dynamsoft Label Recognizer (DLR) which provides label content recognizing algorithm and APIs.
 - Dynamsoft Document Normalizer (DDN) which provides document scanning algorithms and APIs.
 
->Note:
->
->- DCV React-Native edition currently only includes DCE and DBR modules. DLR and DDN modules are still under development and will be included in the future.
+>Note: DCV React-Native edition currently only includes DCE and DBR modules. DLR and DDN modules are still under development and will be included in the future.
 
 <span style="font-size:20px">Table of Contents</span>
 
-- [Requirements](#requirements)
+- [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Build Your Barcode Scanner App](#build-your-barcode-scanner-app)
   - [Initialize Project](#initialize-project)
   - [Include the Library](#include-the-library)
-  - [Add Barcode Reading](#add-barcode-reading)
+  - [Configure the Barcode Reader](#configure-the-barcode-reader)
+  - [Rendering the UI](#rendering-the-ui)
+  - [Configure Camera Permissions](#configure-camera-permissions)
   - [Run the Project](#run-the-project)
 - [Samples](#samples)
 - [API References](#api-references)
 - [License](#license)
 - [Contact](#contact)
 
-## Requirements
+## System Requirements
 
-React Native:
+### React Native
 
-- React Native: 0.60+
+- Supported Version: 0.60 or higher
 
-Android:
+### Android
 
-- Supported OS: Android 5.0+ (API Level 21).
-- Supported ABI: armeabi-v7a, arm64-v8a, x86 and x86_64.
+- Supported OS: Android 5.0 (API Level 21) or higher.
+- Supported ABI: **armeabi-v7a**, **arm64-v8a**, **x86** and **x86_64**.
 - Development Environment: Android Studio 3.4+ (Android Studio 4.2+ recommended).
+- JDK: 1.8+
 
-iOS:
+### iOS
 
-- Supported OS: iOS 10.0 or higher.
-- Supported ABI: arm64 and x86_64.
+- Supported OS: **iOS 10.0** or higher.
+- Supported ABI: **arm64** and **x86_64**.
 - Development Environment: Xcode 7.1 and above (Xcode 13.0+ recommended), CocoaPods 1.11.0+.
 
-Others:
+### Others
 
 - Node: 16.15.1 recommended
-- JDK: 1.8+
 
 ## Installation
 
@@ -69,164 +69,166 @@ Others:
 
 ## Build Your Barcode Scanner App
 
-On this page, you will learn how to create a simple barcode scanner with Dynamsoft Capture Vision SDK.
+Now you will learn how to create a simple barcode scanner using Dynamsoft Capture Vision SDK.
 
-### Initialize Project
+### Initialize the Project
 
-1. Create a new React Native project
+Create a new React Native project.
 
-    ```bash
-    npx react-native init SimpleBarcodeScanner
-    ```
+```bash
+npx react-native init SimpleBarcodeScanner
+```
 
-   >Note:
-   >
-   >- This guide uses react 17.0.2 and react-native 0.65.0.
+>Note: This sample uses react 17.0.2 and react-native 0.65.0.
 
 ### Include the Library
 
-Add the SDK to your new project. Please read [installation](#installation) section for more details.
+Add the SDK to your new project. Please read the [Installation](#installation) section for more details. Once the SDK is added, you will see a reference to it in the **package.json**.
 
-### Add Barcode Reading
+For iOS, you must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
 
-1. In `App.js` file, import the following components:
+```bash
+cd ios
+```
 
-    ```js
-    import React from 'react';
-    import {Text} from 'react-native';
-    import {
-        DynamsoftBarcodeReader,
-        DynamsoftCameraView,
-        BarcodeResult,
-        EnumDBRPresetTemplate,
-        EnumBarcodeFormat,
-        DBRRuntimeSettings
-    } from 'dynamsoft-capture-vision-react-native';
-    ```
+```bash
+pod install
+```
 
-2. Add `state` to your component. In the state, add a `results` variable to store the newly decoded barcodes.
+### Configure the Barcode Reader
 
-    ```js
-    class App extends React.Component {
-        state = {
-            results: null
-        };
-    }
-    export default App;
-    ```
+In `App.js`, import the following components:
 
-3. In `componentDidMount` function, add the following code to start barcode decoding.
+```js
+import React from 'react';
+import {Text} from 'react-native';
+import {
+    DynamsoftBarcodeReader,
+    DynamsoftCameraView,
+    BarcodeResult,
+    EnumDBRPresetTemplate,
+    EnumBarcodeFormat,
+    DBRRuntimeSettings
+} from 'dynamsoft-capture-vision-react-native';
+```
 
-    ```js
-    componentDidMount() {
-        (async () => {
-            // Initialize the license so that you can use full feature of the Barcode Reader module.
-            try {
-                await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
-            } catch (e) {
-                console.log(e.code);
-            }
-            // Create a barcode reader instance.
-            this.reader = await DynamsoftBarcodeReader.createInstance();
-            // Enable video barcode scanning.
-            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
-            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
-            await this.reader.startScanning();
-            // Add a result listener. The result listener will handle callback when barcode result is returned. 
-            this.reader.addResultListener((results: BarcodeResult[]) => {
-                // Update the newly detected barcode results to the state.
-                this.setState({results: results});
-            });
-        })();
-    }
-    ```
+Next in `App.js`, let's define the `state` to your component. In the `state`, add a `results` variable, initialized to null. In the following steps, we will store the newly decoded barcodes to `results`.
 
-4. In `componentWillUnmount` function, add code to stop barcode decoding and remove the result listener.
+```js
+class App extends React.Component {
+    state = {
+        results: null
+    };
+}
+export default App;
+```
 
-    ```js
-    async componentWillUnmount() {
-        // Stop the barcode decoding thread when your component is unmount.
-        await this.reader.stopScanning();
-        // Remove the result listener when your component is unmount.
-        this.reader.removeAllResultListeners();
-    }
-    ```
+Next is the `componentDidMount` implementation. First up is adding the code to start barcode decoding:
 
-5. Render the `DynamsoftCameraView` component.
-
-    ```js
-    render() {
-        // Add code to fetch barcode text and format from the BarcodeResult
-        let results: BarcodeResult[] = this.state.results;
-        let resultBoxText: String = "";
-        if (results && results.length>0){
-            for (let i=0;i<results.length;i++){
-                resultBoxText+=results[i].barcodeFormatString+"\n"+results[i].barcodeText+"\n";
-            }
+```js
+componentDidMount() {
+    (async () => {
+        // Initialize the license so that you can use full feature of the Barcode Reader module.
+        try {
+            await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
+        } catch (e) {
+            console.log(e.code);
         }
-        // Render DynamsoftCameraView componment.
-        return (
-            <DynamsoftCameraView
-                style={{
-                    flex: 1,
-                }}
-                ref = {(ref)=>{this.scanner = ref}}
-                isOverlayVisible={true}
-            >
-               // Add a text box to display the barcode result.
-                <Text style={{
-                    flex: 0.9,
-                    textAlignVertical: "bottom",
-                    textAlign: "center",
-                    color: "white",
-                    fontSize: 18,
-                }}>{results && results.length > 0 ? resultBoxText : "No Barcode Detected"}</Text>
-            </DynamsoftCameraView>
-        );
+        // Create a barcode reader instance.
+        this.reader = await DynamsoftBarcodeReader.createInstance();
+        // Enable video barcode scanning.
+        // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
+        // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
+        await this.reader.startScanning();
+        // Add a result listener. The result listener will handle callback when barcode result is returned. 
+        this.reader.addResultListener((results: BarcodeResult[]) => {
+            // Update the newly detected barcode results to the state.
+            this.setState({results: results});
+        });
+    })();
+}
+```
+
+After implementing `componentDidMount`, `componentWillUnmount` will then include code to stop the barcode decoding and remove the result listener.
+
+```js
+async componentWillUnmount() {
+    // Stop the barcode decoding thread when your component is unmount.
+    await this.reader.stopScanning();
+    // Remove the result listener when your component is unmount.
+    this.reader.removeAllResultListeners();
+}
+```
+
+### Rendering the UI
+
+Lastly, let's create the `DynamsoftCameraView` UI component in the `render` function.
+
+```js
+render() {
+    // Add code to fetch barcode text and format from the BarcodeResult
+    let results: BarcodeResult[] = this.state.results;
+    let resultBoxText: String = "";
+    if (results && results.length>0){
+        for (let i=0;i<results.length;i++){
+            resultBoxText+=results[i].barcodeFormatString+"\n"+results[i].barcodeText+"\n";
+        }
     }
-    ```
+    // Render DynamsoftCameraView componment.
+    return (
+        <DynamsoftCameraView
+            style={{
+                flex: 1,
+            }}
+            ref = {(ref)=>{this.scanner = ref}}
+            isOverlayVisible={true}
+        >
+            // Add a text box to display the barcode result.
+            <Text style={{
+                flex: 0.9,
+                marginTop: 100,
+                textAlign: "center",
+                color: "white",
+                fontSize: 18,
+            }}>{results && results.length > 0 ? resultBoxText : "No Barcode Detected"}</Text>
+        </DynamsoftCameraView>
+    );
+}
+```
+
+### Configure Camera Permissions
+
+You need to set the "Privacy - Camera Usage Description" field in the `Info.plist` file for iOS. If this property is not set, the iOS application will fail at runtime. In order to set this property, you might need to use Xcode and open the corresponding `.xcworkspace` located in the `ios` folder. Once open, you can edit the `Info.plist` to include this property.
 
 ### Run the Project
 
 #### Run Android on Windows
 
-1. Go to your project folder and run the following command:
+In the command line interface (we recommend using Powershell), go to your project folder and run the following command:
 
-   ```bash
-   npx react-native run-android
-   ```
+```bash
+npx react-native run-android
+```
 
 #### Run iOS on macOS
 
-1. Go to the `ios` folder. Run pod install to add native libraries to your iOS project.
+In the terminal, go to the project folder in your project:
 
-   ```bash
-   cd ios
-   ```
+```bash
+npx react-native run-ios
+```
 
-   ```bash
-   pod install
-   ```
-
-   >Note:
-   >
-   >- Don't forget to set the "Privacy - Camera Usage Description" field in the Info.plist file.
-
-2. Go back to the project folder and run the project.
-
-   ```bash
-   cd ..
-   ```
-
-   ```bash
-   npx react-native run-ios
-   ```
+> Note:
+>
+>- The application needs to run on a physical device rather than a simulator as it requires the use of the camera. If you try running it on a simulator, you will most likely run into a number of errors/failures.
+>- On iOS, in order to run the React Native app on a physical device you will need to install the [`ios-deploy`](https://www.npmjs.com/package/ios-deploy) library. Afterwards, you can run the react native app from the terminal as such `npx react-native run-ios --device` assuming it's the only device connected to the Mac.
+>- Alternatively on iOS, you can simply open the xcworkspace of the project found in the `ios` folder using Xcode and run the sample on your connected iOS device from there. The advantage that this offers is that it is easier to deal with the developer signatures for deployment in there.
 
 ## Samples
 
 You can view all the DCV React Native samples via the following links:
 
-- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/BarcodeReaderSimpleSample" target = "_blank" >DCV barcode decoding simple sample</a>
+- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/BarcodeReaderSimpleSample" target = "_blank" >Barcode reader simple sample</a>
 
 ## API References
 
