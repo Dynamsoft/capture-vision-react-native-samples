@@ -76,7 +76,7 @@ class CommandDispatcher {
     dceViewHandle: any;
 
     constructor(viewHandle) {
-        console.log(viewHandle)
+        //console.log(viewHandle)
         this.dceViewHandle = viewHandle;
     }
 
