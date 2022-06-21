@@ -1,15 +1,31 @@
 {
   "name": "henry-capture-vision-react-native",
-  "version": "1.0.10",
-  "description": "Dynamsoft capture vision react native sdk",
-  "homepage": "https://www.dynamsoft.com",
-  "main": "js/index.js",
+  "version": "1.0.11",
+  "description": "Dynamsoft Capture Vision React Native SDK",
+  "homepage": "https://www.dynamsoft.com/capture-vision/docs/introduction",
+  "main": "./js/index.js",
+  "types": "./js/index.d.ts",
+  "license": "SEE LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dynamsoft/capture-vision-react-native.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "barcode",
+    "PDF417",
+    "QRCode",
+    "DataMatrix",
+    "Linear barcode",
+    "1D barcode"
   ],
-  "author": "",
-  "license": ""
+  "author": {
+    "name": "Dynamsoft",
+    "url": "https://www.dynamsoft.com",
+    "email": "support@dynamsoft.com"
+  }
 }
