@@ -73,7 +73,7 @@ export class DynamsoftCameraView extends React.Component {
 }
 
 class CommandDispatcher {
-    dceViewHandle: any;
+    dceViewHandle;
 
     constructor(viewHandle) {
         //console.log(viewHandle)

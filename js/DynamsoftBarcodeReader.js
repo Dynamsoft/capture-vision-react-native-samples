@@ -11,7 +11,7 @@ const DBREventEmitter = new NativeEventEmitter(DBRModule)
 
 export class DynamsoftBarcodeReader {
   
-    static async initLicense(license:String) {
+    static async initLicense(license) {
         try {
             return await DBRModule.initLicense(license)
         }catch (e) {
@@ -24,23 +24,23 @@ export class DynamsoftBarcodeReader {
         return new DynamsoftBarcodeReader()
     }
 
-    getVersion():Promise<String>{
+    getVersion(){
         return DBRModule.getVersion()
     }
 
-    getRuntimeSettings():Promise<DBRRuntimeSettings> {
+    getRuntimeSettings() {
         return DBRModule.getSettings()
     }
 
-    resetRuntimeSettings():Promise<boolean>{
+    resetRuntimeSettings(){
         return DBRModule.resetSettings()
     }
 
-    outputRuntimeSettingsToString():Promise<String>{
+    outputRuntimeSettingsToString(){
         return DBRModule.outputSettings()
     }
 
-    updateRuntimeSettings(settings: DBRRuntimeSettings | number |EnumDBRPresetTemplate | String):Promise<boolean>{
+    updateRuntimeSettings(settings){
         if (typeof settings === 'object') {
             return DBRModule.updateSettingsFromDictionary(settings)
         } else if (typeof settings === 'number') {
@@ -50,15 +50,15 @@ export class DynamsoftBarcodeReader {
         }
     }
 
-    startScanning(): Promise<void>{
+    startScanning(){
         DBRModule.startBarcodeScanning()
     }
   
-    stopScanning(): Promise<void>{
+    stopScanning(){
         DBRModule.stopBarcodeScanning()
     }
 
-    addResultListener(listener:Function){
+    addResultListener(listener){
         if(Platform.OS === 'android') {
             DBRModule.addResultListener()
         }
