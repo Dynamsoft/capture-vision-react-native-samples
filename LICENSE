@@ -1,6 +1,5 @@
 License Notice
 
-The use of this software is governed by the Dynamsoft Terms and Conditions.
-https://www.dynamsoft.com/company/license-agreement/
+The source code of the Dynamsoft Capture Vision (DCV) React Native Edition published here is released under the Apache 2.0 license: http://www.apache.org/licenses/LICENSE-2.0. Dynamsoft Barcode Reader (DBR) and Dynamsoft Camera Enhancer (DCE) SDK upon which Dynamsoft Capture Vision (DCV) depends are provided under a commercial license from https://www.dynamsoft.com/company/license-agreement/.  This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-Copyright © 2003–2022 Dynamsoft. All Rights Reserved.
+Copyright © 2003–2022 Dynamsoft. All Rights Reserved
