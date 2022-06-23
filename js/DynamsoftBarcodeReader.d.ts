@@ -2,11 +2,11 @@ import { DBRRuntimeSettings, EnumDBRPresetTemplate } from "./BarcodeSettings";
 export declare class DynamsoftBarcodeReader {
     static initLicense(license: String): Promise<void>;
     static createInstance(): Promise<DynamsoftBarcodeReader>;
-    getVersion(): Promise<String>;
+    getVersion(): Promise<string>;
     getRuntimeSettings(): Promise<DBRRuntimeSettings>;
     resetRuntimeSettings(): Promise<boolean>;
-    outputRuntimeSettingsToString(): Promise<String>;
-    updateRuntimeSettings(settings: DBRRuntimeSettings | number | EnumDBRPresetTemplate | String): Promise<boolean>;
+    outputRuntimeSettingsToString(): Promise<string>;
+    updateRuntimeSettings(settings: DBRRuntimeSettings | number | EnumDBRPresetTemplate | string): Promise<boolean>;
     startScanning(): Promise<void>;
     stopScanning(): Promise<void>;
     addResultListener(listener: Function): void;
