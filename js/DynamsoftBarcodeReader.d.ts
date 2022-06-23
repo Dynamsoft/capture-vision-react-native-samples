@@ -1,4 +1,4 @@
-import { DBRRuntimeSettings, EnumDBRPresetTemplate } from "./BarcodeSettings";
+import {BarcodeResult, DBRRuntimeSettings, EnumDBRPresetTemplate } from "./BarcodeSettings";
 export declare class DynamsoftBarcodeReader {
     static initLicense(license: string): Promise<void>;
     static createInstance(): Promise<DynamsoftBarcodeReader>;
