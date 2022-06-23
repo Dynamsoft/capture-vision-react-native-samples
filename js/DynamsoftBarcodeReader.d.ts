@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { DBRRuntimeSettings, EnumDBRPresetTemplate } from "./BarcodeSettings";
 export declare class DynamsoftBarcodeReader {
     static initLicense(license: String): Promise<void>;
