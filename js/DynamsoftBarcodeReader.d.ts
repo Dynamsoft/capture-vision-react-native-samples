@@ -9,6 +9,6 @@ export declare class DynamsoftBarcodeReader {
     updateRuntimeSettings(settings: DBRRuntimeSettings | number | EnumDBRPresetTemplate | string): Promise<boolean>;
     startScanning(): Promise<void>;
     stopScanning(): Promise<void>;
-    addResultListener(listener: Function): void;
+    addResultListener(listener: (result: BarcodeResult) => void): void;
     removeAllResultListeners(): void;
 }
