@@ -19,7 +19,7 @@
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Build Your Barcode Scanner App](#build-your-barcode-scanner-app)
-  - [Initialize Project](#initialize-project)
+  - [Initialize the Project](#initialize-the-project)
   - [Include the Library](#include-the-library)
   - [Configure the Barcode Reader](#configure-the-barcode-reader)
   - [Rendering the UI](#rendering-the-ui)
