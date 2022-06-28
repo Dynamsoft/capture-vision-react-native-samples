@@ -228,7 +228,7 @@ npx react-native run-ios
 
 You can view all the DCV React Native samples via the following links:
 
-- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/BarcodeReaderSimpleSample" target = "_blank" >Barcode reader simple sample</a>
+- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/tree/main/BarcodeReaderSimpleSample" target = "_blank" >Barcode reader simple sample</a>
 
 ## API References
 
