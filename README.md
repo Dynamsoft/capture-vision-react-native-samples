@@ -183,7 +183,6 @@ render() {
             ref = {(ref)=>{this.scanner = ref}}
             isOverlayVisible={true}
         >
-            // Add a text box to display the barcode result.
             <Text style={{
                 flex: 0.9,
                 marginTop: 100,
@@ -228,7 +227,7 @@ npx react-native run-ios
 
 You can view all the DCV React Native samples via the following links:
 
-- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/BarcodeReaderSimpleSample" target = "_blank" >Barcode reader simple sample</a>
+- <a href = "https://github.com/Dynamsoft/capture-vision-react-native-samples/tree/main/BarcodeReaderSimpleSample" target = "_blank" >Barcode reader simple sample</a>
 
 ## API References
 
