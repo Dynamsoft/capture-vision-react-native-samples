@@ -14,6 +14,8 @@
 @synthesize overlayVisible;
 @synthesize scanRegionVisible = _scanRegionVisible;
 @synthesize scanRegion;
+@synthesize torchState;
+@synthesize torchButton = _torchButton;
 
 - (instancetype)init {
     self = [super init];
@@ -39,6 +41,37 @@
 
 - (BOOL)scanRegionVisible{
     return _scanRegionVisible;
+}
+
+- (void)setTorchState:(int)torchState{
+    if (torchState == 0) {
+        [[StaticClass instance].dce turnOnTorch];
+    }else if (torchState == 1){
+        [[StaticClass instance].dce turnOffTorch];
+    }
+}
+
+- (void)setTorchButton:(NSDictionary *)torchButton{
+    if (torchButton) {
+        NSString *torchOnImageBase64 = [torchButton valueForKey:@"torchOnImageBase64"];
+        NSString *torchOffImageBase64 = [torchButton valueForKey:@"torchOffImageBase64"];
+        BOOL visible = [[torchButton valueForKey:@"visible"] boolValue];
+        NSDictionary *dic = [torchButton valueForKey:@"location"];
+        NSNumber *x = [dic valueForKey:@"x"];
+        NSNumber *y = [dic valueForKey:@"y"];
+        NSNumber *width = [dic valueForKey:@"width"];
+        NSNumber *height = [dic valueForKey:@"height"];
+    
+        CGRect rect = CGRectMake(x.floatValue, y.floatValue, width.floatValue, height.floatValue);
+        
+        NSData *torchOnImageData = [[NSData alloc]initWithBase64EncodedString:torchOnImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+        UIImage *torchOnImage = [UIImage imageWithData: torchOnImageData];
+        NSData *torchOffImageData = [[NSData alloc]initWithBase64EncodedString:torchOffImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+        UIImage *torchOffImage = [UIImage imageWithData: torchOffImageData];
+        
+        [[StaticClass instance].view setTorchButton:rect torchOnImage:torchOnImage torchOffImage:torchOffImage];
+        [[StaticClass instance].view setTorchButtonVisible:visible];
+    }
 }
 
 - (void)setScanRegion:(NSDictionary *)scanRegion{

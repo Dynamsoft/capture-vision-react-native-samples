@@ -33,9 +33,21 @@ RCT_EXPORT_MODULE(DYSCameraView)
     return [[DYSCameraView alloc] init];
 }
 
+- (NSDictionary *)constantsToExport
+{
+    return @{
+             @"TorchState": @{
+                 @"off": @1,
+                 @"on": @0
+             },
+    };
+}
+
 RCT_EXPORT_VIEW_PROPERTY(scanRegionVisible, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(overlayVisible, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(torchState, int)
 RCT_EXPORT_VIEW_PROPERTY(scanRegion, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(torchButton, NSDictionary)
 
 RCT_EXPORT_METHOD(open:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:
