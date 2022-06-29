@@ -1,107 +1,114 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-    findNodeHandle,
-    requireNativeComponent,
-    View,
-    StyleSheet,
-    Platform, UIManager
-} from 'react-native';
-
-const propTypes = {
-    name: 'DYSCameraView',
-    propTypes: {
-        scanRegionVisible: PropTypes.bool,
-        overlayVisible: PropTypes.bool,
-        scanRegion: PropTypes.shape({
-            regionLeft: PropTypes.number,
-            regionRight: PropTypes.number,
-            regionTop: PropTypes.number,
-            regionBottom: PropTypes.number,
-            regionMeasuredByPercentage: PropTypes.bool
-        }),
-        ...View.propTypes
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
-
-const ReactDCEView = requireNativeComponent('DYSCameraView', propTypes);
-
-export class DynamsoftCameraView extends React.Component {
-
-    componentDidMount() {
-        this.dispatcher = new CommandDispatcher(findNodeHandle(this.references));
-        if(Platform.OS === 'ios') {
-            this.open()
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
         }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DynamsoftCameraView = void 0;
+const React = __importStar(require("react"));
+const react_native_1 = require("react-native");
+const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
+const DCEView = (0, react_native_1.requireNativeComponent)('DYSCameraView');
+const mapValues = (input, mapper) => {
+    const result = {};
+    Object.entries(input).map(([key, value]) => {
+        result[key] = mapper(value, key);
+    });
+    return result;
+};
+class DynamsoftCameraView extends React.Component {
+    constructor(props) {
+        super(props);
     }
-
-    componentWillUnmount(){
-        if(Platform.OS === 'ios') {
-            this.close()
-        }
-    }
-
-    renderChildren = () => {
-        return this.props.children
-    }
-
-    render() {
-        return (
-            <View style={this.props.style}>
-                <ReactDCEView
-                    style={StyleSheet.absoluteFill}
-                    ref={(ref) => {
-                        this.references = ref
-                    }}
-                    overlayVisible={this.props.overlayVisible}
-                    scanRegionVisible={this.props.scanRegionVisible}
-                    scanRegion={this.props.scanRegion}
-                />
-                {this.renderChildren()}
-            </View>
-        );
-    }
-
     open() {
         this.dispatcher.open();
     }
-
     close() {
         this.dispatcher.close();
     }
-
+    componentDidMount() {
+        this.dispatcher = new CommandDispatcher((0, react_native_1.findNodeHandle)(this.references));
+        if (react_native_1.Platform.OS === 'ios') {
+            this.open();
+        }
+    }
+    componentWillUnmount() {
+        if (react_native_1.Platform.OS === 'ios') {
+            this.close();
+        }
+    }
+    convertNativeProps(_a) {
+        var { children } = _a, props = __rest(_a, ["children"]);
+        const newProps = mapValues(props, this.convertProp);
+        return newProps;
+    }
+    convertProp(value, key) {
+        if (typeof value === 'string' && DynamsoftCameraView.ConversionTables[key]) {
+            return DynamsoftCameraView.ConversionTables[key][value];
+        }
+        return value;
+    }
+    render() {
+        const _a = this.convertNativeProps(this.props), { style } = _a, nativeProps = __rest(_a, ["style"]);
+        return (React.createElement(react_native_1.View, { style: style },
+            React.createElement(DCEView, Object.assign({ style: react_native_1.StyleSheet.absoluteFill }, nativeProps)),
+            this.props.children));
+    }
 }
-
+exports.DynamsoftCameraView = DynamsoftCameraView;
+DynamsoftCameraView.ConversionTables = {
+    torchState: DBRModule.TorchState
+};
 class CommandDispatcher {
-    dceViewHandle;
-
     constructor(viewHandle) {
         //console.log(viewHandle)
         this.dceViewHandle = viewHandle;
     }
-
     getViewManagerConfig(viewManagerConfig) {
-        if (UIManager.getViewManagerConfig) {
-            return UIManager.getViewManagerConfig(viewManagerConfig);
-        } else {
-            return UIManager[viewManagerConfig];
+        if (react_native_1.UIManager.getViewManagerConfig) {
+            return react_native_1.UIManager.getViewManagerConfig(viewManagerConfig);
+        }
+        else {
+            return react_native_1.UIManager[viewManagerConfig];
         }
     }
-
     open() {
-        UIManager.dispatchViewManagerCommand(
-            this.dceViewHandle,
-            this.getViewManagerConfig('DYSCameraView').Commands.open,
-            null);
+        if (this.getViewManagerConfig('DYSCameraView')) {
+            react_native_1.UIManager.dispatchViewManagerCommand(this.dceViewHandle, this.getViewManagerConfig('DYSCameraView').Commands.open, undefined);
+        }
     }
-
     close() {
-        UIManager.dispatchViewManagerCommand(
-            this.dceViewHandle,
-            this.getViewManagerConfig('DYSCameraView').Commands.close,
-            null);
+        react_native_1.UIManager.dispatchViewManagerCommand(this.dceViewHandle, this.getViewManagerConfig('DYSCameraView').Commands.close, undefined);
     }
-
 }
-
-
+//# sourceMappingURL=DynamsoftCameraView.js.map

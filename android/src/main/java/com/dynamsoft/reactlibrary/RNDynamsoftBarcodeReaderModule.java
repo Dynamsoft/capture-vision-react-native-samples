@@ -27,6 +27,12 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import static com.dynamsoft.reactlibrary.RNDCECameraViewManager.mCamera;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
 public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext mReactContext;
@@ -45,6 +51,25 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
         return "RNDynamsoftBarcodeReader";
     }
 
+    @Nullable
+    @Override
+    public Map<String, Object> getConstants() {
+        return Collections.unmodifiableMap(new HashMap<String, Object>() {
+            {
+                put("TorchState", getFlashModeConstants());
+            }
+
+            private Map<String, Object> getFlashModeConstants(){
+                return Collections.unmodifiableMap(new HashMap<String, Object>() {
+                    {
+                        put("off", Constants.TORCH_OFF);
+                        put("on", Constants.TORCH_ON);
+                    }
+                });
+            }
+
+        });
+    }
 
     @ReactMethod
     public void initLicense(String license, final Promise promise) {
@@ -98,7 +123,6 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
     public void removeListeners(Integer count) {
 
     }
-
 
     @ReactMethod
     public void startBarcodeScanning() {
@@ -190,7 +214,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
             promise.reject(e.getErrorCode() + "", e.getCause());
         }
         promise.resolve(settingsMap);
-//        return settingsMap;
+        // return settingsMap;
     }
 
     private WritableArray serializeResults(TextResult[] barcodes) {
