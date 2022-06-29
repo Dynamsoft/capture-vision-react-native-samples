@@ -52,12 +52,15 @@ class DynamsoftBarcodeReader {
         else if (typeof settings === 'string') {
             return DBRModule.updateSettingsFromString(settings);
         }
+        else {
+            return new Promise((reslove, reject) => { reject(false); });
+        }
     }
     startScanning() {
-        DBRModule.startBarcodeScanning();
+        return DBRModule.startBarcodeScanning();
     }
     stopScanning() {
-        DBRModule.stopBarcodeScanning();
+        return DBRModule.stopBarcodeScanning();
     }
     addResultListener(listener) {
         if (react_native_1.Platform.OS === 'android') {

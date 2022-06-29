@@ -19,7 +19,7 @@ export declare class DynamsoftCameraView extends React.Component<Props, {}> {
     close(): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
-    convertNativeProps({ children, ...props }: Props): {};
+    convertNativeProps({ children, ...props }: Props): Props;
     convertProp(value: any, key: string): any;
     render(): React.ReactElement | null;
 }
