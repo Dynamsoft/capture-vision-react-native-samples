@@ -1,6 +1,7 @@
 
 package com.dynamsoft.reactlibrary;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.dynamsoft.dbr.BarcodeReader;
@@ -15,6 +16,7 @@ import com.dynamsoft.dbr.Point;
 import com.dynamsoft.dbr.PublicRuntimeSettings;
 import com.dynamsoft.dbr.TextResult;
 import com.dynamsoft.dbr.TextResultListener;
+import com.dynamsoft.dce.CameraEnhancer;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -24,8 +26,11 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Nullable;
 
-import static com.dynamsoft.reactlibrary.RNDCECameraViewManager.mCamera;
 
 public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
@@ -33,6 +38,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
     private BarcodeReader mReader;
 
     private boolean mIsCameraAttached;
+    CameraEnhancer mCamera;
 
     public RNDynamsoftBarcodeReaderModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -40,11 +46,35 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
         mIsCameraAttached = false;
     }
 
+
+    protected Activity getActivity() {
+        return  super.getCurrentActivity();
+    }
+
     @Override
     public String getName() {
         return "RNDynamsoftBarcodeReader";
     }
 
+    @Nullable
+    @Override
+    public Map<String, Object> getConstants() {
+        return Collections.unmodifiableMap(new HashMap<String, Object>() {
+            {
+                put("TorchState", getFlashModeConstants());
+            }
+
+            private Map<String, Object> getFlashModeConstants(){
+                return Collections.unmodifiableMap(new HashMap<String, Object>() {
+                    {
+                        put("off", Constants.TORCH_OFF);
+                        put("on", Constants.TORCH_ON);
+                    }
+                });
+            }
+
+        });
+    }
 
     @ReactMethod
     public void initLicense(String license, final Promise promise) {
@@ -98,7 +128,6 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
     public void removeListeners(Integer count) {
 
     }
-
 
     @ReactMethod
     public void startBarcodeScanning() {
@@ -190,7 +219,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
             promise.reject(e.getErrorCode() + "", e.getCause());
         }
         promise.resolve(settingsMap);
-//        return settingsMap;
+        // return settingsMap;
     }
 
     private WritableArray serializeResults(TextResult[] barcodes) {

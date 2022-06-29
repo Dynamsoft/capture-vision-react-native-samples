@@ -1,42 +1,21 @@
 package com.dynamsoft.reactlibrary;
 
+import com.dynamsoft.dce.CameraEnhancer;
 import com.dynamsoft.dce.CameraEnhancerException;
 import com.dynamsoft.dce.DCECameraView;
-import com.dynamsoft.dce.DCEFrame;
-import com.dynamsoft.dce.DCEFrameListener;
-import com.dynamsoft.dce.EnumResolution;
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.ThemedReactContext;
-import static com.dynamsoft.reactlibrary.RNDCECameraViewManager.mCamera;
 
 public class RNDCECameraView extends DCECameraView implements LifecycleEventListener {
 
-    public RNDCECameraView(ThemedReactContext context, ReactApplicationContext appContext) {
+    CameraEnhancer mCamera;
+
+    public RNDCECameraView(ThemedReactContext context, ReactApplicationContext appContext, CameraEnhancer cameraEnhancer) {
         super(context);
         context.addLifecycleEventListener(this);
+        mCamera = cameraEnhancer;
         mCamera.setCameraView(this);
-//        mCamera.addListener(new DCEFrameListener() {
-//            @Override
-//            public void frameOutputCallback(DCEFrame dceFrame, long l) {
-//                WritableMap frame = Arguments.createMap();
-//                frame.putInt("id",dceFrame.getFrameId());
-//                frame.putInt("width",dceFrame.getWidth());
-//                frame.putInt("height",dceFrame.getHeight());
-//                frame.putInt("stride",dceFrame.getStrides()[0]);
-//                frame.putInt("dataLength",dceFrame.getImageData().length);
-//                frame.putInt("format",dceFrame.getPixelFormat());
-//
-//                ReactContext reactContext = (ReactContext)getContext();
-//                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(
-//                        "getFrameFromBuffer",
-//                        frame);
-//            }
-//        });
     }
 
     @Override
