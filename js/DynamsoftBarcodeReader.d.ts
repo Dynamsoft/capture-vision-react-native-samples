@@ -1,6 +1,6 @@
 import { BarcodeResult, DBRRuntimeSettings } from "./BarcodeSettings";
 export declare class DynamsoftBarcodeReader {
-    static initLicense(license: string): Promise<any>;
+    static initLicense(license: string): Promise<void>;
     static createInstance(): Promise<DynamsoftBarcodeReader>;
     getVersion(): Promise<string>;
     getRuntimeSettings(): Promise<DBRRuntimeSettings>;
