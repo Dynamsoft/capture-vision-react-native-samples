@@ -46,8 +46,8 @@ rootProject.allprojects {
 }
 
 dependencies {
-    implementation 'com.dynamsoft:dynamsoftcameraenhancer:2.1.4@aar'
-    implementation 'com.dynamsoft:dynamsoftbarcodereader:9.0.2@aar'
+    implementation 'com.dynamsoft:dynamsoftcameraenhancer:2.3.0@aar'
+    implementation 'com.dynamsoft:dynamsoftbarcodereader:9.2.10@aar'
 
     implementation 'com.facebook.react:react-native:+'
 }
