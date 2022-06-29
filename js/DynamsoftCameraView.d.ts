@@ -1,33 +1,10 @@
-import * as React from 'react';
-import { ViewProps } from 'react-native';
-import { Region, TorchButton } from './BarcodeSettings';
-interface Props extends ViewProps {
-    overlayVisible?: boolean;
-    scanRegionVisible?: boolean;
-    scanRegion?: Region;
-    torchState?: string | number;
-    torchButton?: TorchButton;
-}
-export declare class DynamsoftCameraView extends React.Component<Props, {}> {
-    dispatcher: CommandDispatcher;
-    references: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
-    constructor(props: Props);
-    static ConversionTables: {
-        torchState: any;
-    };
-    open(): void;
-    close(): void;
+import React from 'react';
+import {Region} from './BarcodeSettings'
+export class DynamsoftCameraView extends React.Component {
     componentDidMount(): void;
     componentWillUnmount(): void;
-    convertNativeProps({ children, ...props }: Props): {};
-    convertProp(value: any, key: string): any;
-    render(): React.ReactElement | null;
+    render(): boolean;
+    scanRegionVisible: boolean;
+    overlayVisible: boolean;
+    scanRegion: Region;
 }
-declare class CommandDispatcher {
-    dceViewHandle: any;
-    constructor(viewHandle: any);
-    getViewManagerConfig(viewManagerConfig: string): any;
-    open(): void;
-    close(): void;
-}
-export {};
