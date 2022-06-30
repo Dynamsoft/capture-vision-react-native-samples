@@ -1,9 +1,4 @@
-export interface Rect {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
+import { Rect } from "./BasicStructures";
 export interface TorchButton {
     location: Rect;
     visible: boolean;

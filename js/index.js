@@ -18,4 +18,6 @@ __exportStar(require("./CameraSettings"), exports);
 __exportStar(require("./BarcodeSettings"), exports);
 __exportStar(require("./DynamsoftBarcodeReader"), exports);
 __exportStar(require("./DynamsoftCameraView"), exports);
+__exportStar(require("./BarcodeResult"), exports);
+__exportStar(require("./BasicStructures"), exports);
 //# sourceMappingURL=index.js.map

@@ -4,44 +4,6 @@ export interface DBRRuntimeSettings {
     expectedBarcodesCount: number;
     timeout: number;
 }
-export interface BarcodeResult {
-    /**
-    * The barcode text.
-    */
-    barcodeText: string;
-    /**
-    * Barcode type in string.
-    */
-    barcodeFormatString: string;
-    /**
-    * The corresponding localization result.
-    */
-    barcodeLocation: BarcodeLocationResult;
-}
-export interface BarcodeLocationResult {
-    /**
-     * The angle of a barcode. Values range from 0 to 360.
-     */
-    angle: number;
-    /**
-     * The quadrilateral
-     */
-    quadrilateral: Quadrilateral;
-}
-export interface Quadrilateral {
-    points: Point[];
-}
-export interface Point {
-    x: number;
-    y: number;
-}
-export interface Region {
-    regionBottom: number;
-    regionRight: number;
-    regionLeft: number;
-    regionTop: number;
-    regionMeasuredByPercentage: number | boolean;
-}
 export declare enum EnumDBRPresetTemplate {
     DEFAULT = 0,
     VIDEO_SINGLE_BARCODE = 1,
