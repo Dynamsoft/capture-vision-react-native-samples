@@ -92,7 +92,7 @@ class App extends React.Component {
             >
                 <Text style={{
                     flex: 0.9,
-                    marginTop: 100,
+                    marginTop: 200,
                     textAlign: "center",
                     color: "white",
                     fontSize: 18,
