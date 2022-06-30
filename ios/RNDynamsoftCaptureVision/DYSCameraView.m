@@ -57,17 +57,26 @@
         NSString *torchOffImageBase64 = [torchButton valueForKey:@"torchOffImageBase64"];
         BOOL visible = [[torchButton valueForKey:@"visible"] boolValue];
         NSDictionary *dic = [torchButton valueForKey:@"location"];
-        NSNumber *x = [dic valueForKey:@"x"];
-        NSNumber *y = [dic valueForKey:@"y"];
-        NSNumber *width = [dic valueForKey:@"width"];
-        NSNumber *height = [dic valueForKey:@"height"];
-    
-        CGRect rect = CGRectMake(x.floatValue, y.floatValue, width.floatValue, height.floatValue);
+        CGRect rect;
+        if (dic) {
+            NSNumber *x = [dic valueForKey:@"x"];
+            NSNumber *y = [dic valueForKey:@"y"];
+            NSNumber *width = [dic valueForKey:@"width"];
+            NSNumber *height = [dic valueForKey:@"height"];
+            rect = CGRectMake(x.floatValue, y.floatValue, width.floatValue, height.floatValue);
+        }else{
+            rect = CGRectMake(25, 100, 45, 45);
+        }
         
-        NSData *torchOnImageData = [[NSData alloc]initWithBase64EncodedString:torchOnImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
-        UIImage *torchOnImage = [UIImage imageWithData: torchOnImageData];
-        NSData *torchOffImageData = [[NSData alloc]initWithBase64EncodedString:torchOffImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
-        UIImage *torchOffImage = [UIImage imageWithData: torchOffImageData];
+        UIImage *torchOnImage, *torchOffImage;
+        if (torchOnImageBase64) {
+            NSData *torchOnImageData = [[NSData alloc]initWithBase64EncodedString:torchOnImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+            torchOnImage = [UIImage imageWithData: torchOnImageData];
+        }
+        if (torchOffImageBase64) {
+            NSData *torchOffImageData = [[NSData alloc]initWithBase64EncodedString:torchOffImageBase64 options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+            torchOffImage = [UIImage imageWithData: torchOffImageData];
+        }
         
         [[StaticClass instance].view setTorchButton:rect torchOnImage:torchOnImage torchOffImage:torchOffImage];
         [[StaticClass instance].view setTorchButtonVisible:visible];
