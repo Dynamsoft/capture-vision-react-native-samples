@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
-import { Region, TorchButton } from './BarcodeSettings';
+import { Region } from './BarcodeSettings';
+import { TorchButton } from './CameraSettings';
 interface Props extends ViewProps {
     overlayVisible?: boolean;
     scanRegionVisible?: boolean;

@@ -14,6 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./CameraSettings"), exports);
 __exportStar(require("./BarcodeSettings"), exports);
 __exportStar(require("./DynamsoftBarcodeReader"), exports);
 __exportStar(require("./DynamsoftCameraView"), exports);

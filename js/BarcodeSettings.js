@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EnumBarcodeFormat_2 = exports.EnumBarcodeFormat = exports.EnumDBRPresetTemplate = exports.EnumTorchState = void 0;
-var EnumTorchState;
-(function (EnumTorchState) {
-    EnumTorchState[EnumTorchState["ON"] = 0] = "ON";
-    EnumTorchState[EnumTorchState["OFF"] = 1] = "OFF";
-})(EnumTorchState = exports.EnumTorchState || (exports.EnumTorchState = {}));
+exports.EnumBarcodeFormat_2 = exports.EnumBarcodeFormat = exports.EnumDBRPresetTemplate = void 0;
 var EnumDBRPresetTemplate;
 (function (EnumDBRPresetTemplate) {
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["DEFAULT"] = 0] = "DEFAULT";

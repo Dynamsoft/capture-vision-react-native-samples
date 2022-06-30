@@ -47,4 +47,3 @@ buck-out/
 tsconfig.json
 js/*.js.map
 js/*.tsx
-js/*.ts
