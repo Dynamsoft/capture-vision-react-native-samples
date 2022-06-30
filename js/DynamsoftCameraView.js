@@ -81,7 +81,7 @@ class DynamsoftCameraView extends React.Component {
     render() {
         const _a = this.convertNativeProps(this.props), { style } = _a, nativeProps = __rest(_a, ["style"]);
         return (React.createElement(react_native_1.View, { style: style },
-            React.createElement(DCEView, Object.assign({ style: react_native_1.StyleSheet.absoluteFill, ref: (ref) => { this.references; } }, nativeProps)),
+            React.createElement(DCEView, Object.assign({ style: react_native_1.StyleSheet.absoluteFill, ref: (ref) => { this.references = ref; } }, nativeProps)),
             this.props.children));
     }
 }
