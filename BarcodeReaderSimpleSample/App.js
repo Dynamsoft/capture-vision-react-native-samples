@@ -3,11 +3,7 @@ import {Text} from 'react-native';
 import {
     DynamsoftBarcodeReader,
     DynamsoftCameraView,
-    BarcodeResult,
-    EnumDBRPresetTemplate,
-    Region,
-    EnumBarcodeFormat,
-    DBRRuntimeSettings
+    EnumBarcodeFormat
 } from 'henry-capture-vision-react-native';
 
 
@@ -27,7 +23,6 @@ class App extends React.Component {
 
             // Create a barcode reader instance.
             this.reader = await DynamsoftBarcodeReader.createInstance();
-            await this.reader.updateRuntimeSettings(EnumDBRPresetTemplate.DEFAULT);
 
             // Get the current runtime settings of the barcode reader.
             let settings = await this.reader.getRuntimeSettings();
@@ -41,19 +36,18 @@ class App extends React.Component {
             // Apply the new runtime settings to the barcode reader.
             await this.reader.updateRuntimeSettings(settings);
 
-            // Enable video barcode scanning.
-            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
-            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
-            await this.reader.startScanning();
-
             // Add a result listener. The result listener will handle callback when barcode result is returned. 
             this.reader.addResultListener((results) => {
                 // Update the newly detected barcode results to the state.
                 this.setState({results: results})
             })
+
+            // Enable video barcode scanning.
+            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
+            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
+            this.reader.startScanning();
+
         })();
-
-
     }
 
     async componentWillUnmount() {
@@ -89,6 +83,10 @@ class App extends React.Component {
                 overlayVisible={true}
                 scanRegionVisible={true}
                 scanRegion={region}
+                torchButton={{
+                    visible: true
+                }}
+                torchState={'off'}
             >
                 <Text style={{
                     flex: 0.9,
@@ -96,7 +94,7 @@ class App extends React.Component {
                     textAlign: "center",
                     color: "white",
                     fontSize: 18,
-                }}>{results && results.length > 0 ? barcode_text : "null"}</Text>
+                }}>{results && results.length > 0 ? barcode_text : ""}</Text>
             </DynamsoftCameraView>
         );
     }
