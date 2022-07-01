@@ -19,6 +19,7 @@
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
 - [Build Your Barcode Scanner App](#build-your-barcode-scanner-app)
+  - [Set up Development Environment](#set-up-development-environment)
   - [Initialize the Project](#initialize-the-project)
   - [Include the Library](#include-the-library)
   - [Configure the Barcode Reader](#configure-the-barcode-reader)
@@ -71,6 +72,10 @@
 
 Now you will learn how to create a simple barcode scanner using Dynamsoft Capture Vision SDK.
 
+### Set up Development Environment
+
+If you are a beginer on React Native, please follow the guide on <a href="https://reactnative.dev/docs/environment-setup" target="_blank">React Native official website</a> to set up the development environment.
+
 ### Initialize the Project
 
 Create a new React Native project.
@@ -83,7 +88,19 @@ npx react-native init SimpleBarcodeScanner
 
 ### Include the Library
 
-Add the SDK to your new project. Please read the [Installation](#installation) section for more details. Once the SDK is added, you will see a reference to it in the **package.json**.
+Add the SDK to your new project. Once the SDK is added, you will see a reference to it in the **package.json**.
+
+- **yarn**
+
+  ```bash
+  yarn add dynamsoft-capture-vision-react-native
+  ```
+
+- **npm**
+
+  ```bash
+  npm install dynamsoft-capture-vision-react-native
+  ```
 
 For iOS, you must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
 
@@ -123,41 +140,45 @@ export default App;
 Next is the `componentDidMount` implementation. First up is adding the code to start barcode decoding:
 
 ```js
-componentDidMount() {
-    (async () => {
-        // Initialize the license so that you can use full feature of the Barcode Reader module.
-        try {
-            await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
-        } catch (e) {
-            console.log(e);
-        }
-
-        // Create a barcode reader instance.
-        this.reader = await DynamsoftBarcodeReader.createInstance();
-
-        // Add a result listener. The result listener will handle callback when barcode result is returned. 
-        this.reader.addResultListener((results) => {
-            // Update the newly detected barcode results to the state.
-            this.setState({results: results})
-        })
-
-        // Enable video barcode scanning.
-        // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
-        // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
-        this.reader.startScanning();
-
-    })();
+class App extends React.Component {
+    ...
+    componentDidMount() {
+        (async () => {
+            // Initialize the license so that you can use full feature of the Barcode Reader module.
+            try {
+                await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
+            } catch (e) {
+                console.log(e);
+            }
+            // Create a barcode reader instance.
+            this.reader = await DynamsoftBarcodeReader.createInstance();
+            // Enable video barcode scanning.
+            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
+            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
+            await this.reader.startScanning();
+            // Add a result listener. The result listener will handle callback when barcode result is returned. 
+            this.reader.addResultListener((results) => {
+                // Update the newly detected barcode results to the state.
+                this.setState({results});
+            });
+        })();
+    }
+    ...
 }
 ```
 
 After implementing `componentDidMount`, `componentWillUnmount` will then include code to stop the barcode decoding and remove the result listener.
 
 ```js
-async componentWillUnmount() {
-    // Stop the barcode decoding thread when your component is unmount.
-    await this.reader.stopScanning();
-    // Remove the result listener when your component is unmount.
-    this.reader.removeAllResultListeners();
+class App extends React.Component {
+    ...
+    async componentWillUnmount() {
+        // Stop the barcode decoding thread when your component is unmount.
+        await this.reader.stopScanning();
+        // Remove the result listener when your component is unmount.
+        this.reader.removeAllResultListeners();
+    }
+    ...
 }
 ```
 
@@ -165,32 +186,42 @@ async componentWillUnmount() {
 
 Lastly, let's create the `DynamsoftCameraView` UI component in the `render` function.
 
-```js
-render() {
-    let barcode_text = "";
-    let results = this.state.results;
-    if (results && results.length > 0){
-        for (var i=0; i<results.length; i++) {
-            barcode_text += results[i].barcodeFormatString+":"+results[i].barcodeText+"\n"
+```jsx
+class App extends React.Component {
+    ...
+    render() {
+        // Add code to fetch barcode text and format from the BarcodeResult
+        let results = this.state.results;
+        let resultBoxText = "";
+        if (results && results.length>0){
+            for (let i=0;i<results.length;i++){
+                resultBoxText+=results[i].barcodeFormatString+"\n"+results[i].barcodeText+"\n";
+            }
         }
+        // Render DynamsoftCameraView componment.
+        return (
+            <DynamsoftCameraView
+                style={
+                    {
+                        flex: 1
+                    }
+                }
+                ref = {(ref)=>{this.scanner = ref}}
+                overlayVisible={true}
+            >
+                {/*Add a text box to display the barcode result.*/}
+                <Text style={
+                    {
+                        flex: 0.9,
+                        marginTop: 100,
+                        textAlign: "center",
+                        color: "white",
+                        fontSize: 18,
+                    }
+                }>{results && results.length > 0 ? resultBoxText : "No Barcode Detected"}</Text>
+            </DynamsoftCameraView>
+        );
     }
-    return (
-        <DynamsoftCameraView
-            style={{
-                flex: 1,
-            }}
-            ref = {(ref)=>{this.scanner = ref}}
-            overlayVisible={true}
-        >
-            <Text style={{
-                flex: 0.9,
-                marginTop: 200,
-                textAlign: "center",
-                color: "white",
-                fontSize: 18,
-            }}>{results && results.length > 0 ? barcode_text : ""}</Text>
-        </DynamsoftCameraView>
-    );
 }
 ```
 
