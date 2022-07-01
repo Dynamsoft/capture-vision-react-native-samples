@@ -43,4 +43,7 @@ local.properties
 buck-out/
 \.buckd/
 *.keystore
-      
+
+tsconfig.json
+js/*.js.map
+js/*.tsx

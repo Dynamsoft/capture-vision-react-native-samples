@@ -16,7 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL overlayVisible;
 
+@property (nonatomic) int torchState;
+
 @property (nonatomic, strong, nullable) NSDictionary *scanRegion;
+
+@property (nonatomic, strong, nullable) NSDictionary *torchButton;
 
 - (void)open;
 - (void)close;
