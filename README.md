@@ -146,21 +146,23 @@ class App extends React.Component {
         (async () => {
             // Initialize the license so that you can use full feature of the Barcode Reader module.
             try {
-                await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
+                await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
             } catch (e) {
                 console.log(e);
             }
             // Create a barcode reader instance.
             this.reader = await DynamsoftBarcodeReader.createInstance();
-            // Enable video barcode scanning.
-            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
-            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
-            await this.reader.startScanning();
+
             // Add a result listener. The result listener will handle callback when barcode result is returned. 
             this.reader.addResultListener((results) => {
                 // Update the newly detected barcode results to the state.
                 this.setState({results});
             });
+
+            // Enable video barcode scanning.
+            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
+            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
+            this.reader.startScanning();
         })();
     }
     ...
