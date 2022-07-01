@@ -52,9 +52,9 @@ class App extends React.Component {
 
     async componentWillUnmount() {
         // Stop the barcode decoding thread when your component is unmount.
-        await this.reader.stopScanning()
+        await this.reader.stopScanning();
         // Remove the result listener when your component is unmount.
-        this.reader.removeAllResultListeners()
+        this.reader.removeAllResultListeners();
     }
 
     render() {
