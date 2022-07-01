@@ -74,7 +74,7 @@ Now you will learn how to create a simple barcode scanner using Dynamsoft Captur
 
 ### Set up Development Environment
 
-If you are a beginer on React Native, please follow the guide on <a href="https://reactnative.dev/docs/environment-setup" target="_blank">React Native official website</a> to set up the development environment.
+If you are a beginner on React Native, please follow the guide on <a href="https://reactnative.dev/docs/environment-setup" target="_blank">React Native official website</a> to set up the development environment.
 
 ### Initialize the Project
 
