@@ -83,7 +83,7 @@ class BarcodeScanner extends React.Component {
         torchButton={{
           visible: true
         }}
-        torchState={ EnumTorchState.ON }
+        torchState={ EnumTorchState.OFF }
       >
         <Text
           style={{
