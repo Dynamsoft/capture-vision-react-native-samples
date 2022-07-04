@@ -41,16 +41,16 @@ class App extends React.Component {
             // Apply the new runtime settings to the barcode reader.
             await this.reader.updateRuntimeSettings(settings);
 
-            // Enable video barcode scanning.
-            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
-            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
-            await this.reader.startScanning();
-
             // Add a result listener. The result listener will handle callback when barcode result is returned. 
             this.reader.addResultListener((results) => {
                 // Update the newly detected barcode results to the state.
                 this.setState({results: results})
             })
+
+            // Enable video barcode scanning.
+            // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
+            // The barcode reader will scan the barcodes continuously before you trigger stopScanning.
+            this.reader.startScanning();
         })();
 
 
