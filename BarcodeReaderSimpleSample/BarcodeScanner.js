@@ -4,7 +4,7 @@ import {
   DynamsoftBarcodeReader,
   DynamsoftCameraView,
   EnumBarcodeFormat,
-  TorchButton
+  EnumTorchState
 } from 'henry-capture-vision-react-native';
 
 class BarcodeScanner extends React.Component {
@@ -83,7 +83,7 @@ class BarcodeScanner extends React.Component {
         torchButton={{
           visible: true
         }}
-        torchState={'off'}
+        torchState={ EnumTorchState.ON }
       >
         <Text
           style={{
