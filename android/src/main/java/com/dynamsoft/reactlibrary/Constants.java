@@ -16,8 +16,8 @@
 package com.dynamsoft.reactlibrary;
 
 public interface Constants {
-  int TORCH_ON = 0;
-  int TORCH_OFF = 1;
+  int TORCH_OFF = 0;
+  int TORCH_ON = 1;
   // int FLASH_TORCH = 2;
   // int FLASH_AUTO = 3;
 }
