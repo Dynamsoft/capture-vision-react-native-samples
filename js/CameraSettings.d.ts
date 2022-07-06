@@ -6,6 +6,6 @@ export interface TorchButton {
     torchOffImageBase64: string;
 }
 export declare enum EnumTorchState {
-    ON = 0,
-    OFF = 1
+    OFF = 0,
+    ON = 1
 }

@@ -32,6 +32,16 @@
     return YES;
 }
 
+- (NSDictionary *)constantsToExport
+{
+    return @{
+             @"TorchState": @{
+                 @"off": @0,
+                 @"on": @1
+             },
+    };
+}
+
 - (NSArray<NSString *> *)supportedEvents
 {
   return @[@"resultEvent"];

@@ -31,12 +31,15 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
 
     ReactApplicationContext mReactApplicationContext;
     CameraEnhancer mCamera;
-
+    RNDynamsoftBarcodeReaderModule mDbrModule;
 
     public RNDCECameraViewManager(ReactApplicationContext reactContext, RNDynamsoftBarcodeReaderModule dbrModule) {
         mReactApplicationContext = reactContext;
-        mCamera = new CameraEnhancer(dbrModule.getActivity());
-        dbrModule.mCamera = mCamera;
+        mDbrModule = dbrModule;
+        if (dbrModule.getActivity() != null) {
+            mCamera = new CameraEnhancer(dbrModule.getActivity());
+            dbrModule.mCamera = mCamera;
+        }
     }
 
     private static final String REACT_CLASS = "DYSCameraView";
@@ -48,6 +51,10 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
 
     @Override
     protected RNDCECameraView createViewInstance(ThemedReactContext reactContext) {
+        if (mCamera == null) {
+            mCamera = new CameraEnhancer(mDbrModule.getActivity());
+            mDbrModule.mCamera = mCamera;
+        }
         return new RNDCECameraView(reactContext, mReactApplicationContext, mCamera);
     }
 
@@ -81,11 +88,11 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
                 if (location != null) {
                     int x = (location.hasKey("x") && !location.isNull("x")) ? location.getInt("x") : 25;
                     int y = (location.hasKey("y") && !location.isNull("y")) ? location.getInt("y") : 100;
-                    startPoint = new Point(x,y);
+                    startPoint = new Point(x, y);
                     width = (location.hasKey("width") && !location.isNull("width")) ? location.getInt("width") : 45;
                     height = (location.hasKey("height") && !location.isNull("height")) ? location.getInt("height") : 45;
                 } else {
-                    //Default location. Unit is dp.
+                    // Default location. Unit is dp.
                     startPoint = new Point(25, 100);
                     width = 45;
                     height = 45;
@@ -131,13 +138,6 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
             return null;
         }
     }
-
-//    @Nullable
-//    @Override
-//    public Map<String, Object> getExportedViewConstants() {
-//        return super.getExportedViewConstants();
-//    }
-
 
     @ReactProp(name = "scanRegionVisible")
     public void setScanRegionVisible(RNDCECameraView view, boolean isVisible) {
