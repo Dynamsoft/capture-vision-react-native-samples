@@ -1,0 +1,130 @@
+import * as React from 'react';
+import {
+    findNodeHandle,
+    HostComponent,
+    NativeModules,
+    Platform,
+    requireNativeComponent,
+    StyleSheet,
+    UIManager,
+    View,
+    ViewProps,
+} from 'react-native';
+import { Region } from './BasicStructures';
+import { TorchButton } from './CameraSettings';
+
+const DBRModule = NativeModules.RNDynamsoftBarcodeReader
+
+interface Props extends ViewProps {
+    overlayVisible?: boolean
+    scanRegionVisible?: boolean
+    scanRegion?: Region
+    torchState?: string | number
+    torchButton?: TorchButton
+}
+
+const DCEView: HostComponent<any> = requireNativeComponent('DYSCameraView');
+
+const mapValues = (input: any, mapper: any) => {
+    const result = {};
+    Object.entries(input).map(([key, value]) => {
+        result[key] = mapper(value, key);
+    });
+    return result;
+};
+
+export class DynamsoftCameraView extends React.Component<Props, {}> {
+    dispatcher!: CommandDispatcher;
+    references!: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
+
+    constructor(props: Props) {
+        super(props)
+    }
+
+    static ConversionTables = {
+        torchState: DBRModule.TorchState
+    }
+
+    open(): void {
+        this.dispatcher.open();
+    }
+
+    close(): void {
+        this.dispatcher.close();
+    }
+
+    componentDidMount(): void {
+        this.dispatcher = new CommandDispatcher(findNodeHandle(this.references));
+        if(Platform.OS === 'ios') {
+            this.open()
+        }
+    }
+
+    componentWillUnmount(): void{
+        if(Platform.OS === 'ios') {
+            this.close()
+        }
+    }
+
+    convertNativeProps({ children, ...props }: Props) : Props {
+        const newProps = mapValues(props, this.convertProp);
+        return newProps;
+    }
+
+    convertProp(value: any, key: string): any {
+        if (typeof value === 'string' && DynamsoftCameraView.ConversionTables[key]) {
+            return DynamsoftCameraView.ConversionTables[key][value];
+        }
+        return value;
+    }
+
+    render(): React.ReactElement | null {
+        const { style, ...nativeProps } : Props = this.convertNativeProps(this.props);
+        return (
+            <View style={style}>
+                <DCEView
+                    style={StyleSheet.absoluteFill}
+                    ref={(ref) => { this.references = ref }}
+                    {...nativeProps}
+                />
+                {this.props.children}
+
+            </View>
+        )
+    }
+}
+
+class CommandDispatcher {
+    dceViewHandle: any;
+
+    constructor(viewHandle: any) {
+        //console.log(viewHandle)
+        this.dceViewHandle = viewHandle;
+    }
+
+    getViewManagerConfig(viewManagerConfig: string) {
+        if (UIManager.getViewManagerConfig) {
+            return UIManager.getViewManagerConfig(viewManagerConfig);
+        } else {
+            return UIManager[viewManagerConfig];
+        }
+    }
+
+    open() {
+        if (this.getViewManagerConfig('DYSCameraView')) {
+            UIManager.dispatchViewManagerCommand(
+                this.dceViewHandle,
+                this.getViewManagerConfig('DYSCameraView').Commands.open,
+                undefined);
+        }
+        
+    }
+
+    close() {
+        UIManager.dispatchViewManagerCommand(
+            this.dceViewHandle,
+            this.getViewManagerConfig('DYSCameraView').Commands.close,
+            undefined);
+    }
+
+}

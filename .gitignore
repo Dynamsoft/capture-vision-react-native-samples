@@ -45,5 +45,3 @@ buck-out/
 *.keystore
 
 tsconfig.json
-js/*.js.map
-js/*.tsx
