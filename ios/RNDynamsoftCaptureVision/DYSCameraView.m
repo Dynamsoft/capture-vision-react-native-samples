@@ -44,9 +44,9 @@
 }
 
 - (void)setTorchState:(int)torchState{
-    if (torchState == 0) {
+    if (torchState == 1) {
         [[StaticClass instance].dce turnOnTorch];
-    }else if (torchState == 1){
+    }else if (torchState == 0){
         [[StaticClass instance].dce turnOffTorch];
     }
 }

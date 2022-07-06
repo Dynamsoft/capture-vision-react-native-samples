@@ -36,8 +36,8 @@
 {
     return @{
              @"TorchState": @{
-                 @"off": @1,
-                 @"on": @0
+                 @"off": @0,
+                 @"on": @1
              },
     };
 }
