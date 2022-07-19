@@ -6,14 +6,14 @@ import BarcodeScanner from './BarcodeScanner';
 import {DynamsoftBarcodeReader} from 'henry-capture-vision-react-native';
 
 function HomeScreen({navigation}) {
-  async () => {
+  (async () => {
     // Initialize the license so that you can use full feature of the Barcode Reader module.
     try {
       await DynamsoftBarcodeReader.initLicense('DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9');
     } catch (e) {
       console.log(e);
     }
-  };
+  })();
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
