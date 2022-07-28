@@ -71,8 +71,7 @@ class BarcodeScanner extends React.Component {
     return (
       <DynamsoftCameraView
         style={{
-          width: deviceWidth,
-          height: deviceHeight,
+          flex: 1
         }}
         ref={ref => {
           this.scanner = ref;
