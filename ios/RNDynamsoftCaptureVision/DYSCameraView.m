@@ -11,10 +11,10 @@
 
 @implementation DYSCameraView
 
-@synthesize overlayVisible;
+@synthesize overlayVisible = _overlayVisible;
 @synthesize scanRegionVisible = _scanRegionVisible;
-@synthesize scanRegion;
-@synthesize torchState;
+@synthesize scanRegion = _scanRegion;
+@synthesize torchState = _torchState;
 @synthesize torchButton = _torchButton;
 
 - (instancetype)init {
@@ -31,6 +31,7 @@
 }
 
 - (void)setOverlayVisible:(BOOL)overlayVisible{
+    _overlayVisible = overlayVisible;
     [StaticClass instance].view.overlayVisible = overlayVisible;
 }
 
@@ -44,6 +45,7 @@
 }
 
 - (void)setTorchState:(int)torchState{
+    _torchState = torchState;
     if (torchState == 1) {
         [[StaticClass instance].dce turnOnTorch];
     }else if (torchState == 0){
@@ -53,6 +55,7 @@
 
 - (void)setTorchButton:(NSDictionary *)torchButton{
     if (torchButton) {
+        _torchButton = torchButton;
         NSString *torchOnImageBase64 = [torchButton valueForKey:@"torchOnImageBase64"];
         NSString *torchOffImageBase64 = [torchButton valueForKey:@"torchOffImageBase64"];
         BOOL visible = [[torchButton valueForKey:@"visible"] boolValue];
@@ -85,6 +88,7 @@
 
 - (void)setScanRegion:(NSDictionary *)scanRegion{
     if (scanRegion) {
+        _scanRegion = scanRegion;
         NSNumber *regionTop = [scanRegion valueForKey:@"regionTop"];
         NSNumber *regionLeft = [scanRegion valueForKey:@"regionLeft"];
         NSNumber *regionRight = [scanRegion valueForKey:@"regionRight"];
