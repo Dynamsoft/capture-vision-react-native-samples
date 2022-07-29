@@ -50,14 +50,13 @@ class BarcodeScanner extends React.Component {
 
   render() {
     let barcode_text = '';
-    // Define the scan region.
-    let region = {
-      regionTop: 30,
-      regionLeft: 15,
-      regionBottom: 70,
-      regionRight: 85,
-      regionMeasuredByPercentage: true,
-    };
+    // let region = {
+    //   regionTop: 30,
+    //   regionLeft: 15,
+    //   regionBottom: 70,
+    //   regionRight: 85,
+    //   regionMeasuredByPercentage: true,
+    // };       // Define the scan region.
     let results = this.state.results;
     if (results && results.length > 0) {
       for (var i = 0; i < results.length; i++) {
@@ -78,12 +77,12 @@ class BarcodeScanner extends React.Component {
           this.scanner = ref;
         }}
         overlayVisible={true}
-        scanRegionVisible={true}
-        scanRegion={region}
         torchButton={{
           visible: true
         }}
         torchState={ EnumTorchState.OFF }
+        // scanRegionVisible={true}
+        // scanRegion={region}  // Set scan region.
       >
         <Text
           style={{
