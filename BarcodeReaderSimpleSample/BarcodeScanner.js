@@ -64,9 +64,6 @@ class BarcodeScanner extends React.Component {
       }
     }
 
-    const deviceWidth = Dimensions.get('window').width;
-    const deviceHeight = Dimensions.get('window').height;
-
     return (
       <DynamsoftCameraView
         style={{
