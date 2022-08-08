@@ -35,20 +35,15 @@ import javax.annotation.Nullable;
 public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext mReactContext;
-    private BarcodeReader mReader;
 
-    private boolean mIsCameraAttached;
-    CameraEnhancer mCamera;
+    public  BarcodeReader mReader;
+    public boolean mIsCameraAttached;
+    public CameraEnhancer mCamera;
 
     public RNDynamsoftBarcodeReaderModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
         mIsCameraAttached = false;
-    }
-
-
-    protected Activity getActivity() {
-        return  super.getCurrentActivity();
     }
 
     @Override
@@ -98,7 +93,10 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
         } catch (BarcodeReaderException e) {
             e.printStackTrace();
         }
-        mReader.setCameraEnhancer(mCamera);
+        if(mCamera != null) {
+            mIsCameraAttached = true;
+            mReader.setCameraEnhancer(mCamera);
+        }
     }
 
     @ReactMethod
