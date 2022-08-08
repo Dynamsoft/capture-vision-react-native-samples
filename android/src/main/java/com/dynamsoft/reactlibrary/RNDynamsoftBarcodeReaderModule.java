@@ -26,9 +26,11 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 
 
@@ -36,7 +38,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext mReactContext;
 
-    public  BarcodeReader mReader;
+    public BarcodeReader mReader;
     public boolean mIsCameraAttached;
     public CameraEnhancer mCamera;
 
@@ -59,7 +61,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
                 put("TorchState", getFlashModeConstants());
             }
 
-            private Map<String, Object> getFlashModeConstants(){
+            private Map<String, Object> getFlashModeConstants() {
                 return Collections.unmodifiableMap(new HashMap<String, Object>() {
                     {
                         put("off", Constants.TORCH_OFF);
@@ -93,7 +95,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
         } catch (BarcodeReaderException e) {
             e.printStackTrace();
         }
-        if(mCamera != null) {
+        if (mCamera != null && !mIsCameraAttached) {
             mIsCameraAttached = true;
             mReader.setCameraEnhancer(mCamera);
         }
@@ -129,7 +131,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startBarcodeScanning() {
-        if (!mIsCameraAttached) {
+        if (mCamera != null && !mIsCameraAttached) {
             mReader.setCameraEnhancer(mCamera);
             mIsCameraAttached = true;
         }
