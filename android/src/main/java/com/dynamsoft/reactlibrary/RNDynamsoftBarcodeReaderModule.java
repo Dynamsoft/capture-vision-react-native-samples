@@ -90,10 +90,12 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void createInstance() {
-        try {
-            mReader = new BarcodeReader();
-        } catch (BarcodeReaderException e) {
-            e.printStackTrace();
+        if(mReader == null) {
+            try {
+                mReader = new BarcodeReader();
+            } catch (BarcodeReaderException e) {
+                e.printStackTrace();
+            }
         }
         if (mCamera != null && !mIsCameraAttached) {
             mIsCameraAttached = true;
