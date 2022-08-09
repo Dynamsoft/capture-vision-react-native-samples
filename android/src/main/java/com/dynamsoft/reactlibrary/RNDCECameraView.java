@@ -21,8 +21,8 @@ public class RNDCECameraView extends DCECameraView implements LifecycleEventList
         context.addLifecycleEventListener(this);
         mAppContext = appContext;
         mDbrModule = dbrModule;
+        mCamera = cameraEnhancer;
         if(mCamera != null) {
-            mCamera = cameraEnhancer;
             mCamera.setCameraView(this);
         }
     }
