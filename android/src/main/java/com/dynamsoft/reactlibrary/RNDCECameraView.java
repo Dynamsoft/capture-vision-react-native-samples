@@ -1,5 +1,8 @@
 package com.dynamsoft.reactlibrary;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.dynamsoft.dce.CameraEnhancer;
 import com.dynamsoft.dce.CameraEnhancerException;
 import com.dynamsoft.dce.DCECameraView;
@@ -10,12 +13,18 @@ import com.facebook.react.uimanager.ThemedReactContext;
 public class RNDCECameraView extends DCECameraView implements LifecycleEventListener {
 
     CameraEnhancer mCamera;
+    ReactApplicationContext mAppContext;
+    RNDynamsoftBarcodeReaderModule mDbrModule;
 
-    public RNDCECameraView(ThemedReactContext context, ReactApplicationContext appContext, CameraEnhancer cameraEnhancer) {
+    public RNDCECameraView(ThemedReactContext context, ReactApplicationContext appContext, @Nullable CameraEnhancer cameraEnhancer, @NonNull RNDynamsoftBarcodeReaderModule dbrModule) {
         super(context);
         context.addLifecycleEventListener(this);
+        mAppContext = appContext;
+        mDbrModule = dbrModule;
         mCamera = cameraEnhancer;
-        mCamera.setCameraView(this);
+        if(mCamera != null) {
+            mCamera.setCameraView(this);
+        }
     }
 
     @Override
@@ -40,6 +49,14 @@ public class RNDCECameraView extends DCECameraView implements LifecycleEventList
 
     @Override
     public void onHostResume() {
+        if(mCamera == null) {
+            if(mAppContext.getCurrentActivity() != null) {
+                mCamera = new CameraEnhancer(mAppContext.getCurrentActivity());
+                mCamera.setCameraView(this);
+                mDbrModule.mIsCameraAttached = false;
+                mDbrModule.mReader.setCameraEnhancer(mCamera);
+            }
+        }
         if(mCamera!=null){
             try {
                 mCamera.open();

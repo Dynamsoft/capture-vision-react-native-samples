@@ -20,9 +20,6 @@ public class RNDynamsoftCaptrueVisionPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         mDbrModule = new RNDynamsoftBarcodeReaderModule(reactContext);
-        if(mDCEViewManager !=null && mDCEViewManager.mCamera != null) {
-            mDbrModule.mCamera = mDCEViewManager.mCamera;
-        }
         return Arrays.<NativeModule>asList(mDbrModule);
     }
 

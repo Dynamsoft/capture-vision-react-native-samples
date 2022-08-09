@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
+
 import com.dynamsoft.dce.CameraEnhancer;
 import com.dynamsoft.dce.CameraEnhancerException;
 import com.dynamsoft.dce.RegionDefinition;
@@ -33,12 +35,16 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
     CameraEnhancer mCamera;
     RNDynamsoftBarcodeReaderModule mDbrModule;
 
-    public RNDCECameraViewManager(ReactApplicationContext reactContext, RNDynamsoftBarcodeReaderModule dbrModule) {
+    public RNDCECameraViewManager(ReactApplicationContext reactContext, @NonNull RNDynamsoftBarcodeReaderModule dbrModule) {
         mReactApplicationContext = reactContext;
         mDbrModule = dbrModule;
-        if (dbrModule.getActivity() != null) {
-            mCamera = new CameraEnhancer(dbrModule.getActivity());
+        if (reactContext.getCurrentActivity() != null) {
+            mCamera = new CameraEnhancer(reactContext.getCurrentActivity());
             dbrModule.mCamera = mCamera;
+            if(dbrModule.mReader != null && !dbrModule.mIsCameraAttached) {
+                dbrModule.mIsCameraAttached = true;
+                dbrModule.mReader.setCameraEnhancer(mCamera);
+            }
         }
     }
 
@@ -52,10 +58,16 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
     @Override
     protected RNDCECameraView createViewInstance(ThemedReactContext reactContext) {
         if (mCamera == null) {
-            mCamera = new CameraEnhancer(mDbrModule.getActivity());
-            mDbrModule.mCamera = mCamera;
+            if (reactContext.getCurrentActivity() != null) {
+                mCamera = new CameraEnhancer(reactContext.getCurrentActivity());
+                mDbrModule.mCamera = mCamera;
+                if(mDbrModule.mReader != null && !mDbrModule.mIsCameraAttached) {
+                    mDbrModule.mIsCameraAttached = true;
+                    mDbrModule.mReader.setCameraEnhancer(mCamera);
+                }
+            }
         }
-        return new RNDCECameraView(reactContext, mReactApplicationContext, mCamera);
+        return new RNDCECameraView(reactContext, mReactApplicationContext, mCamera, mDbrModule);
     }
 
     @ReactProp(name = "overlayVisible")

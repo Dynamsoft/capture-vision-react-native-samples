@@ -26,29 +26,26 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Nullable;
 
 
 public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext mReactContext;
-    private BarcodeReader mReader;
 
-    private boolean mIsCameraAttached;
-    CameraEnhancer mCamera;
+    public BarcodeReader mReader;
+    public boolean mIsCameraAttached;
+    public CameraEnhancer mCamera;
 
     public RNDynamsoftBarcodeReaderModule(ReactApplicationContext reactContext) {
         super(reactContext);
         mReactContext = reactContext;
         mIsCameraAttached = false;
-    }
-
-
-    protected Activity getActivity() {
-        return  super.getCurrentActivity();
     }
 
     @Override
@@ -64,7 +61,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
                 put("TorchState", getFlashModeConstants());
             }
 
-            private Map<String, Object> getFlashModeConstants(){
+            private Map<String, Object> getFlashModeConstants() {
                 return Collections.unmodifiableMap(new HashMap<String, Object>() {
                     {
                         put("off", Constants.TORCH_OFF);
@@ -93,12 +90,17 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void createInstance() {
-        try {
-            mReader = new BarcodeReader();
-        } catch (BarcodeReaderException e) {
-            e.printStackTrace();
+        if(mReader == null) {
+            try {
+                mReader = new BarcodeReader();
+            } catch (BarcodeReaderException e) {
+                e.printStackTrace();
+            }
         }
-        mReader.setCameraEnhancer(mCamera);
+        if (mCamera != null && !mIsCameraAttached) {
+            mIsCameraAttached = true;
+            mReader.setCameraEnhancer(mCamera);
+        }
     }
 
     @ReactMethod
@@ -131,7 +133,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void startBarcodeScanning() {
-        if (!mIsCameraAttached) {
+        if (mCamera != null && !mIsCameraAttached) {
             mReader.setCameraEnhancer(mCamera);
             mIsCameraAttached = true;
         }
