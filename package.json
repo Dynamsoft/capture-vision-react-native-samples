@@ -1,6 +1,6 @@
 {
   "name": "henry-capture-vision-react-native",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Dynamsoft Capture Vision React Native SDK",
   "homepage": "https://www.dynamsoft.com/capture-vision/docs/introduction",
   "main": "./js/index.js",
