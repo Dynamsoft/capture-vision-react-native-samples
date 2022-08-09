@@ -9,7 +9,7 @@ function HomeScreen({navigation}) {
   (async () => {
     // Initialize the license so that you can use full feature of the Barcode Reader module.
     try {
-      await DynamsoftBarcodeReader.initLicense('DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9');
+      await DynamsoftBarcodeReader.initLicense('DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwMTIwMDkzNiIsIm9yZ2FuaXphdGlvbklEIjoiMjAwMDAxIn0=');
     } catch (e) {
       console.log(e);
     }
