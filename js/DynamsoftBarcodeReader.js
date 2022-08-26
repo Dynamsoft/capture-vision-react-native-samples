@@ -56,6 +56,9 @@ class DynamsoftBarcodeReader {
             return new Promise((reslove, reject) => { reject(false); });
         }
     }
+    decodeFile(filePath) {
+        return DBRModule.decodeFile(filePath);
+    }
     startScanning() {
         return DBRModule.startBarcodeScanning();
     }

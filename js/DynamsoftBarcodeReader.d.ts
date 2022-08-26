@@ -8,6 +8,7 @@ export declare class DynamsoftBarcodeReader {
     resetRuntimeSettings(): Promise<boolean>;
     outputRuntimeSettingsToString(): Promise<string>;
     updateRuntimeSettings(settings: DBRRuntimeSettings | EnumDBRPresetTemplate | string): Promise<boolean>;
+    decodeFile(filePath: string): Promise<BarcodeResult[]>;
     startScanning(): Promise<void>;
     stopScanning(): Promise<void>;
     addResultListener(listener: (results: BarcodeResult[]) => void): void;

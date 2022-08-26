@@ -11,15 +11,16 @@ import {
     ViewProps,
 } from 'react-native';
 import { Region } from './BasicStructures';
-import { TorchButton } from './CameraSettings';
+import { EnumCameraPosition, EnumTorchState, TorchButton } from './CameraSettings';
 
 const DBRModule = NativeModules.RNDynamsoftBarcodeReader
 
 interface Props extends ViewProps {
+    cameraPosition?: string | EnumCameraPosition 
     overlayVisible?: boolean
     scanRegionVisible?: boolean
     scanRegion?: Region
-    torchState?: string | number
+    torchState?: string | EnumTorchState
     torchButton?: TorchButton
 }
 

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
 import { Region } from './BasicStructures';
-import { TorchButton } from './CameraSettings';
+import { EnumCameraPosition, EnumTorchState, TorchButton } from './CameraSettings';
 interface Props extends ViewProps {
+    cameraPosition?: string | EnumCameraPosition;
     overlayVisible?: boolean;
     scanRegionVisible?: boolean;
     scanRegion?: Region;
-    torchState?: string | number;
+    torchState?: string | EnumTorchState;
     torchButton?: TorchButton;
 }
 export declare class DynamsoftCameraView extends React.Component<Props, {}> {

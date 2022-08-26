@@ -1,1 +1,1 @@
-{"version":3,"file":"CameraSettings.js","sourceRoot":"","sources":["CameraSettings.tsx"],"names":[],"mappings":";;;AAUA,IAAY,cAGX;AAHD,WAAY,cAAc;IACtB,iDAAG,CAAA;IACH,+CAAE,CAAA;AACN,CAAC,EAHW,cAAc,GAAd,sBAAc,KAAd,sBAAc,QAGzB"}
+{"version":3,"file":"CameraSettings.js","sourceRoot":"","sources":["CameraSettings.tsx"],"names":[],"mappings":";;;AAUA,IAAY,cAGX;AAHD,WAAY,cAAc;IACtB,iDAAG,CAAA;IACH,+CAAE,CAAA;AACN,CAAC,EAHW,cAAc,GAAd,sBAAc,KAAd,sBAAc,QAGzB;AAED,IAAY,kBAGX;AAHD,WAAY,kBAAkB;IAC1B,iEAAO,CAAA;IACP,mEAAQ,CAAA;AACZ,CAAC,EAHW,kBAAkB,GAAlB,0BAAkB,KAAlB,0BAAkB,QAG7B"}

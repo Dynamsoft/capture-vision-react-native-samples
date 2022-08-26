@@ -12,3 +12,8 @@ export enum EnumTorchState {
     OFF,
     ON
 }
+
+export enum EnumCameraPosition {
+    CP_BACK,
+    CP_FRONT
+}
