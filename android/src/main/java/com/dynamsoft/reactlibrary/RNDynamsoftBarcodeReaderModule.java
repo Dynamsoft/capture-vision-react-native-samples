@@ -227,7 +227,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void decodeFile(String filePath, Promise promise) {
         try {
-            TextResult[] textResults = mReader.decodeFile("filePath");
+            TextResult[] textResults = mReader.decodeFile(filePath);
             promise.resolve(serializeResults(textResults));
         } catch (BarcodeReaderException e) {
             promise.reject(e.getErrorCode() + "", e.getMessage());
