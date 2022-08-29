@@ -25,6 +25,7 @@ export declare class DynamsoftCameraView extends React.Component<Props, {}> {
     convertProp(value: any, key: string): any;
     render(): React.ReactElement | null;
 }
+export declare const DCVCameraView: typeof DynamsoftCameraView;
 declare class CommandDispatcher {
     dceViewHandle: any;
     constructor(viewHandle: any);

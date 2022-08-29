@@ -14,3 +14,4 @@ export declare class DynamsoftBarcodeReader {
     addResultListener(listener: (results: BarcodeResult[]) => void): void;
     removeAllResultListeners(): void;
 }
+export declare const DCVBarcodeReader: typeof DynamsoftBarcodeReader;

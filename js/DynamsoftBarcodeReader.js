@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DynamsoftBarcodeReader = void 0;
+exports.DCVBarcodeReader = exports.DynamsoftBarcodeReader = void 0;
 const react_native_1 = require("react-native");
 const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
 const DBREventEmitter = new react_native_1.NativeEventEmitter(DBRModule);
@@ -76,4 +76,5 @@ class DynamsoftBarcodeReader {
     }
 }
 exports.DynamsoftBarcodeReader = DynamsoftBarcodeReader;
+exports.DCVBarcodeReader = DynamsoftBarcodeReader;
 //# sourceMappingURL=DynamsoftBarcodeReader.js.map

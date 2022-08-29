@@ -79,3 +79,5 @@ export class DynamsoftBarcodeReader {
     }
     
 }
+
+export const DCVBarcodeReader = DynamsoftBarcodeReader;

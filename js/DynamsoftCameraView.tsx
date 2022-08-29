@@ -95,6 +95,8 @@ export class DynamsoftCameraView extends React.Component<Props, {}> {
     }
 }
 
+export const DCVCameraView = DynamsoftCameraView;
+
 class CommandDispatcher {
     dceViewHandle: any;
 

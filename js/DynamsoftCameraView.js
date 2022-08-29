@@ -34,7 +34,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DynamsoftCameraView = void 0;
+exports.DCVCameraView = exports.DynamsoftCameraView = void 0;
 const React = __importStar(require("react"));
 const react_native_1 = require("react-native");
 const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
@@ -89,6 +89,7 @@ exports.DynamsoftCameraView = DynamsoftCameraView;
 DynamsoftCameraView.ConversionTables = {
     torchState: DBRModule.TorchState
 };
+exports.DCVCameraView = DynamsoftCameraView;
 class CommandDispatcher {
     constructor(viewHandle) {
         //console.log(viewHandle)
