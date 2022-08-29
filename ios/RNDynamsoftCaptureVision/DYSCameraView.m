@@ -16,6 +16,7 @@
 @synthesize scanRegion = _scanRegion;
 @synthesize torchState = _torchState;
 @synthesize torchButton = _torchButton;
+@synthesize cameraPosition = _cameraPosition;
 
 - (instancetype)init {
     self = [super init];
@@ -103,6 +104,16 @@
         NSError *err = [NSError new];
         [[StaticClass instance].dce setScanRegion:region error:&err];
         [StaticClass instance].dce.scanRegionVisible = _scanRegionVisible;
+    }
+}
+
+- (void)setCameraPosition:(int)cameraPosition{
+    _cameraPosition = cameraPosition;
+    NSError *error;
+    if (cameraPosition == 0) {
+        [[StaticClass instance].dce selectCameraWithPosition:EnumCameraPositionBack error:&error];
+    }else if (cameraPosition == 1){
+        [[StaticClass instance].dce selectCameraWithPosition:EnumCameraPositionFront error:&error];
     }
 }
 

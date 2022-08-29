@@ -82,7 +82,7 @@ RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getInternalVersion) {
 RCT_EXPORT_METHOD(getSettings:(RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
 {
-    NSError *error = [NSError new];
+    NSError *error;
     iPublicRuntimeSettings *settings = [[StaticClass instance].dbr getRuntimeSettings:&error];
     if (error.code != 0) {
         resolve(@(NO));
@@ -100,7 +100,7 @@ RCT_EXPORT_METHOD(getSettings:(RCTPromiseResolveBlock)resolve
 RCT_EXPORT_METHOD(resetSettings:(RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
 {
-    NSError *error = [NSError new];
+    NSError *error;
     [[StaticClass instance].dbr resetRuntimeSettings:&error];
     if (error.code != 0) {
         resolve(@(NO));
@@ -119,7 +119,7 @@ RCT_EXPORT_METHOD(updateSettingsFromString:(NSString *)settings
                   resolver: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
 {
-    NSError *error = [NSError new];
+    NSError *error;
     [[StaticClass instance].dbr initRuntimeSettingsWithString:settings conflictMode:EnumConflictModeOverwrite error:&error];
     if (error.code != 0) {
         resolve(@(NO));
@@ -133,7 +133,7 @@ RCT_EXPORT_METHOD(updateSettingsFromDictionary:(NSDictionary *)dic
                   rejecter: (RCTPromiseRejectBlock)reject)
 {
     if (dic) {
-        NSError *error = [NSError new];
+        NSError *error;
         NSNumber *barcodeFormatIds = [dic valueForKey:@"barcodeFormatIds"];
         NSNumber *barcodeFormatIds_2 = [dic valueForKey:@"barcodeFormatIds_2"];
         NSNumber *expectedBarcodeCount = [dic valueForKey:@"expectedBarcodeCount"];
@@ -180,6 +180,51 @@ RCT_EXPORT_METHOD(stopBarcodeScanning) {
     [[StaticClass instance].dbr stopScanning];
 }
 
+RCT_EXPORT_METHOD(decodeFile:(NSString *)filePath
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject)
+{
+    NSError *error;
+    NSArray<iTextResult *> *results = [[StaticClass instance].dbr decodeFileWithName:filePath error:&error];
+    if (results.count > 0) {
+        NSMutableArray* barcodes = [NSMutableArray array];
+        NSString* formatString = @"all";
+        for (iTextResult* res in results) {
+            if (res.barcodeFormat_2 != EnumBarcodeFormat2NULL) {
+                formatString = res.barcodeFormatString_2;
+            }else{
+                formatString = res.barcodeFormatString;
+            }
+            NSString *base64String = [res.barcodeBytes base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+            NSMutableArray* points = [NSMutableArray array];
+            for (int i = 0; i < 4; i++) {
+                NSDictionary *point = @{
+                    @"x": [NSNumber numberWithFloat:[res.localizationResult.resultPoints[i] CGPointValue].x],
+                    @"y": [NSNumber numberWithFloat:[res.localizationResult.resultPoints[i] CGPointValue].y]
+                };
+                [points addObject:point];
+            }
+            NSDictionary *quad = @{
+                @"points" : points
+            };
+            NSDictionary *location = @{
+                @"angle" : [NSNumber numberWithInteger:res.localizationResult.angle],
+                @"location" : quad
+            };
+            NSDictionary *barcode = @{
+                @"barcodeBytes" : base64String,
+                @"barcodeText" : res.barcodeText,
+                @"barcodeFormatString" : formatString,
+                @"barcodeLocation" : location
+            };
+            [barcodes addObject:barcode];
+        }
+        resolve([barcodes copy]);
+    }else{
+        resolve(nil);
+    }
+}
+
 - (void)DBRLicenseVerificationCallback:(bool)isSuccess error:(NSError * _Nullable)error {
     if(isSuccess){
         licenseResolve(@(YES));
@@ -202,6 +247,7 @@ RCT_EXPORT_METHOD(stopBarcodeScanning) {
             }else{
                 formatString = res.barcodeFormatString;
             }
+            NSString *base64String = [res.barcodeBytes base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
             NSMutableArray* points = [NSMutableArray array];
             for (int i = 0; i < 4; i++) {
                 NSDictionary *point = @{
@@ -218,6 +264,7 @@ RCT_EXPORT_METHOD(stopBarcodeScanning) {
                 @"location" : quad
             };
             NSDictionary *barcode = @{
+                @"barcodeBytes" : base64String,
                 @"barcodeText" : res.barcodeText,
                 @"barcodeFormatString" : formatString,
                 @"barcodeLocation" : location
