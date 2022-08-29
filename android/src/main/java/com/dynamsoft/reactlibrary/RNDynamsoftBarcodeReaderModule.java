@@ -2,6 +2,7 @@
 package com.dynamsoft.reactlibrary;
 
 import android.app.Activity;
+import android.util.Base64;
 import android.util.Log;
 
 import com.dynamsoft.dbr.BarcodeReader;
@@ -246,6 +247,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
                     serializedBarcode.putString("barcodeFormatString", barcode.barcodeFormatString);
                 }
                 serializedBarcode.putString("barcodeText", barcode.barcodeText);
+                serializedBarcode.putString("barcodeBytes", Base64.encodeToString(barcode.barcodeBytes, Base64.DEFAULT));
                 serializedBarcode.putMap("barcodeLocation", handleLocationResult(barcode.localizationResult));
                 barcodeList.pushMap(serializedBarcode);
             }

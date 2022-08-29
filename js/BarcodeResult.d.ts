@@ -9,6 +9,10 @@ export interface BarcodeResult {
     */
     barcodeFormatString: string;
     /**
+    * Barcode bytes in base64 string.
+    */
+    barcodeBytes: string;
+    /**
     * The corresponding localization result.
     */
     barcodeLocation: BarcodeLocationResult;
