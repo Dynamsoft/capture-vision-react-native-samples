@@ -3,6 +3,7 @@ import {
   Button,
   Modal,
   PermissionsAndroid,
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -18,8 +19,6 @@ import {
 } from 'henry-capture-vision-react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-let mdbr;
-
 const option = {
   mediaType: 'photo',
   maxWidth: 2000,
@@ -29,9 +28,7 @@ const option = {
 
 const requestPermissions = async () => {
   try {
-    if (
-      !(await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA))
-    ) {
+    if (Platform.OS === 'android') {
       await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
     }
   } catch (err) {
@@ -41,7 +38,7 @@ const requestPermissions = async () => {
 
 const decodeFile = async filePath => {
   try {
-    return await mdbr.decodeFile(filePath);
+    return await this.dbr.decodeFile(filePath);
   } catch (err) {
     return null;
   }
@@ -60,60 +57,62 @@ const mergeResultsText = (results: BarcodeResult[]) => {
   return str;
 };
 
-const useImagePicker = (imagePickerLauncher, setModalVisible, setModalText) => {
-  imagePickerLauncher(option).then(res => {
+const useImagePicker = (imagePickerLauncher, setModalState) => {
+  imagePickerLauncher(option, res => {
     if (res.didCancel) {
-      setModalVisible(false);
+      setModalState(modalInitState);
       return false;
     }
+    setModalState({isVisible: true, text: 'decoding...'});
     decodeFile(res.assets[0].uri.split('file://')[1]).then(results => {
       let str = mergeResultsText(results);
-      setModalVisible(true);
-      setModalText(str);
+      setModalState({isVisible: true, text: str});
     });
   });
-  setModalText('Decoding...');
-  setModalVisible(true);
+};
+
+(async () => {
+  // Initialize the license so that you can use full feature of the Barcode Reader module.
+  try {
+    await DCVBarcodeReader.initLicense(
+      'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
+    );
+  } catch (e) {
+    console.log(e);
+  }
+  this.dbr = await DCVBarcodeReader.createInstance();
+  await this.dbr.updateRuntimeSettings(
+    EnumDBRPresetTemplate.IMAGE_READ_RATE_FIRST,
+  );
+})();
+
+const modalInitState = {
+  isVisible: false,
+  text: '',
 };
 
 function HomeScreen({navigation}) {
-  (async () => {
-    // Initialize the license so that you can use full feature of the Barcode Reader module.
-    try {
-      await DCVBarcodeReader.initLicense(
-        'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
-      );
-
-      mdbr = await DCVBarcodeReader.createInstance();
-      await mdbr.updateRuntimeSettings(
-        EnumDBRPresetTemplate.IMAGE_READ_RATE_FIRST,
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  })();
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalText, setModalText] = useState('');
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const [modalText, setModalText] = useState('');
+  const [modalState, setModalState] = useState(modalInitState);
 
   return (
     <View style={styles.contentView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={modalState.isVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalState(modalInitState);
         }}>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            console.log('false');
-            setModalVisible(false);
+            setModalState(modalInitState);
           }}
           style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{modalText}</Text>
+            <Text style={styles.modalText}>{modalState.text}</Text>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -123,7 +122,7 @@ function HomeScreen({navigation}) {
         onPress={() => {
           requestPermissions().then(() => {
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            useImagePicker(launchCamera, setModalVisible, setModalText);
+            useImagePicker(launchCamera, setModalState);
           });
         }}
       />
@@ -132,7 +131,7 @@ function HomeScreen({navigation}) {
         title="Select Photo"
         onPress={() => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          useImagePicker(launchImageLibrary, setModalVisible, setModalText);
+          useImagePicker(launchImageLibrary, setModalState);
         }}
       />
       <View style={styles.splitView} />
