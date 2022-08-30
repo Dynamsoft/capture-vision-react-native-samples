@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, Dimensions} from 'react-native';
+import {Text} from 'react-native';
 import {
   DynamsoftBarcodeReader,
   DynamsoftCameraView,
   EnumBarcodeFormat,
-  EnumTorchState
+  EnumTorchState,
 } from 'henry-capture-vision-react-native';
 
 class BarcodeScanner extends React.Component {
@@ -16,6 +16,8 @@ class BarcodeScanner extends React.Component {
     // Create a barcode reader instance.
     this.reader = await DynamsoftBarcodeReader.createInstance();
 
+    await this.reader.resetRuntimeSettings();
+
     // Get the current runtime settings of the barcode reader.
     let settings = await this.reader.getRuntimeSettings();
 
@@ -24,16 +26,20 @@ class BarcodeScanner extends React.Component {
     settings.expectedBarcodesCount = 0;
 
     // Set the barcode format to read.
-    settings.barcodeFormatIds = EnumBarcodeFormat.BF_ONED | EnumBarcodeFormat.BF_QR_CODE | EnumBarcodeFormat.BF_PDF417 | EnumBarcodeFormat.BF_DATAMATRIX;
+    settings.barcodeFormatIds =
+      EnumBarcodeFormat.BF_ONED |
+      EnumBarcodeFormat.BF_QR_CODE |
+      EnumBarcodeFormat.BF_PDF417 |
+      EnumBarcodeFormat.BF_DATAMATRIX;
 
     // Apply the new runtime settings to the barcode reader.
     await this.reader.updateRuntimeSettings(settings);
 
-    // Add a result listener. The result listener will handle callback when barcode result is returned. 
-    this.reader.addResultListener((results) => {
+    // Add a result listener. The result listener will handle callback when barcode result is returned.
+    this.reader.addResultListener(results => {
       // Update the newly detected barcode results to the state.
-      this.setState({results: results})
-    })
+      this.setState({results: results});
+    });
 
     // Enable video barcode scanning.
     // If the camera is opened, the barcode reader will start the barcode decoding thread when you triggered the startScanning.
@@ -60,24 +66,25 @@ class BarcodeScanner extends React.Component {
     let results = this.state.results;
     if (results && results.length > 0) {
       for (var i = 0; i < results.length; i++) {
-        barcode_text += results[i].barcodeFormatString + ':' + results[i].barcodeText + '\n';
+        barcode_text +=
+          results[i].barcodeFormatString + ':' + results[i].barcodeText + '\n';
       }
     }
 
     return (
       <DynamsoftCameraView
         style={{
-          flex: 1
+          flex: 1,
         }}
         ref={ref => {
           this.scanner = ref;
         }}
         overlayVisible={true}
         torchButton={{
-          visible: true
+          visible: true,
         }}
-        torchState={ EnumTorchState.OFF }
-        // scanRegionVisible={true} 
+        torchState={EnumTorchState.OFF}
+        // scanRegionVisible={true}
         // scanRegion={region}  // Set scan region.
       >
         <Text
