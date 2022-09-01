@@ -60,31 +60,32 @@ const useImagePicker = (imagePickerLauncher, setModalState) => {
       return false;
     }
     setModalState({isVisible: true, text: 'decoding...'});
-    decodeFile(res.assets[0].uri.split('file://')[1]).then(
-      results => {
+    decodeFile(res.assets[0].uri.split('file://')[1])
+      .then(results => {
         let str = mergeResultsText(results);
         setModalState({isVisible: true, text: str});
-      },
-      err => {
-        setModalState({isVisible: true, text: err});
-      },
-    );
+      })
+      .catch(err => {
+        setModalState({isVisible: true, text: err.toString()});
+      });
   });
 };
 
 (async () => {
   // Initialize the license so that you can use full feature of the Barcode Reader module.
+  await DCVBarcodeReader.initLicense(
+    'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
+  ).catch(e => {
+    console.log(e);
+  });
   try {
-    await DCVBarcodeReader.initLicense(
-      'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
+    this.dbr = await DCVBarcodeReader.createInstance();
+    await this.dbr.updateRuntimeSettings(
+      EnumDBRPresetTemplate.IMAGE_READ_RATE_FIRST,
     );
   } catch (e) {
     console.log(e);
   }
-  this.dbr = await DCVBarcodeReader.createInstance();
-  await this.dbr.updateRuntimeSettings(
-    EnumDBRPresetTemplate.IMAGE_READ_RATE_FIRST,
-  );
 })();
 
 const modalInitState = {
