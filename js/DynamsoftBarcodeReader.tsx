@@ -53,11 +53,7 @@ export class DynamsoftBarcodeReader {
     }
 
     decodeFile(filePath: string): Promise<BarcodeResult[]> {
-        try {
-            return DBRModule.decodeFile(filePath)
-        } catch (e){
-            throw e;
-        }
+        return DBRModule.decodeFile(filePath)
     }
 
     startScanning(): Promise<void>{
