@@ -57,7 +57,12 @@ class DynamsoftBarcodeReader {
         }
     }
     decodeFile(filePath) {
-        return DBRModule.decodeFile(filePath);
+        try {
+            return DBRModule.decodeFile(filePath);
+        }
+        catch (e) {
+            throw e;
+        }
     }
     startScanning() {
         return DBRModule.startBarcodeScanning();
