@@ -34,7 +34,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DCVCameraView = exports.DynamsoftCameraView = void 0;
+exports.DynamsoftCameraView = exports.DCVCameraView = void 0;
 const React = __importStar(require("react"));
 const react_native_1 = require("react-native");
 const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
@@ -46,7 +46,7 @@ const mapValues = (input, mapper) => {
     });
     return result;
 };
-class DynamsoftCameraView extends React.Component {
+class DCVCameraView extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -73,8 +73,8 @@ class DynamsoftCameraView extends React.Component {
         return newProps;
     }
     convertProp(value, key) {
-        if (typeof value === 'string' && DynamsoftCameraView.ConversionTables[key]) {
-            return DynamsoftCameraView.ConversionTables[key][value];
+        if (typeof value === 'string' && DCVCameraView.ConversionTables[key]) {
+            return DCVCameraView.ConversionTables[key][value];
         }
         return value;
     }
@@ -85,11 +85,15 @@ class DynamsoftCameraView extends React.Component {
             this.props.children));
     }
 }
-exports.DynamsoftCameraView = DynamsoftCameraView;
-DynamsoftCameraView.ConversionTables = {
+exports.DCVCameraView = DCVCameraView;
+DCVCameraView.ConversionTables = {
     torchState: DBRModule.TorchState
 };
-exports.DCVCameraView = DynamsoftCameraView;
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVCameraView instead.
+ */
+exports.DynamsoftCameraView = DCVCameraView;
 class CommandDispatcher {
     constructor(viewHandle) {
         //console.log(viewHandle)

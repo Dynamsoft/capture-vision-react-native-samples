@@ -1,8 +1,8 @@
 import { BarcodeResult } from './BarcodeResult';
 import { DBRRuntimeSettings, EnumDBRPresetTemplate } from "./BarcodeSettings";
-export declare class DynamsoftBarcodeReader {
+export declare class DCVBarcodeReader {
     static initLicense(license: string): Promise<void>;
-    static createInstance(): Promise<DynamsoftBarcodeReader>;
+    static createInstance(): Promise<DCVBarcodeReader>;
     getVersion(): Promise<string>;
     getRuntimeSettings(): Promise<DBRRuntimeSettings>;
     resetRuntimeSettings(): Promise<boolean>;
@@ -14,4 +14,8 @@ export declare class DynamsoftBarcodeReader {
     addResultListener(listener: (results: BarcodeResult[]) => void): void;
     removeAllResultListeners(): void;
 }
-export declare const DCVBarcodeReader: typeof DynamsoftBarcodeReader;
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVBarcodeReader instead.
+ */
+export declare const DynamsoftBarcodeReader: typeof DCVBarcodeReader;

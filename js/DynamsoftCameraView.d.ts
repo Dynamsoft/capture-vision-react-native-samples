@@ -10,7 +10,7 @@ interface Props extends ViewProps {
     torchState?: string | EnumTorchState;
     torchButton?: TorchButton;
 }
-export declare class DynamsoftCameraView extends React.Component<Props, {}> {
+export declare class DCVCameraView extends React.Component<Props, {}> {
     dispatcher: CommandDispatcher;
     references: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
     constructor(props: Props);
@@ -25,7 +25,11 @@ export declare class DynamsoftCameraView extends React.Component<Props, {}> {
     convertProp(value: any, key: string): any;
     render(): React.ReactElement | null;
 }
-export declare const DCVCameraView: typeof DynamsoftCameraView;
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVCameraView instead.
+ */
+export declare const DynamsoftCameraView: typeof DCVCameraView;
 declare class CommandDispatcher {
     dceViewHandle: any;
     constructor(viewHandle: any);
