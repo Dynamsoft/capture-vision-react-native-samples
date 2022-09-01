@@ -37,14 +37,10 @@ const requestPermissions = async () => {
 };
 
 const decodeFile = async filePath => {
-  try {
-    return await this.dbr.decodeFile(filePath);
-  } catch (err) {
-    return null;
-  }
+  return this.dbr.decodeFile(filePath);
 };
 
-const mergeResultsText = (results: BarcodeResult[]) => {
+const mergeResultsText = results => {
   let str = '';
   if (results && results.length > 0) {
     for (let i = 0; i < results.length; i++) {
@@ -64,10 +60,15 @@ const useImagePicker = (imagePickerLauncher, setModalState) => {
       return false;
     }
     setModalState({isVisible: true, text: 'decoding...'});
-    decodeFile(res.assets[0].uri.split('file://')[1]).then(results => {
-      let str = mergeResultsText(results);
-      setModalState({isVisible: true, text: str});
-    });
+    decodeFile(res.assets[0].uri.split('file://')[1]).then(
+      results => {
+        let str = mergeResultsText(results);
+        setModalState({isVisible: true, text: str});
+      },
+      err => {
+        setModalState({isVisible: true, text: err});
+      },
+    );
   });
 };
 
