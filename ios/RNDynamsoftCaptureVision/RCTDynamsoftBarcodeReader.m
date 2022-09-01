@@ -84,8 +84,11 @@ RCT_EXPORT_METHOD(getSettings:(RCTPromiseResolveBlock)resolve
 {
     NSError *error;
     iPublicRuntimeSettings *settings = [[StaticClass instance].dbr getRuntimeSettings:&error];
-    if (error.code != 0) {
-        resolve(@(NO));
+    if (error != nil) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
+        NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
+        reject(code, msg, error);
     }else{
         NSDictionary *barcode = @{
             @"barcodeFormatIds" : [NSNumber numberWithInteger:settings.barcodeFormatIds],
@@ -102,8 +105,11 @@ RCT_EXPORT_METHOD(resetSettings:(RCTPromiseResolveBlock)resolve
 {
     NSError *error;
     [[StaticClass instance].dbr resetRuntimeSettings:&error];
-    if (error.code != 0) {
-        resolve(@(NO));
+    if (error != nil) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
+        NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
+        reject(code, msg, error);
     }else{
         resolve(@(YES));
     }
@@ -121,8 +127,11 @@ RCT_EXPORT_METHOD(updateSettingsFromString:(NSString *)settings
 {
     NSError *error;
     [[StaticClass instance].dbr initRuntimeSettingsWithString:settings conflictMode:EnumConflictModeOverwrite error:&error];
-    if (error.code != 0) {
-        resolve(@(NO));
+    if (error != nil) {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
+        NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
+        reject(code, msg, error);
     }else{
         resolve(@(YES));
     }
@@ -145,8 +154,11 @@ RCT_EXPORT_METHOD(updateSettingsFromDictionary:(NSDictionary *)dic
         setting.timeout = timeout.integerValue;
         
         [[StaticClass instance].dbr updateRuntimeSettings:setting error:&error];
-        if (error.code != 0) {
-            resolve(@(NO));
+        if (error != nil) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
+            NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
+            reject(code, msg, error);
         }else{
             resolve(@(YES));
         }
@@ -221,7 +233,14 @@ RCT_EXPORT_METHOD(decodeFile:(NSString *)filePath
         }
         resolve([barcodes copy]);
     }else{
-        resolve(nil);
+        if (error != nil) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
+            NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
+            reject(code, msg, error);
+        }else{
+            resolve(nil);
+        }
     }
 }
 
