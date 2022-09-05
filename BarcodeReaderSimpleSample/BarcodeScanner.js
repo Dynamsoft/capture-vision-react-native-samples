@@ -36,6 +36,7 @@ const modalInitState = {
 };
 
 class BarcodeScanner extends React.Component {
+  ifDecodingFile = false;
   state = {
     results: null,
     isVisible: false,
@@ -52,10 +53,11 @@ class BarcodeScanner extends React.Component {
       .catch(err => {
         console.log(err);
       });
-
+    this.ifDecodingFile = true;
     imagePickerLauncher(option, res => {
       if (res.didCancel) {
         // this.setState(modalInitState);
+        this.ifDecodingFile = false;
         return false;
       }
       this.decodeFile(res.assets[0].uri.split('file://')[1])
@@ -67,7 +69,10 @@ class BarcodeScanner extends React.Component {
           console.log(err);
           this.setState({isVisible: true, modalText: err.toString()});
         })
-        .finally(this.initSettingForVideo(this.reader));
+        .finally(() => {
+          this.initSettingForVideo(this.reader);
+          this.ifDecodingFile = false;
+        });
     });
   };
 
@@ -99,7 +104,9 @@ class BarcodeScanner extends React.Component {
     // Add a result listener. The result listener will handle callback when barcode result is returned.
     this.reader.addResultListener(results => {
       // Update the newly detected barcode results to the state.
-      this.setState({results: results});
+      if (!this.ifDecodingFile) {
+        this.setState({results: results});
+      }
     });
 
     // Enable video barcode scanning.
