@@ -4,6 +4,7 @@ import {
   DCVBarcodeReader,
   DCVCameraView,
   EnumBarcodeFormat,
+  EnumDBRPresetTemplate,
   EnumTorchState,
 } from 'henry-capture-vision-react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -46,37 +47,33 @@ class BarcodeScanner extends React.Component {
   };
 
   useImagePicker = imagePickerLauncher => {
-    console.log(this.reader);
+    this.reader
+      .updateRuntimeSettings(EnumDBRPresetTemplate.IMAGE_SPEED_FIRST)
+      .catch(err => {
+        console.log(err);
+      });
+
     imagePickerLauncher(option, res => {
       if (res.didCancel) {
         // this.setState(modalInitState);
         return false;
       }
-
-      // setModalState({isVisible: true, modalText: 'decoding...'});
-      console.log(res.assets[0].uri.split('file://')[1]);
       this.decodeFile(res.assets[0].uri.split('file://')[1])
         .then(results => {
           let str = mergeResultsText(results);
-          console.log(str);
           this.setState({isVisible: true, modalText: str});
         })
         .catch(err => {
           console.log(err);
           this.setState({isVisible: true, modalText: err.toString()});
-        });
+        })
+        .finally(this.initSettingForVideo(this.reader));
     });
   };
 
-  async componentDidMount() {
-    console.log('start');
-    // Create a barcode reader instance.
-    this.reader = await DCVBarcodeReader.createInstance();
-
-    await this.reader.resetRuntimeSettings();
-
-    // Get the current runtime settings of the barcode reader.
-    let settings = await this.reader.getRuntimeSettings();
+  initSettingForVideo = async reader => {
+    await reader.resetRuntimeSettings();
+    let settings = await reader.getRuntimeSettings();
 
     // Set the expected barcode count to 0 when you are not sure how many barcodes you are scanning.
     // Set the expected barcode count to 1 can maximize the barcode decoding speed.
@@ -91,6 +88,13 @@ class BarcodeScanner extends React.Component {
 
     // Apply the new runtime settings to the barcode reader.
     await this.reader.updateRuntimeSettings(settings);
+  };
+
+  async componentDidMount() {
+    // Create a barcode reader instance.
+    this.reader = await DCVBarcodeReader.createInstance();
+
+    await this.initSettingForVideo(this.reader);
 
     // Add a result listener. The result listener will handle callback when barcode result is returned.
     this.reader.addResultListener(results => {
