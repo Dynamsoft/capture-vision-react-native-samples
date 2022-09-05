@@ -237,7 +237,8 @@ RCT_EXPORT_METHOD(decodeFile:(NSString *)filePath
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:error.userInfo options:0 error:nil];
             NSString *msg = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             NSString *code = [NSString stringWithFormat:@"%ld",(long)error.code];
-            reject(code, msg, error);
+            NSError *err = [NSError errorWithDomain:@"com.dynamsoft.error" code:error.code userInfo:nil];
+            reject(code, msg, err);
         }else{
             resolve(nil);
         }
