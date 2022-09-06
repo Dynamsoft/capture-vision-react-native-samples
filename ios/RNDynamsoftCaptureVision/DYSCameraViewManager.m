@@ -38,6 +38,7 @@ RCT_EXPORT_VIEW_PROPERTY(overlayVisible, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(torchState, int)
 RCT_EXPORT_VIEW_PROPERTY(scanRegion, NSDictionary)
 RCT_EXPORT_VIEW_PROPERTY(torchButton, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(cameraPosition, int)
 
 RCT_EXPORT_METHOD(open:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:

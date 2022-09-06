@@ -34,7 +34,7 @@ const mapValues = (input: any, mapper: any) => {
     return result;
 };
 
-export class DynamsoftCameraView extends React.Component<Props, {}> {
+export class DCVCameraView extends React.Component<Props, {}> {
     dispatcher!: CommandDispatcher;
     references!: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
 
@@ -73,8 +73,8 @@ export class DynamsoftCameraView extends React.Component<Props, {}> {
     }
 
     convertProp(value: any, key: string): any {
-        if (typeof value === 'string' && DynamsoftCameraView.ConversionTables[key]) {
-            return DynamsoftCameraView.ConversionTables[key][value];
+        if (typeof value === 'string' && DCVCameraView.ConversionTables[key]) {
+            return DCVCameraView.ConversionTables[key][value];
         }
         return value;
     }
@@ -94,6 +94,12 @@ export class DynamsoftCameraView extends React.Component<Props, {}> {
         )
     }
 }
+
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVCameraView instead.
+ */
+export const DynamsoftCameraView = DCVCameraView;
 
 class CommandDispatcher {
     dceViewHandle: any;

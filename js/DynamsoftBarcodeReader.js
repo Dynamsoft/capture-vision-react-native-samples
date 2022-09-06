@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DynamsoftBarcodeReader = void 0;
+exports.DynamsoftBarcodeReader = exports.DCVBarcodeReader = void 0;
 const react_native_1 = require("react-native");
 const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
 const DBREventEmitter = new react_native_1.NativeEventEmitter(DBRModule);
-class DynamsoftBarcodeReader {
+class DCVBarcodeReader {
     static initLicense(license) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -27,7 +27,7 @@ class DynamsoftBarcodeReader {
     static createInstance() {
         return __awaiter(this, void 0, void 0, function* () {
             yield DBRModule.createInstance();
-            return new DynamsoftBarcodeReader();
+            return new exports.DynamsoftBarcodeReader();
         });
     }
     getVersion() {
@@ -75,5 +75,10 @@ class DynamsoftBarcodeReader {
         DBREventEmitter.removeAllListeners('resultEvent');
     }
 }
-exports.DynamsoftBarcodeReader = DynamsoftBarcodeReader;
+exports.DCVBarcodeReader = DCVBarcodeReader;
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVBarcodeReader instead.
+ */
+exports.DynamsoftBarcodeReader = DCVBarcodeReader;
 //# sourceMappingURL=DynamsoftBarcodeReader.js.map

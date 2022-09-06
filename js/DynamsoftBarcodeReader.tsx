@@ -9,7 +9,7 @@ import {DBRRuntimeSettings, EnumDBRPresetTemplate} from "./BarcodeSettings"
 const DBRModule = NativeModules.RNDynamsoftBarcodeReader
 const DBREventEmitter = new NativeEventEmitter(DBRModule)
 
-export class DynamsoftBarcodeReader {
+export class DCVBarcodeReader {
   
     static async initLicense(license: string): Promise<void>{
         try {
@@ -19,7 +19,7 @@ export class DynamsoftBarcodeReader {
         }
     }
 
-    static async createInstance(): Promise<DynamsoftBarcodeReader>{
+    static async createInstance(): Promise<DCVBarcodeReader>{
         await DBRModule.createInstance()
         return new DynamsoftBarcodeReader()
     }
@@ -79,3 +79,9 @@ export class DynamsoftBarcodeReader {
     }
     
 }
+
+/**
+ * @deprecated since version 1.1.5,
+ * use DCVBarcodeReader instead.
+ */
+export const DynamsoftBarcodeReader = DCVBarcodeReader;
