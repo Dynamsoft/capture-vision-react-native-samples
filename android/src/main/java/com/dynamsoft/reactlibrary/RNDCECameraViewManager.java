@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.dynamsoft.dce.CameraEnhancer;
 import com.dynamsoft.dce.CameraEnhancerException;
+import com.dynamsoft.dce.EnumCameraPosition;
 import com.dynamsoft.dce.RegionDefinition;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
@@ -68,6 +69,21 @@ public class RNDCECameraViewManager extends ViewGroupManager<RNDCECameraView> {
             }
         }
         return new RNDCECameraView(reactContext, mReactApplicationContext, mCamera, mDbrModule);
+    }
+
+    @ReactProp(name = "cameraPosition")
+    public void setCameraPosition(RNDCECameraView view, int cameraPosition) {
+        EnumCameraPosition position = null;
+        if(cameraPosition == 0) {
+            position = EnumCameraPosition.CP_BACK;
+        } else {
+            position = EnumCameraPosition.CP_FRONT;
+        }
+        try {
+            mCamera.selectCamera(position);
+        } catch (CameraEnhancerException e) {
+            e.printStackTrace();
+        }
     }
 
     @ReactProp(name = "overlayVisible")

@@ -2,6 +2,7 @@
 package com.dynamsoft.reactlibrary;
 
 import android.app.Activity;
+import android.util.Base64;
 import android.util.Log;
 
 import com.dynamsoft.dbr.BarcodeReader;
@@ -203,7 +204,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
             promise.resolve(mReader.outputSettingsToString(""));
         } catch (BarcodeReaderException e) {
             e.printStackTrace();
-            promise.reject(e.getErrorCode() + "", e.getCause());
+            promise.reject(e.getErrorCode() + "", e.getMessage());
         }
     }
 
@@ -218,27 +219,38 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
             settingsMap.putInt("timeout", settings.timeout);
         } catch (BarcodeReaderException e) {
             e.printStackTrace();
-            promise.reject(e.getErrorCode() + "", e.getCause());
+            promise.reject(e.getErrorCode() + "", e.getMessage());
         }
         promise.resolve(settingsMap);
         // return settingsMap;
     }
 
+    @ReactMethod
+    public void decodeFile(String filePath, Promise promise) {
+        try {
+            TextResult[] textResults = mReader.decodeFile(filePath);
+            promise.resolve(serializeResults(textResults));
+        } catch (BarcodeReaderException e) {
+            promise.reject(e.getErrorCode() + "", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private WritableArray serializeResults(TextResult[] barcodes) {
         WritableArray barcodeList = Arguments.createArray();
-
-        for (int i = 0; i < barcodes.length; i++) {
-            TextResult barcode = barcodes[i];
-            WritableMap serializedBarcode = Arguments.createMap();
-
-            if (barcode.barcodeFormat_2 != EnumBarcodeFormat_2.BF2_NULL) {
-                serializedBarcode.putString("barcodeFormatString", barcode.barcodeFormatString_2);
-            } else {
-                serializedBarcode.putString("barcodeFormatString", barcode.barcodeFormatString);
+        if(barcodes != null) {
+            for (TextResult barcode : barcodes) {
+                WritableMap serializedBarcode = Arguments.createMap();
+                if (barcode.barcodeFormat_2 != EnumBarcodeFormat_2.BF2_NULL) {
+                    serializedBarcode.putString("barcodeFormatString", barcode.barcodeFormatString_2);
+                } else {
+                    serializedBarcode.putString("barcodeFormatString", barcode.barcodeFormatString);
+                }
+                serializedBarcode.putString("barcodeText", barcode.barcodeText);
+                serializedBarcode.putString("barcodeBytes", Base64.encodeToString(barcode.barcodeBytes, Base64.DEFAULT));
+                serializedBarcode.putMap("barcodeLocation", handleLocationResult(barcode.localizationResult));
+                barcodeList.pushMap(serializedBarcode);
             }
-            serializedBarcode.putString("barcodeText", barcode.barcodeText);
-            serializedBarcode.putMap("barcodeLocation", handleLocationResult(barcode.localizationResult));
-            barcodeList.pushMap(serializedBarcode);
         }
 
         return barcodeList;
