@@ -16,7 +16,7 @@ import { EnumCameraPosition, EnumTorchState, TorchButton } from './CameraSetting
 const DBRModule = NativeModules.RNDynamsoftBarcodeReader
 
 interface Props extends ViewProps {
-    cameraPosition?: string | EnumCameraPosition 
+    cameraPosition?: EnumCameraPosition
     overlayVisible?: boolean
     scanRegionVisible?: boolean
     scanRegion?: Region
@@ -124,7 +124,7 @@ class CommandDispatcher {
                 this.getViewManagerConfig('DYSCameraView').Commands.open,
                 undefined);
         }
-        
+
     }
 
     close() {

@@ -3,7 +3,7 @@ import { ViewProps } from 'react-native';
 import { Region } from './BasicStructures';
 import { EnumCameraPosition, EnumTorchState, TorchButton } from './CameraSettings';
 interface Props extends ViewProps {
-    cameraPosition?: string | EnumCameraPosition;
+    cameraPosition?: EnumCameraPosition;
     overlayVisible?: boolean;
     scanRegionVisible?: boolean;
     scanRegion?: Region;
