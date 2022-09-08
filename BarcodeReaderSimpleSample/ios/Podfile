@@ -25,5 +25,7 @@ target 'BarcodeReaderSimpleSample' do
 
   post_install do |installer|
     react_native_post_install(installer)
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   end
 end

@@ -1,22 +1,22 @@
 import React from 'react';
-import {Button, View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BarcodeScanner from './BarcodeScanner';
-import {DynamsoftBarcodeReader} from 'dynamsoft-capture-vision-react-native';
+import {DCVBarcodeReader} from 'dynamsoft-capture-vision-react-native';
+
+(async () => {
+  // Initialize the license so that you can use full feature of the Barcode Reader module.
+  await DCVBarcodeReader.initLicense(
+    'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwMTIwMDkzNiIsIm9yZ2FuaXphdGlvbklEIjoiMjAwMDAxIn0=',
+  ).catch(e => {
+    console.log(e);
+  });
+})();
 
 function HomeScreen({navigation}) {
-  (async () => {
-    // Initialize the license so that you can use full feature of the Barcode Reader module.
-    try {
-      await DynamsoftBarcodeReader.initLicense('DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwMTIwMDkzNiIsIm9yZ2FuaXphdGlvbklEIjoiMjAwMDAxIn0=');
-    } catch (e) {
-      console.log(e);
-    }
-  })();
-
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.contentView}>
       <Button
         title="Start Scanning"
         onPress={() => navigation.navigate('Barcode')}
@@ -37,5 +37,14 @@ function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  contentView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+});
 
 export default App;
