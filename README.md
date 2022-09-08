@@ -52,7 +52,7 @@
 
 ### Others
 
-- Node: 16.15.1 recommended
+- Node: 16.15.1+ recommended
 
 ## Installation
 
@@ -72,9 +72,11 @@
 
 Now you will learn how to create a simple barcode scanner using Dynamsoft Capture Vision SDK.
 
+>Note: You can get the full source code of a similar project:  [Barcode Reader Simple Sample](https://github.com/Dynamsoft/capture-vision-react-native-samples/tree/main/BarcodeReaderSimpleSample)
+
 ### Set up Development Environment
 
-If you are a beginner on React Native, please follow the guide on <a href="https://reactnative.dev/docs/environment-setup" target="_blank">React Native official website</a> to set up the development environment.
+If you are a beginner with React Native, please follow the guide on the <a href="https://reactnative.dev/docs/environment-setup" target="_blank">React Native official website</a> to set up the development environment.
 
 ### Initialize the Project
 
@@ -84,7 +86,7 @@ Create a new React Native project.
 npx react-native init SimpleBarcodeScanner
 ```
 
->Note: This sample uses react 17.0.2 and react-native 0.65.0.
+>Note: This sample uses React 17.0.2 and React Native 0.67.2.
 
 ### Include the Library
 
@@ -102,7 +104,7 @@ Add the SDK to your new project. Once the SDK is added, you will see a reference
   npm install dynamsoft-capture-vision-react-native
   ```
 
-For iOS, you must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
+For iOS, you can install the necessary native frameworks from cocoapods by running the `pod install` command as below:
 
 ```bash
 cd ios
@@ -120,13 +122,13 @@ In `App.js`, import the following components:
 import React from 'react';
 import {Text} from 'react-native';
 import {
-    DynamsoftBarcodeReader,
-    DynamsoftCameraView,
+    DCVBarcodeReader,
+    DCVCameraView,
     EnumBarcodeFormat
 } from 'dynamsoft-capture-vision-react-native';
 ```
 
-Next in `App.js`, let's define the `state` to your component. In the `state`, add a `results` variable, initialized to null. In the following steps, we will store the newly decoded barcodes to `results`.
+Next in `App.js`, let's define the `state` to your component. In the `state`, add a `results` variable, initialized to `null`. In the following steps, we will store the newly decoded barcodes to `results`.
 
 ```js
 class App extends React.Component {
@@ -146,12 +148,12 @@ class App extends React.Component {
         (async () => {
             // Initialize the license so that you can use full feature of the Barcode Reader module.
             try {
-                await DynamsoftBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
+                await DCVBarcodeReader.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9");
             } catch (e) {
                 console.log(e);
             }
             // Create a barcode reader instance.
-            this.reader = await DynamsoftBarcodeReader.createInstance();
+            this.reader = await DCVBarcodeReader.createInstance();
 
             // Add a result listener. The result listener will handle callback when barcode result is returned. 
             this.reader.addResultListener((results) => {
@@ -186,7 +188,7 @@ class App extends React.Component {
 
 ### Rendering the UI
 
-Lastly, let's create the `DynamsoftCameraView` UI component in the `render` function.
+Lastly, let's create the `DCVCameraView` UI component in the `render` function.
 
 ```jsx
 class App extends React.Component {
@@ -200,9 +202,9 @@ class App extends React.Component {
                 resultBoxText+=results[i].barcodeFormatString+"\n"+results[i].barcodeText+"\n";
             }
         }
-        // Render DynamsoftCameraView componment.
+        // Render DCVCameraView componment.
         return (
-            <DynamsoftCameraView
+            <DCVCameraView
                 style={
                     {
                         flex: 1
@@ -221,7 +223,7 @@ class App extends React.Component {
                         fontSize: 18,
                     }
                 }>{results && results.length > 0 ? resultBoxText : "No Barcode Detected"}</Text>
-            </DynamsoftCameraView>
+            </DCVCameraView>
         );
     }
 }
@@ -235,7 +237,7 @@ You need to set the "Privacy - Camera Usage Description" field in the `Info.plis
 
 #### Run Android on Windows
 
-In the command line interface (we recommend using Powershell), go to your project folder and run the following command:
+In the command line interface (Powershell recommended), go to your project folder and run the following command:
 
 ```bash
 npx react-native run-android
@@ -266,8 +268,8 @@ You can view all the DCV React Native samples via the following links:
 View the API reference of DCV React Native Edition to explore the full feature of DCV:
 
 - <a href = "https://www.dynamsoft.com/capture-vision/docs/programming/react-native/api-reference/?ver=latest" target = "_blank" >DCV API Reference - React Native Edition</a>
-  - <a href = "https://www.dynamsoft.com/capture-vision/docs/programming/react-native/api-reference/barcode-reader.html?ver=latest" target = "_blank" >DynamsoftBarcodeReader Class</a>
-  - <a href = "https://www.dynamsoft.com/capture-vision/docs/programming/react-native/api-reference/camera-view.html?ver=latest" target = "_blank" >DynamsoftCameraEnhancer Class</a>
+  - <a href = "https://www.dynamsoft.com/capture-vision/docs/programming/react-native/api-reference/barcode-reader.html?ver=latest" target = "_blank" >DCVBarcodeReader Class</a>
+  - <a href = "https://www.dynamsoft.com/capture-vision/docs/programming/react-native/api-reference/camera-view.html?ver=latest" target = "_blank" >DCVCameraView Class</a>
 
 ## License
 
