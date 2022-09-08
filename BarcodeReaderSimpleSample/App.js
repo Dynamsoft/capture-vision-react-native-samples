@@ -3,7 +3,7 @@ import {Button, StyleSheet, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BarcodeScanner from './BarcodeScanner';
-import {DCVBarcodeReader} from 'henry-capture-vision-react-native';
+import {DCVBarcodeReader} from 'dynamsoft-capture-vision-react-native';
 
 (async () => {
   // Initialize the license so that you can use full feature of the Barcode Reader module.

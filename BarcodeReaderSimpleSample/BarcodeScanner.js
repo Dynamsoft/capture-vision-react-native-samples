@@ -6,7 +6,7 @@ import {
   EnumBarcodeFormat,
   EnumDBRPresetTemplate,
   EnumTorchState,
-} from 'henry-capture-vision-react-native';
+} from 'dynamsoft-capture-vision-react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
