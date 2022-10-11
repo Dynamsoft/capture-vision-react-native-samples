@@ -59,7 +59,9 @@ public class RNDCECameraView extends DCECameraView implements LifecycleEventList
         }
         if(mCamera!=null){
             try {
-                mCamera.open();
+                if(isAttachedToWindow()){
+                    mCamera.open();
+                }
             } catch (CameraEnhancerException e) {
                 e.printStackTrace();
             }
