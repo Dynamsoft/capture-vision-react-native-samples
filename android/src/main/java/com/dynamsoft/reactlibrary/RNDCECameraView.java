@@ -46,6 +46,31 @@ public class RNDCECameraView extends DCECameraView implements LifecycleEventList
             layout(getLeft(), getTop(), getRight(), getBottom());
         }
     };
+    
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if(mCamera!=null){
+            try {
+                mCamera.open();
+            } catch (CameraEnhancerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if(mCamera!=null){
+            try {
+                mCamera.close();
+            } catch (CameraEnhancerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @Override
     public void onHostResume() {
@@ -59,7 +84,9 @@ public class RNDCECameraView extends DCECameraView implements LifecycleEventList
         }
         if(mCamera!=null){
             try {
-                mCamera.open();
+                if(isAttachedToWindow()){
+                    mCamera.open();
+                }
             } catch (CameraEnhancerException e) {
                 e.printStackTrace();
             }
