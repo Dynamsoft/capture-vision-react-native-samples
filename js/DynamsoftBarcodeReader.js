@@ -70,8 +70,7 @@ class DCVBarcodeReader {
             DBRModule.addResultListener();
         }
         DBREventEmitter.addListener('resultEvent', listener);
-    }
-    removeAllResultListeners() {
+    }    removeAllResultListeners()  {
         DBREventEmitter.removeAllListeners('resultEvent');
     }
 }
