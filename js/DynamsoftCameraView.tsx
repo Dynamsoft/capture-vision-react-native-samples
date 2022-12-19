@@ -16,11 +16,30 @@ import { EnumCameraPosition, EnumTorchState, TorchButton } from './CameraSetting
 const DBRModule = NativeModules.RNDynamsoftBarcodeReader
 
 interface Props extends ViewProps {
+    /**
+    * Select the (front or back facing) camera.
+    */
     cameraPosition?: EnumCameraPosition
+    /**
+    * Set whether to display overlays to highlight the decoded barcodes.
+    */
     overlayVisible?: boolean
+    /**
+    * Set whether to display the scan region.
+    */
     scanRegionVisible?: boolean
+    /**
+    * Specify a region of interest with a region object.
+    */
     scanRegion?: Region
+    /**
+    * Set whether to turn on the torch.
+    */
     torchState?: string | EnumTorchState
+    /**
+    * Set the torch button with a TorchButton object.
+    * You can configure the position, images and visibility of the button.
+    */
     torchButton?: TorchButton
 }
 
@@ -46,10 +65,16 @@ export class DCVCameraView extends React.Component<Props, {}> {
         torchState: DBRModule.TorchState
     }
 
+    /**
+    * Open the camera.
+    */
     open(): void {
         this.dispatcher.open();
     }
 
+    /**
+    * Open the camera.
+    */
     close(): void {
         this.dispatcher.close();
     }
