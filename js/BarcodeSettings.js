@@ -3,14 +3,38 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EnumBarcodeFormat_2 = exports.EnumBarcodeFormat = exports.EnumDBRPresetTemplate = void 0;
 var EnumDBRPresetTemplate;
 (function (EnumDBRPresetTemplate) {
+    /**
+    * The default setting for processing the video streaming.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["DEFAULT"] = 0] = "DEFAULT";
+    /**
+    * Use this template when processing single barcode under the video streaming.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["VIDEO_SINGLE_BARCODE"] = 1] = "VIDEO_SINGLE_BARCODE";
+    /**
+    * Use this template for higher speed when processing the video streaming.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["VIDEO_SPEED_FIRST"] = 2] = "VIDEO_SPEED_FIRST";
+    /**
+    * Use this template for higher read rate when processing the video streaming.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["VIDEO_READ_RATE_FIRST"] = 3] = "VIDEO_READ_RATE_FIRST";
+    /**
+    * Use this template for higher speed when processing a still image.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["IMAGE_SPEED_FIRST"] = 4] = "IMAGE_SPEED_FIRST";
+    /**
+    * Use this template for higher read rate when processing a still image.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["IMAGE_READ_RATE_FIRST"] = 5] = "IMAGE_READ_RATE_FIRST";
+    /**
+    * The default setting for processing a still image.
+    */
     EnumDBRPresetTemplate[EnumDBRPresetTemplate["IMAGE_DEFAULT"] = 6] = "IMAGE_DEFAULT";
 })(EnumDBRPresetTemplate = exports.EnumDBRPresetTemplate || (exports.EnumDBRPresetTemplate = {}));
+/**
+* The first group of barcode formats.
+*/
 var EnumBarcodeFormat;
 (function (EnumBarcodeFormat) {
     EnumBarcodeFormat[EnumBarcodeFormat["BF_ALL"] = -29360129] = "BF_ALL";
@@ -47,6 +71,9 @@ var EnumBarcodeFormat;
     EnumBarcodeFormat[EnumBarcodeFormat["BF_MSI_CODE"] = 1048576] = "BF_MSI_CODE";
     EnumBarcodeFormat[EnumBarcodeFormat["BF_NULL"] = 0] = "BF_NULL";
 })(EnumBarcodeFormat = exports.EnumBarcodeFormat || (exports.EnumBarcodeFormat = {}));
+/**
+* The second group of barcode formats.
+*/
 var EnumBarcodeFormat_2;
 (function (EnumBarcodeFormat_2) {
     EnumBarcodeFormat_2[EnumBarcodeFormat_2["BF2_AUSTRALIANPOST"] = 8388608] = "BF2_AUSTRALIANPOST";
