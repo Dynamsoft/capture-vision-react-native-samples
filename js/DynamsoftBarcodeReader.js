@@ -14,6 +14,9 @@ const react_native_1 = require("react-native");
 const DBRModule = react_native_1.NativeModules.RNDynamsoftBarcodeReader;
 const DBREventEmitter = new react_native_1.NativeEventEmitter(DBRModule);
 class DCVBarcodeReader {
+    /**
+    * Initialize the license with a license key.
+    */
     static initLicense(license) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -24,24 +27,42 @@ class DCVBarcodeReader {
             }
         });
     }
+    /**
+    * Create an instance of the DCVBarcode reader.
+    */
     static createInstance() {
         return __awaiter(this, void 0, void 0, function* () {
             yield DBRModule.createInstance();
             return new exports.DynamsoftBarcodeReader();
         });
     }
+    /**
+    * Get the version of the barcode reader library.
+    */
     getVersion() {
         return DBRModule.getVersion();
     }
+    /**
+    * Get the current runtime settings as a DBRRuntimeSettings object.
+    */
     getRuntimeSettings() {
         return DBRModule.getSettings();
     }
+    /**
+    * Reset the runtime settings.
+    */
     resetRuntimeSettings() {
         return DBRModule.resetSettings();
     }
+    /**
+    * Output the current runtime settings as a string.
+    */
     outputRuntimeSettingsToString() {
         return DBRModule.outputSettings();
     }
+    /**
+    * Update the current runtime settings with a DBRRuntimeSettings object / a preset template / a JSON string.
+    */
     updateRuntimeSettings(settings) {
         if (typeof settings === 'object') {
             return DBRModule.updateSettingsFromDictionary(settings);
@@ -56,21 +77,37 @@ class DCVBarcodeReader {
             return new Promise((reslove, reject) => { reject(false); });
         }
     }
+    /**
+    * Decode barcode(s) from an image file with the file path.
+    */
     decodeFile(filePath) {
         return DBRModule.decodeFile(filePath);
     }
+    /**
+    * Start barcode decoding from the video streaming.
+    */
     startScanning() {
         return DBRModule.startBarcodeScanning();
     }
+    /**
+    * Stop barcode decoding from the video streaming.
+    */
     stopScanning() {
         return DBRModule.stopBarcodeScanning();
     }
+    /**
+    * Register a listener to receive callback when barcode result is output.
+    */
     addResultListener(listener) {
         if (react_native_1.Platform.OS === 'android') {
             DBRModule.addResultListener();
         }
         DBREventEmitter.addListener('resultEvent', listener);
-    }    removeAllResultListeners()  {
+    }
+    /**
+    * Remove all the result listeners.
+    */
+    removeAllResultListeners() {
         DBREventEmitter.removeAllListeners('resultEvent');
     }
 }

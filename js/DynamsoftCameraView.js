@@ -50,9 +50,15 @@ class DCVCameraView extends React.Component {
     constructor(props) {
         super(props);
     }
+    /**
+    * Open the camera.
+    */
     open() {
         this.dispatcher.open();
     }
+    /**
+    * Open the camera.
+    */
     close() {
         this.dispatcher.close();
     }

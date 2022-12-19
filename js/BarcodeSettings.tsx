@@ -1,20 +1,56 @@
 export interface DBRRuntimeSettings {
+    /**
+    * A combined value of EnumBarcodeFormat members.
+    */
     barcodeFormatIds: number;
+    /**
+    * A combined value of EnumBarcodeFormat_2 members.
+    */
     barcodeFormatIds_2: number;
+    /**
+    * Defines how many barcodes you want decode from a single image.
+    */
     expectedBarcodesCount: number;
+    /**
+    * Defines the maximum time consumption on processing a single image.
+    */
     timeout: number;
 }
 
 export enum EnumDBRPresetTemplate {
+    /**
+    * The default setting for processing the video streaming.
+    */
     DEFAULT,
+    /**
+    * Use this template when processing single barcode under the video streaming.
+    */
     VIDEO_SINGLE_BARCODE,
+    /**
+    * Use this template for higher speed when processing the video streaming.
+    */
     VIDEO_SPEED_FIRST,
+    /**
+    * Use this template for higher read rate when processing the video streaming.
+    */
     VIDEO_READ_RATE_FIRST,
+    /**
+    * Use this template for higher speed when processing a still image.
+    */
     IMAGE_SPEED_FIRST,
+    /**
+    * Use this template for higher read rate when processing a still image.
+    */
     IMAGE_READ_RATE_FIRST,
+    /**
+    * The default setting for processing a still image.
+    */
     IMAGE_DEFAULT
 }
 
+/**
+* The first group of barcode formats.
+*/
 export enum EnumBarcodeFormat {
     BF_ALL = 0xFE3FFFFF | 0,
     BF_ONED = 0x3007FF,
@@ -51,6 +87,9 @@ export enum EnumBarcodeFormat {
     BF_NULL = 0x00
 }
 
+/**
+* The second group of barcode formats.
+*/
 export enum EnumBarcodeFormat_2 {
     BF2_AUSTRALIANPOST = 0x00800000,
     BF2_DOTCODE = 0x02,
