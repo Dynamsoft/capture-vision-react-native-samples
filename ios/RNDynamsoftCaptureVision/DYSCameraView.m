@@ -100,8 +100,8 @@
         region.regionLeft = regionLeft.integerValue;
         region.regionRight = regionRight.integerValue;
         region.regionBottom = regionBottom.integerValue;
-        region.regionMeasuredByPercentage = regionMeasuredByPercentage.boolValue;
-        NSError *err = [NSError new];
+        region.regionMeasuredByPercentage = regionMeasuredByPercentage.integerValue;
+        NSError *err;
         [[StaticClass instance].dce setScanRegion:region error:&err];
         [StaticClass instance].dce.scanRegionVisible = _scanRegionVisible;
     }
