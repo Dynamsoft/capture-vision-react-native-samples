@@ -94,7 +94,7 @@
         NSNumber *regionLeft = [scanRegion valueForKey:@"regionLeft"];
         NSNumber *regionRight = [scanRegion valueForKey:@"regionRight"];
         NSNumber *regionBottom = [scanRegion valueForKey:@"regionBottom"];
-        NSNumber *regionMeasuredByPercentage = [scanRegion valueForKey:@"regionTop"];
+        NSNumber *regionMeasuredByPercentage = [scanRegion valueForKey:@"regionMeasuredByPercentage"];
         iRegionDefinition *region = [iRegionDefinition new];
         region.regionTop = regionTop.integerValue;
         region.regionLeft = regionLeft.integerValue;
