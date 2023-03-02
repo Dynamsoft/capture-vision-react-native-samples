@@ -94,14 +94,14 @@
         NSNumber *regionLeft = [scanRegion valueForKey:@"regionLeft"];
         NSNumber *regionRight = [scanRegion valueForKey:@"regionRight"];
         NSNumber *regionBottom = [scanRegion valueForKey:@"regionBottom"];
-        NSNumber *regionMeasuredByPercentage = [scanRegion valueForKey:@"regionTop"];
+        NSNumber *regionMeasuredByPercentage = [scanRegion valueForKey:@"regionMeasuredByPercentage"];
         iRegionDefinition *region = [iRegionDefinition new];
         region.regionTop = regionTop.integerValue;
         region.regionLeft = regionLeft.integerValue;
         region.regionRight = regionRight.integerValue;
         region.regionBottom = regionBottom.integerValue;
-        region.regionMeasuredByPercentage = regionMeasuredByPercentage.boolValue;
-        NSError *err = [NSError new];
+        region.regionMeasuredByPercentage = regionMeasuredByPercentage.integerValue;
+        NSError *err;
         [[StaticClass instance].dce setScanRegion:region error:&err];
         [StaticClass instance].dce.scanRegionVisible = _scanRegionVisible;
     }
