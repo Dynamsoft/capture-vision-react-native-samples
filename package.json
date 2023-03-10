@@ -12,7 +12,8 @@
   },
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios"
+    "ios": "react-native run-ios",
+    "typescript": "tsc"
   },
   "keywords": [
     "react-native",
@@ -27,6 +28,9 @@
     "name": "Dynamsoft",
     "url": "https://www.dynamsoft.com",
     "email": "support@dynamsoft.com"
+  },
+  "resolutions": {
+    "@types/react": "^18.0.14"
   },
   "devDependencies": {
     "@types/jest": "^28.1.3",
