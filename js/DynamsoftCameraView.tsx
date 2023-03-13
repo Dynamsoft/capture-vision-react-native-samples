@@ -46,7 +46,7 @@ interface Props extends ViewProps {
 const DCEView: HostComponent<any> = requireNativeComponent('DYSCameraView');
 
 const mapValues = (input: any, mapper: any) => {
-    const result = {};
+    const result:any = {};
     Object.entries(input).map(([key, value]) => {
         result[key] = mapper(value, key);
     });
@@ -55,13 +55,13 @@ const mapValues = (input: any, mapper: any) => {
 
 export class DCVCameraView extends React.Component<Props, {}> {
     dispatcher!: CommandDispatcher;
-    references!: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
+    references!: any;
 
     constructor(props: Props) {
         super(props)
     }
 
-    static ConversionTables = {
+    static ConversionTables: any  = {
         torchState: DBRModule.TorchState
     }
 
@@ -97,7 +97,7 @@ export class DCVCameraView extends React.Component<Props, {}> {
         return newProps;
     }
 
-    convertProp(value: any, key: string): any {
+    convertProp(value: any, key: string ): any {
         if (typeof value === 'string' && DCVCameraView.ConversionTables[key]) {
             return DCVCameraView.ConversionTables[key][value];
         }
@@ -138,7 +138,7 @@ class CommandDispatcher {
         if (UIManager.getViewManagerConfig) {
             return UIManager.getViewManagerConfig(viewManagerConfig);
         } else {
-            return UIManager[viewManagerConfig];
+            return (UIManager as any)[viewManagerConfig];
         }
     }
 

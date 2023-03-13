@@ -31,11 +31,9 @@ interface Props extends ViewProps {
 }
 export declare class DCVCameraView extends React.Component<Props, {}> {
     dispatcher: CommandDispatcher;
-    references: number | React.ComponentClass<any, any> | React.Component<any, any, any> | null;
+    references: any;
     constructor(props: Props);
-    static ConversionTables: {
-        torchState: any;
-    };
+    static ConversionTables: any;
     /**
     * Open the camera.
     */
