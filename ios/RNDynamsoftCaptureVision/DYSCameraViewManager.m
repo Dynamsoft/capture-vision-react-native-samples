@@ -17,10 +17,7 @@ RCT_EXPORT_MODULE(DYSCameraView)
 - (instancetype)init {
     self = [super init];
     if (self) {
-        CGFloat heigth = UIScreen.mainScreen.bounds.size.height;
-        CGFloat width = UIScreen.mainScreen.bounds.size.width;
-        [StaticClass instance].view = [[DCECameraView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
-        [StaticClass instance].dce = [[DynamsoftCameraEnhancer alloc] initWithView:[StaticClass instance].view];
+        
     }
     return self;
 }
