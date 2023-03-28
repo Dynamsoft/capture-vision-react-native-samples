@@ -23,7 +23,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-
+        [StaticClass instance].dbr = [DynamsoftBarcodeReader new];
     }
     return self;
 }
@@ -68,7 +68,7 @@ RCT_EXPORT_METHOD(initLicense:(NSString *)license
 }
 
 RCT_EXPORT_METHOD(createInstance) {
-    [StaticClass instance].dbr = [DynamsoftBarcodeReader new];
+//    [StaticClass instance].dbr = [DynamsoftBarcodeReader new];
 }
 
 RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getVersion) {
@@ -184,7 +184,6 @@ RCT_EXPORT_METHOD(updateSettingsFromNumber:(nonnull NSNumber *)number
 }
 
 RCT_EXPORT_METHOD(startBarcodeScanning) {
-    [[StaticClass instance].dbr setCameraEnhancer:[StaticClass instance].dce];
     [[StaticClass instance].dbr startScanning];
 }
 

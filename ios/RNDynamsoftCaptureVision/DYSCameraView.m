@@ -21,6 +21,11 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        CGFloat heigth = UIScreen.mainScreen.bounds.size.height;
+        CGFloat width = UIScreen.mainScreen.bounds.size.width;
+        [StaticClass instance].view = [[DCECameraView alloc] initWithFrame:CGRectMake(0, 0, width, heigth)];
+        [StaticClass instance].dce = [[DynamsoftCameraEnhancer alloc] init];
+        [StaticClass instance].dce.dceCameraView = [StaticClass instance].view;
         [self addSubview:[StaticClass instance].view];
     }
     return self;
@@ -118,6 +123,7 @@
 }
 
 - (void)open{
+    [[StaticClass instance].dbr setCameraEnhancer:[StaticClass instance].dce];
     [[StaticClass instance].dce open];
 }
 
