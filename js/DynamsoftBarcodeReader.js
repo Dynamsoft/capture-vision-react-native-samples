@@ -96,6 +96,12 @@ class DCVBarcodeReader {
         return DBRModule.stopBarcodeScanning();
     }
     /**
+     * Enable Duplicated Filter in video stream
+     * */
+    enableDuplicateFilter(isEnabled) {
+        return DBRModule.enableDuplicateFilter(isEnabled);
+    }
+    /**
     * Register a listener to receive callback when barcode result is output.
     */
     addResultListener(listener) {
