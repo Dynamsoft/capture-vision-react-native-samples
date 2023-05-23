@@ -42,6 +42,10 @@ export declare class DCVBarcodeReader {
     */
     stopScanning(): Promise<void>;
     /**
+     * Enable Duplicated Filter in video stream
+     * */
+    enableDuplicateFilter(isEnabled: boolean): Promise<void>;
+    /**
     * Register a listener to receive callback when barcode result is output.
     */
     addResultListener(listener: (results: BarcodeResult[]) => void): void;

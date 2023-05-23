@@ -79,6 +79,10 @@ RCT_EXPORT_SYNCHRONOUS_TYPED_METHOD(NSString *, getInternalVersion) {
     return @"1.0.0";
 }
 
+RCT_EXPORT_METHOD(enableDuplicateFilter:(BOOL)isEnabled) {
+    [StaticClass instance].dbr.enableDuplicateFilter = isEnabled;
+}
+
 RCT_EXPORT_METHOD(getSettings:(RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
 {

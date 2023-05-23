@@ -1,9 +1,7 @@
 
 package com.dynamsoft.reactlibrary;
 
-import android.app.Activity;
 import android.util.Base64;
-import android.util.Log;
 
 import com.dynamsoft.dbr.BarcodeReader;
 import com.dynamsoft.dbr.BarcodeReaderException;
@@ -106,7 +104,7 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getVersion(Promise promise) {
-        promise.resolve(mReader.getVersion());
+        promise.resolve(BarcodeReader.getVersion());
     }
 
     @ReactMethod
@@ -144,6 +142,11 @@ public class RNDynamsoftBarcodeReaderModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void stopBarcodeScanning() {
         mReader.stopScanning();
+    }
+
+    @ReactMethod
+    public void enableDuplicateFilter(boolean isEnabled) {
+        mReader.enableDuplicateFilter(isEnabled);
     }
 
     @ReactMethod

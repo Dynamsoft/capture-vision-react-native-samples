@@ -10,7 +10,7 @@ const DBRModule = NativeModules.RNDynamsoftBarcodeReader
 const DBREventEmitter = new NativeEventEmitter(DBRModule)
 
 export class DCVBarcodeReader {
-  
+
     /**
     * Initialize the license with a license key.
     */
@@ -86,12 +86,19 @@ export class DCVBarcodeReader {
     startScanning(): Promise<void>{
         return DBRModule.startBarcodeScanning()
     }
-  
+
     /**
     * Stop barcode decoding from the video streaming.
     */
     stopScanning(): Promise<void>{
         return DBRModule.stopBarcodeScanning()
+    }
+
+    /**
+     * Enable Duplicated Filter in video stream
+     * */
+    enableDuplicateFilter(isEnabled: boolean): Promise<void>{
+        return DBRModule.enableDuplicateFilter(isEnabled)
     }
 
     /**
@@ -113,7 +120,7 @@ export class DCVBarcodeReader {
     removeAllResultListeners(): void{
         DBREventEmitter.removeAllListeners('resultEvent');
     }
-    
+
 }
 
 /**
