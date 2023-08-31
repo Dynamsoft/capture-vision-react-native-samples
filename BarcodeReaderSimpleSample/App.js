@@ -6,7 +6,9 @@ import BarcodeScanner from './BarcodeScanner';
 import {DCVBarcodeReader} from 'dynamsoft-capture-vision-react-native';
 
 (async () => {
-  // Initialize the license so that you can use full feature of the Barcode Reader module.
+  // Initialize license for the Barcode Decoding module of Dynamsoft Capture Vision.
+	// The license string here is a time-limited trial license. Note that network connection is required for this license to work.
+	// You can also request an extension for your trial license in the customer portal: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=samples&package=react_native
   await DCVBarcodeReader.initLicense(
     'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwMTIwMDkzNiIsIm9yZ2FuaXphdGlvbklEIjoiMjAwMDAxIn0=',
   ).catch(e => {
