@@ -2,8 +2,8 @@
 
 This repository contains multiple samples that demonstrate how to use the Dynamsoft Capture Vision React-Native Edition.
 
-* [User Guide](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/user-guide/barcode-reader.html?product=dbr&version=latest&repoType=mobile){:target="_blank"}
-* [API Reference](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/api-reference/?product=dbr&version=latest&repoType=mobile){:target="_blank"}
+* [User Guide](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/user-guide/barcode-reader.html?product=dbr&version=latest&repoType=mobile)
+* [API Reference](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/api-reference/?product=dbr&version=latest&repoType=mobile)
 
 ## System Requirements
 
