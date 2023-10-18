@@ -43,7 +43,7 @@ interface Props extends ViewProps {
     torchButton?: TorchButton
 }
 
-const DCEView: HostComponent<any> = requireNativeComponent('DYSCameraView');
+const DCEView: HostComponent<any> = requireNativeComponent<any>('DYSCameraView');
 
 const mapValues = (input: any, mapper: any) => {
     const result:any = {};
