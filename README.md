@@ -84,7 +84,7 @@ npx react-native run-ios
 
 ## License
 
-* You can also request an extension for your trial license in the [customer portal](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github)
+* You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github&package=react_native&version=9) link.
 
 ## Contact
 
