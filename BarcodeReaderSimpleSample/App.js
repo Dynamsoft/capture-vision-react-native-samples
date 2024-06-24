@@ -10,7 +10,7 @@ import {DCVBarcodeReader} from 'dynamsoft-capture-vision-react-native';
 	// The license string here is a time-limited trial license. Note that network connection is required for this license to work.
 	// You can also request an extension for your trial license via the Request a Trial License link: https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github&package=react_native&version=9
   await DCVBarcodeReader.initLicense(
-    'DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTEwMTIwMDkzNiIsIm9yZ2FuaXphdGlvbklEIjoiMjAwMDAxIn0=',
+    'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
   ).catch(e => {
     console.log(e);
   });
