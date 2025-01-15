@@ -1,42 +1,46 @@
 # Dynamsoft Capture Vision samples for React-Native edition
 
-This repository contains multiple samples that demonstrate how to use the Dynamsoft Capture Vision React-Native Edition.
+This repository contains multiple samples that demonstrate how to use the [Dynamsoft Capture Vision](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) React-Native Edition.
 
-* [User Guide](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/user-guide/barcode-reader.html?product=dbr&version=latest&repoType=mobile)
-* [API Reference](https://www.dynamsoft.com/capture-vision/docs/mobile/programming/react-native/api-reference/?product=dbr&version=latest&repoType=mobile)
+## What is Dynamsoft Capture Vision SDK
 
-## System Requirements
+[Dynamsoft Capture Vision (DCV)](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) is an aggregating SDK of a series of specific functional products, which cover image capturing, content understanding, result parsing, and interactive workflow.
 
-### React Native
-
-* Supported Version: 0.60 or higher
-
-### Android
-
-* Supported OS: Android 5.0 (API Level 21) or higher.
-* Supported ABI: **armeabi-v7a**, **arm64-v8a**, **x86** and **x86_64**.
-* Development Environment: Android Studio 3.4+ (Android Studio 4.2+ recommended).
-* JDK: 1.8+
-
-### iOS
-
-* Supported OS: **iOS 10.0** or higher.
-* Supported ABI: **arm64** and **x86_64**.
-* Development Environment: Xcode 7.1 and above (Xcode 13.0+ recommended), CocoaPods 1.11.0+.
-
-### Others
-
-* Node: 16.15.1 recommended
+- Dynamsoft Barcode Reader (DBR), Dynamsoft Document Normalizer (DDN), and Dynamsoft Label Recognizer (DLR) play crucial roles in reading barcodes, structures, and texts from images.
+- Dynamsoft Code Parser (DCP) is utilized to extract meaningful fields from text/bytes results, ensuring optimal data parsing capabilities.
+- To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provide a suite of robust viewing and editing functions.
 
 ## Samples
 
-| Sample Name | Description |
-| ----------- | ----------- |
-| `BarcodeReaderSimpleSample` | This is a sample that illustrates the simplest way to recognize barcodes from video streaming with Dynamsoft Capture Vision React-Native SDK. |
+| Sample Name                                                                  | Description |
+|------------------------------------------------------------------------------| ----------- |
+| [ScanSingleBarcode](./ScanSingleBarcode)           | This sample illustrates the simplest way to recognize single barcode from video streaming. |
+| [DetectAndDeskewDocument](./DetectAndDeskewDocument) | This sample illustrates how to detect and deskew an document from video streaming. |
+| [ScanMRZ](./ScanMRZ)                                         | This sample illustrates how to scan passport and ID cards from video streaming. |
 
-### Install the Dependencies
+### How to build and run a sample
 
-Go to your project folder and run the following command:
+1. Enter a sample folder that you want to try
+
+```bash
+cd ScanSingleBarcode
+```
+
+or
+
+```bash
+cd DetectAndDeskewDocument
+```
+
+or
+
+```bash
+cd ScanMRZ
+```
+
+2. Install node modules
+
+Run the following command:
 
 ```bash
 yarn install
@@ -48,33 +52,45 @@ or
 npm install
 ```
 
-**For iOS**, you must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
+3. Prepare iOS
+
+You must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
 
 ```bash
 cd ios
-```
-
-```bash
 pod install
 ```
 
-### Build and Run
+Open the **workspace** file `*.xcworkspace` (not .xcodeproj) from the `ios` directory in Xcode. Adjust *Provisioning* and *Signing* settings.
 
-* **Android**
+4. Build and Run
+
+- **Android**
 
 Go to your project folder and run the following command:
 
 ```bash
-npx react-native run-android
+# using npm
+npm run android
+
+# OR using Yarn
+yarn android
 ```
 
-* **iOS**
+- **iOS**
 
 In the terminal, go to the project folder in your project:
 
 ```bash
-npx react-native run-ios
+# using npm
+npm run ios
+
+# OR using Yarn
+yarn ios
 ```
+
+If everything is set up _correctly_, you should see your new app running in your device.
+This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
 > Note:
 >
@@ -82,9 +98,26 @@ npx react-native run-ios
 >- On iOS, in order to run the React Native app on a physical device you will need to install the [`ios-deploy`](https://www.npmjs.com/package/ios-deploy) library. Afterwards, you can run the react native app from the terminal as such `npx react-native run-ios --device` assuming it's the only device connected to the Mac.
 >- Alternatively on iOS, you can simply open the xcworkspace of the project found in the `ios` folder using Xcode and run the sample on your connected iOS device from there. The advantage that this offers is that it is easier to deal with the developer signatures for deployment in there.
 
+### How to use the new architecture of React Native (Optional)
+
+[How to enable new architecture in Android](https://reactnative.dev/architecture/landing-page#android)
+
+[How to enable new architecture in IOS](https://reactnative.dev/architecture/landing-page#ios)
+> Note:
+> 
+> If you enable new architecture and want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
+> 
+> Therefore, we recommend that you move the project to a directory with a shorter path before enable the new architecture.
+
+## Integration Guide For Your Project
+
+- [Barcode Reader Integration Guide](./barcode-reader-integration-guide.md)
+- [Document Scanner Integration Guide](./document-scanner-integration-guide.md)
+- [MRZ Scanner Integration Guide](./mrz-scanner-integration-guide.md)
+
 ## License
 
-* You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=github&package=react_native&version=9) link.
+- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dcv&utm_source=github&package=mobile) link.
 
 ## Contact
 
