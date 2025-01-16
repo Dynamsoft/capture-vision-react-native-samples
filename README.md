@@ -8,15 +8,15 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 
 - Dynamsoft Barcode Reader (DBR), Dynamsoft Document Normalizer (DDN), and Dynamsoft Label Recognizer (DLR) play crucial roles in reading barcodes, structures, and texts from images.
 - Dynamsoft Code Parser (DCP) is utilized to extract meaningful fields from text/bytes results, ensuring optimal data parsing capabilities.
-- To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provide a suite of robust viewing and editing functions.
+- To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provides a suite of robust viewing and editing functions.
 
 ## Samples
 
-| Sample Name                                                                  | Description |
-|------------------------------------------------------------------------------| ----------- |
-| [ScanSingleBarcode](./ScanSingleBarcode)           | This sample illustrates the simplest way to recognize single barcode from video streaming. |
-| [DetectAndDeskewDocument](./DetectAndDeskewDocument) | This sample illustrates how to detect and deskew an document from video streaming. |
-| [ScanMRZ](./ScanMRZ)                                         | This sample illustrates how to scan passport and ID cards from video streaming. |
+| Sample Name                                            | Description |
+|--------------------------------------------------------| ----------- |
+| [ScanSingleBarcode](./ScanSingleBarcode)               | This sample illustrates the simplest way to recognize single barcode from video streaming. |
+| [DetectAndDeskewDocument](./DetectAndDeskewDocument)   | This sample illustrates how to detect and deskew a document from video streaming. |
+| [ScanMRZ](./ScanMRZ)                                   | This sample illustrates how to scan passport and ID cards from video streaming. |
 
 ### How to build and run a sample
 
@@ -54,7 +54,7 @@ npm install
 
 3. Prepare iOS
 
-You must install the necessary native frameworks from cocoapods to run the application. In order to do this, the `pod install` command needs to be run as such:
+You must install the necessary native frameworks from CocoaPods to run the application. In order to do this, the `pod install` command needs to be run as such:
 
 ```bash
 cd ios
@@ -89,7 +89,7 @@ npm run ios
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your device.
+If everything is set up _correctly_, you should see your new app running on your device.
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
 > Note:
@@ -102,7 +102,7 @@ This is one way to run your app — you can also run it directly from within And
 
 [How to enable new architecture in Android](https://reactnative.dev/architecture/landing-page#android)
 
-[How to enable new architecture in IOS](https://reactnative.dev/architecture/landing-page#ios)
+[How to enable new architecture in iOS](https://reactnative.dev/architecture/landing-page#ios)
 > Note:
 > 
 > If you enable new architecture and want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
