@@ -262,10 +262,10 @@ import {CameraEnhancer} from "dynamsoft-capture-vision-react-native";
 
 let camera = CameraEnhancer.getInstance()
 let scanRegion = {
-  top: 25,
-  bottom: 75,
-  left: 25,
-  right: 75,
+  top: 0.25,
+  bottom: 0.75,
+  left: 0.25,
+  right: 0.75,
   measuredInPercentage: true,
 }
 camera.setScanRegion(scanRegion);
