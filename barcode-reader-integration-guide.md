@@ -229,7 +229,7 @@ let settings: SimplifiedCaptureVisionSettings = {
     // Set the expected barcode count to 0 when you are not sure how many barcodes you are scanning.
     // Set the expected barcode count to 1 can maximize the barcode decoding speed.
     expectedBarcodesCount: 0,
-    barcodeFormats: EnumBarcodeFormat.BF_ONED | EnumBarcodeFormat.BF_QR_CODE | EnumBarcodeFormat.BF_PDF417 | EnumBarcodeFormat.BF_DATAMATRIX,
+    barcodeFormatIds: EnumBarcodeFormat.BF_ONED | EnumBarcodeFormat.BF_QR_CODE | EnumBarcodeFormat.BF_PDF417 | EnumBarcodeFormat.BF_DATAMATRIX,
   }
 };
 //Only timeout, expectedBarcodesCount and barcodeFormatIds will be updated and undefined properties will retain their original values.
