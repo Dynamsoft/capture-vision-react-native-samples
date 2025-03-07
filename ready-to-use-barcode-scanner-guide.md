@@ -6,7 +6,7 @@ We provide BarcodeScanner APIs, which is a ready-to-use component that allows de
 With the built-in component, it streamlines the integration of barcode scanning functionality into any application.
 
 In the BarcodeScanner APIs, we provide some customization features based on easy integration to meet your needs. 
-However, if you want to achieve a higher level of customization, we recommend that you use our Foundation APIs and see this [Foundation Barcode Reader Guide](./foundation-barcode-reader-guide).
+However, if you want to achieve a higher level of customization, we recommend that you use our Foundation APIs and see this [Foundation Barcode Reader Guide](./foundation-barcode-reader-guide.md).
 
 ## Supported Barcode Symbologies
 

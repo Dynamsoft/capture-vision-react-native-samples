@@ -117,8 +117,8 @@ This is one way to run your app — you can also run it directly from within And
 
 ## Integration Guide For Your Project
 
-- [Foundation Barcode Reader Integration Guide](./foundation-barcode-reader-guide.md)
 - [Ready-to-use Barcode Scanner Integration Guide](./ready-to-use-barcode-scanner-guide.md)
+- [Foundational Barcode Reader Integration Guide](./foundation-barcode-reader-guide.md)
 - [Document Scanner Integration Guide](./document-scanner-guide.md)
 - [MRZ Scanner Integration Guide](./mrz-scanner-guide.md)
 - [Divers' License Scanner Integration Guide](./drivers-license-scanner-guide.md)

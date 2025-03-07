@@ -8,7 +8,7 @@ export const NormalizedImage = () => {
 
   useEffect(() => {
     return () => {
-      if(global.normalizedImage) {
+      if (global.normalizedImage && typeof global.normalizedImage.release === 'function') {
         global.normalizedImage.release();
       }
     };

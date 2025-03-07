@@ -14,7 +14,7 @@ export function Editor({navigation}: StackNavigation) {
     );
 
     return () => {
-      if(global.originalImage) {
+      if (global.originalImage && typeof global.originalImage.release === 'function') {
         global.originalImage.release();
       }
     };
