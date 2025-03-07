@@ -76,7 +76,9 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
           you should call getOriginalImage(result.originalImageHashId) within the callback.*/
           global.originalImage = cvr.getIntermediateResultManager().getOriginalImage(result.originalImageHashId);
           global.quadsResult = result;
-          navigation.navigate('Editor');
+          if (global.originalImage.width > 0 && global.originalImage.height > 0) {
+            navigation.navigate('Editor');
+          }
         }
       },
     });
