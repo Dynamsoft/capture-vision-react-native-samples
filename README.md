@@ -98,11 +98,11 @@ yarn ios
 If everything is set up _correctly_, you should see your new app running on your device.
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-> Note:
+> [!NOTE]
 > If you want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
 > Therefore, we recommend that you move the project to a directory with a shorter path.
 
-> Note:
+> [!NOTE]
 >
 >- The application needs to run on a physical device rather than a simulator as it requires the use of the camera. If you try running it on a simulator, you will most likely run into a number of errors/failures.
 >- On iOS, in order to run the React Native app on a physical device you will need to install the [`ios-deploy`](https://www.npmjs.com/package/ios-deploy) library. Afterwards, you can run the react native app from the terminal as such `npx react-native run-ios --device` assuming it's the only device connected to the Mac.

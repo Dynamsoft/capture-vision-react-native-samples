@@ -1,51 +1,18 @@
-# Barcode Reader Integration Guide
+# BarcodeScanner Integration Guide
 
-In this guide, we will explore the Barcode Reader features of the [Dynamsoft Capture Vision](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) SDK.
+In this guide, we will explore the `BarcodeScanner` features of the [Dynamsoft Capture Vision](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) SDK.
 
-We provide BarcodeScanner APIs, which is a ready-to-use component that allows developers to quickly set up a barcode scanning app.
+We provide `BarcodeScanner` APIs, which is a ready-to-use component that allows developers to quickly set up a barcode scanning app.
 With the built-in component, it streamlines the integration of barcode scanning functionality into any application.
 
-In the BarcodeScanner APIs, we provide some customization features based on easy integration to meet your needs. 
+In the `BarcodeScanner` APIs, we provide some customization features based on easy integration to meet your needs. 
 However, if you want to achieve a higher level of customization, we recommend that you use our Foundation APIs and see this [Foundation Barcode Reader Guide](./foundation-barcode-reader-guide.md).
 
 ## Supported Barcode Symbologies
 
-- Linear Barcodes (1D)
-  - Code 39 (including Code 39 Extended)
-  - Code 93
-  - Code 128
-  - Codabar
-  - Interleaved 2 of 5
-  - EAN-8
-  - EAN-13
-  - UPC-A
-  - UPC-E
-  - Industrial 2 of 5
-
-- 2D Barcodes
-  - QR Code (including Micro QR Code and Model 1)
-  - Data Matrix
-  - PDF417 (including Micro PDF417)
-  - Aztec Code
-  - MaxiCode (mode 2-5)
-  - DotCode
-
-- Patch Code
-
-- GS1 Composite Code
-
-- GS1 DataBar
-  - Omnidirectional,
-  - Truncated, Stacked, 
-  - Stacked Omnidirectional, Limited,
-  - Expanded, Expanded Stacked
-
-- Postal Codes
-  - USPS Intelligent Mail
-  - Postnet
-  - Planet
-  - Australian Post
-  - UK Royal Mail
+| Linear Barcodes (1D) | 2D Barcodes | Others |
+| :------------------- | :---------- | :----- |
+| Code 39 (including Code 39 Extended)<br>Code 93<br>Code 128<br>Codabar<br>Interleaved 2 of 5<br>EAN-8<br>EAN-13<br>UPC-A<br>UPC-E<br>Industrial 2 of 5<br><br><br><br><br><br><br><br> | QR Code (including Micro QR Code and Model 1)<br>Data Matrix<br>PDF417 (including Micro PDF417)<br>Aztec Code<br>MaxiCode (mode 2-5)<br>DotCode<br><br><br><br><br><br><br><br><br><br><br><br> | Patch Code<br><br>GS1 Composite Code<br><br>GS1 DataBar<br><li>Omnidirectional</li><li>Truncated, Stacked</li><li>Stacked Omnidirectional, Limited</li><li>Expanded, Expanded Stacked</li><br>Postal Codes<br><li>USPS Intelligent Mail</li><li>Postnet</li><li>Planet</li><li>Australian Post</li><li>UK Royal Mail</li> |
 
 ## System Requirements
 
@@ -115,9 +82,9 @@ For iOS, you need to include the camera permission in `ios/your-project-name/Inf
     <string></string>
 ```
 
-## Build the Barcode Reader Component
+## Build the BarcodeScanner Component
 
-Now that the package is added, it's time to start building the barcode reader component using the SDK.
+Now that the package is added, it's time to start building the `BarcodeScanner` component using the SDK.
 
 ### Import
 To use the BarcodeScanner API, please import `BarcodeScanner` class 
@@ -149,8 +116,8 @@ function App(): React.JSX.Element {
   );
 }
 ```
->Note:
->
+
+> [!NOTE]
 >- The license string here grants a time-limited free trial which requires network connection to work.
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=guide&package=mobile) link.
 
@@ -173,7 +140,7 @@ import {BarcodeScanConfig, EnumBarcodeFormat} from 'dynamsoft-capture-vision-rea
 
 const config = {
   /**
-   * The license key required to initialize the barcode reader.
+   * The license key required to initialize the BarcodeScanner.
    */
   license: "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9", //The license string here grants a time-limited free trial which requires network connection to work.
   
@@ -229,7 +196,7 @@ const config = {
   isScanLaserVisible: true,
 
   /**
-   * Sets the scanning mode for the barcode reader.
+   * Sets the scanning mode for the BarcodeScanner.
    * The mode is defined by the EnumScanningMode and affects the scanning behavior. Default is SM_SINGLE.
    */
   scanningMode: EnumScanningMode.SM_SINGLE,
@@ -249,7 +216,7 @@ const config = {
   maxConsecutiveStableFramesToExit: 10,
 
   /**
-   * Specifies the template configuration for the barcode scanner.
+   * Specifies the template configuration for the BarcodeScanner.
    * This can be either a file path or a JSON string that defines various scanning parameters.
    * Default is undefined, which means the default template will be used.
    */
@@ -297,7 +264,7 @@ yarn ios
 If everything is set up _correctly_, you should see your new app running on your device.
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-> Note:
+> [!NOTE]
 > If you want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
 > Therefore, we recommend that you move the project to a directory with a shorter path.
 

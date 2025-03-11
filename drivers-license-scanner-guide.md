@@ -98,7 +98,7 @@ LicenseManager.initLicense("your-license-key")
 .catch(error => console.error("Init License failed.", error));
 ```
 
->Note:
+> [!NOTE]
 >
 >- The license string here grants a time-limited free trial which requires network connection to work.
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=guide&package=mobile) link.
@@ -197,7 +197,7 @@ export function Scanner() {
 }
 ```
 
-> Note:
+> [!NOTE]
 >
 > - The `parsedItemToDriverLicenseData` function is a helper function to convert `ParsedResultItem` into an easier-to-read structure(`DriverLicenseData`). You can get the source code from [DriverLicenseScanResult.tsx](ReadDriverLicense/src/DriverLicenseScanResult.tsx).
 

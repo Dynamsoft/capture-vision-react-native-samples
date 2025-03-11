@@ -13,7 +13,7 @@ The Machine Readable Travel Documents (MRTD) standard specified by the Internati
 
 Currently, the SDK supports three types of MRTD:
 
-> Note: If you need support for other types of MRTDs, our SDK can be easily customized. Please contact support@dynamsoft.com.
+> [!NOTE] If you need support for other types of MRTDs, our SDK can be easily customized. Please contact support@dynamsoft.com.
 
 ### ID (TD1 Size)
 
@@ -144,7 +144,8 @@ function App(): React.JSX.Element {
   );
 }
 ```
->Note:
+
+> [!NOTE]
 >
 >- The license string here grants a time-limited free trial which requires network connection to work.
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=mrz&utm_source=github&package=mobile) link.
@@ -276,7 +277,7 @@ yarn ios
 If everything is set up _correctly_, you should see your new app running on your device.
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-> Note:
+> [!NOTE]
 > If you want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
 > Therefore, we recommend that you move the project to a directory with a shorter path.
 

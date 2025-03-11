@@ -1,45 +1,12 @@
-# Foundation Barcode Reader Integration Guide
+# Foundational Barcode Reader Integration Guide
 
 In this guide, we will explore the Barcode Reader features of the [Dynamsoft Capture Vision](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) SDK.
 
 ## Supported Barcode Symbologies
 
-- Linear Barcodes (1D)
-  - Code 39 (including Code 39 Extended)
-  - Code 93
-  - Code 128
-  - Codabar
-  - Interleaved 2 of 5
-  - EAN-8
-  - EAN-13
-  - UPC-A
-  - UPC-E
-  - Industrial 2 of 5
-
-- 2D Barcodes
-  - QR Code (including Micro QR Code and Model 1)
-  - Data Matrix
-  - PDF417 (including Micro PDF417)
-  - Aztec Code
-  - MaxiCode (mode 2-5)
-  - DotCode
-
-- Patch Code
-
-- GS1 Composite Code
-
-- GS1 DataBar
-  - Omnidirectional,
-  - Truncated, Stacked,
-  - Stacked Omnidirectional, Limited,
-  - Expanded, Expanded Stacked
-
-- Postal Codes
-  - USPS Intelligent Mail
-  - Postnet
-  - Planet
-  - Australian Post
-  - UK Royal Mail
+| Linear Barcodes (1D) | 2D Barcodes | Others |
+| :------------------- | :---------- | :----- |
+| Code 39 (including Code 39 Extended)<br>Code 93<br>Code 128<br>Codabar<br>Interleaved 2 of 5<br>EAN-8<br>EAN-13<br>UPC-A<br>UPC-E<br>Industrial 2 of 5<br><br><br><br><br><br><br><br> | QR Code (including Micro QR Code and Model 1)<br>Data Matrix<br>PDF417 (including Micro PDF417)<br>Aztec Code<br>MaxiCode (mode 2-5)<br>DotCode<br><br><br><br><br><br><br><br><br><br><br><br> | Patch Code<br><br>GS1 Composite Code<br><br>GS1 DataBar<br><li>Omnidirectional</li><li>Truncated, Stacked</li><li>Stacked Omnidirectional, Limited</li><li>Expanded, Expanded Stacked</li><br>Postal Codes<br><li>USPS Intelligent Mail</li><li>Postnet</li><li>Planet</li><li>Australian Post</li><li>UK Royal Mail</li> |
 
 ## System Requirements
 
@@ -125,7 +92,7 @@ LicenseManager.initLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9")
 .catch(error => console.error("Init License failed.", error));
 ```
 
->Note:
+> [!NOTE]
 >
 >- The license string here grants a time-limited free trial which requires network connection to work.
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=guide&package=mobile) link.
@@ -249,7 +216,7 @@ router.initSettings(JSON.stringify(require('./settings.json')));
 router.startCapturing();
 ```
 
-> Note:
+> [!NOTE]
 >
 > - A template file is a JSON file that includes a series of algorithm parameter settings. It is always used to customize the performance for different usage scenarios. [Contact us](https://www.dynamsoft.com/company/contact/) to get a customized template for your barcode scanner.
 
@@ -303,7 +270,7 @@ yarn ios
 If everything is set up _correctly_, you should see your new app running on your device.
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-> Note:
+> [!NOTE]
 > If you want to run Android via `Windows`, You may encounter some build errors due to the `Windows Maximum Path Length Limitation`.
 > Therefore, we recommend that you move the project to a directory with a shorter path.
 
