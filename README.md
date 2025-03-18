@@ -10,6 +10,9 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 - Dynamsoft Code Parser (DCP) is utilized to extract meaningful fields from text/bytes results, ensuring optimal data parsing capabilities.
 - To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provides a suite of robust viewing and editing functions.
 
+## API References
+The API References can be found here: [API References](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences)
+
 ## Samples
 
 | Sample Name                                          | Description                                                                          |
