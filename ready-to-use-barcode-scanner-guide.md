@@ -122,7 +122,7 @@ function App(): React.JSX.Element {
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=dbr&utm_source=guide&package=mobile) link.
 
 ### Barcode Scan Result
-Also see it in the [BarcodeScanResult](./APIReferences/interfaces/rtu.BarcodeScanResult.html) section of API References.
+Also see it in the [BarcodeScanResult](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/interfaces/rtu.BarcodeScanResult.html) section of API References.
 
 `BarcodeScanResult` structure:
 - resultStatus: The status of the barcode result, of type `EnumResultStatus`.
@@ -134,7 +134,7 @@ Also see it in the [BarcodeScanResult](./APIReferences/interfaces/rtu.BarcodeSca
 - barcodes: An array of `BarcodeResultItem`.
 
 ### (Optional) Change the BarcodeScanConfig to meet your needs
-Also see it in the [BarcodeScanConfig](./APIReferences/interfaces/rtu.BarcodeScanConfig.html) section of API References.
+Also see it in the [BarcodeScanConfig](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/interfaces/rtu.BarcodeScanConfig.html) section of API References.
 ```typescript jsx
 import {BarcodeScanConfig, EnumBarcodeFormat} from 'dynamsoft-capture-vision-react-native';
 

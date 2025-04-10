@@ -151,8 +151,8 @@ function App(): React.JSX.Element {
 >- You can request a 30-day trial license via the [Request a Trial License](https://www.dynamsoft.com/customer/license/trialLicense?product=mrz&utm_source=github&package=mobile) link.
 
 ### MRZ Scan Result And MRZ Data
-Also see it in the [MRZScanResult](./APIReferences/interfaces/rtu.MRZScanResult.html) 
-and [MRZData](./APIReferences/interfaces/rtu.MRZData.html)  section of API References.
+Also see it in the [MRZScanResult](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/interfaces/rtu.MRZScanResult.html) 
+and [MRZData](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/interfaces/rtu.MRZData.html)  section of API References.
 
 `MRZScanResult` structure:
 - resultStatus: The status of the MRZ scan result, of type `EnumResultStatus`.
@@ -178,7 +178,7 @@ and [MRZData](./APIReferences/interfaces/rtu.MRZData.html)  section of API Refer
 
 
 ### (Optional)Change the MRZScanConfig to meet your needs
-Also see it in the [MRZScanConfig](./APIReferences/interfaces/rtu.MRZScanConfig.html) section of API References.
+Also see it in the [MRZScanConfig](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/interfaces/rtu.MRZScanConfig.html) section of API References.
 ```typescript jsx
 import {MRZScanConfig, EnumDocumentType} from 'dynamsoft-capture-vision-react-native';
 
