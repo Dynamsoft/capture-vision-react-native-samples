@@ -10,7 +10,8 @@ The Machine Readable Travel Documents (MRTD) standard specified by the Internati
 
 Currently, the SDK supports three types of MRTD:
 
-> [!NOTE] If you need support for other types of MRTDs, our SDK can be easily customized. Please contact support@dynamsoft.com.
+> [!NOTE]
+> If you need support for other types of MRTDs, our SDK can be easily customized. Please contact support@dynamsoft.com.
 
 ### ID (TD1 Size)
 

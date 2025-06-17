@@ -2,14 +2,6 @@
 
 This repository contains multiple samples that demonstrate how to use the Dynamsoft Capture Vision React-Native Edition.
 
-## What is Dynamsoft Capture Vision SDK
-
-[Dynamsoft Capture Vision (DCV)](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) is an aggregating SDK of a series of specific functional products, which cover image capturing, content understanding, result parsing, and interactive workflow.
-
-- Dynamsoft Barcode Reader (DBR), Dynamsoft Document Normalizer (DDN), and Dynamsoft Label Recognizer (DLR) play crucial roles in reading barcodes, structures, and texts from images.
-- Dynamsoft Code Parser (DCP) is utilized to extract meaningful fields from text/bytes results, ensuring optimal data parsing capabilities.
-- To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provides a suite of robust viewing and editing functions.
-
 ## Integration Guide For Your Project
 
 - [MRZ Scanner Integration Guide](./guide-scan-mrz.md)
