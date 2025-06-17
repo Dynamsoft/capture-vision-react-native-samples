@@ -1,6 +1,6 @@
 # Dynamsoft Capture Vision samples for React-Native edition
 
-This repository contains multiple samples that demonstrate how to use the [Dynamsoft Capture Vision](https://www.dynamsoft.com/capture-vision/docs/core/introduction/) React-Native Edition.
+This repository contains multiple samples that demonstrate how to use the Dynamsoft Capture Vision React-Native Edition.
 
 ## What is Dynamsoft Capture Vision SDK
 
@@ -10,30 +10,31 @@ This repository contains multiple samples that demonstrate how to use the [Dynam
 - Dynamsoft Code Parser (DCP) is utilized to extract meaningful fields from text/bytes results, ensuring optimal data parsing capabilities.
 - To view and edit the output results, Dynamsoft Camera Enhancer (DCE) provides a suite of robust viewing and editing functions.
 
+## Integration Guide For Your Project
+
+- [MRZ Scanner Integration Guide](./guide-scan-mrz.md)
+- [Document Scanner Integration Guide](./guide-scan-document.md)
+- [VIN Scanner Integration Guide](./guide-scan-vin.md)
+
 ## API References
-The API References can be found here: [API References](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences)
+
+- [Ready-to-use MRZScanner APIs](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/dynamsoft-mrz-scanner-bundle-react-native)
+- [Foundational APIs](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/dynamsoft-capture-vision-react-native)
 
 ## Samples
 
-| Sample Name                                          | Description                                                                          |
-|------------------------------------------------------|--------------------------------------------------------------------------------------|
-| [ScanBarcodes](./ScanBarcodes)| This sample illustrates the simplest way to recognize barcodes from video streaming. |
-| [DetectAndDeskewDocument](./DetectAndDeskewDocument) | This sample illustrates how to detect and deskew a document from video streaming.    |
-| [ScanMRZ](./ScanMRZ) | This sample illustrates how to scan passport and ID cards from video streaming.      |
-| [ReadDriverLicense](./ReadDriverLicense)| This sample illustrates how to scan drivers' license from video streaming.           |
+| Sample Name                                          | Description                                                                                                            |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| [ScanMRZ](ScanMRZ) | This sample illustrates how to scan passport and ID cards from video streaming.                                        |
+| [ScanDocument](ScanDocument) | This sample illustrates how to detect and deskew document pages from the video stream.                                 |
+| [ScanVIN](ScanVIN) | This sample illustrates how to Scan the VIN code from a barcode or a text line and extract the vehicle information  from video streaming. |
 
 ### How to build and run a sample
 
 1. Enter a sample folder that you want to try
 
 ```bash
-cd ScanBarcodes
-```
-
-or
-
-```bash
-cd DetectAndDeskewDocument
+cd ScanDocument
 ```
 
 or
@@ -41,10 +42,11 @@ or
 ```bash
 cd ScanMRZ
 ```
+
 or
 
 ```bash
-cd ReadDriverLicense
+cd ScanVIN
 ```
 
 2. Install node modules
@@ -111,20 +113,11 @@ This is one way to run your app — you can also run it directly from within And
 >- On iOS, in order to run the React Native app on a physical device you will need to install the [`ios-deploy`](https://www.npmjs.com/package/ios-deploy) library. Afterwards, you can run the react native app from the terminal as such `npx react-native run-ios --device` assuming it's the only device connected to the Mac.
 >- Alternatively on iOS, you can simply open the xcworkspace of the project found in the `ios` folder using Xcode and run the sample on your connected iOS device from there. The advantage that this offers is that it is easier to deal with the developer signatures for deployment in there.
 
-
 ### How to use the new architecture of React Native (Optional)
 
 [How to enable new architecture in Android](https://reactnative.dev/architecture/landing-page#android)
 
 [How to enable new architecture in iOS](https://reactnative.dev/architecture/landing-page#ios)
-
-## Integration Guide For Your Project
-
-- [Ready-to-use Barcode Scanner Integration Guide](./ready-to-use-barcode-scanner-guide.md)
-- [Foundational Barcode Reader Integration Guide](./foundation-barcode-reader-guide.md)
-- [Document Scanner Integration Guide](./document-scanner-guide.md)
-- [MRZ Scanner Integration Guide](./mrz-scanner-guide.md)
-- [Divers' License Scanner Integration Guide](./drivers-license-scanner-guide.md)
 
 ## License
 

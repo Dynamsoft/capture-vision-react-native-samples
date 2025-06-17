@@ -1,13 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useState} from 'react';
 import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {MRZScanner, EnumResultStatus, MRZScanConfig} from 'dynamsoft-capture-vision-react-native';
+import {MRZScanner, EnumResultStatus, MRZScanConfig} from 'dynamsoft-mrz-scanner-bundle-react-native';
 
 function App(): React.JSX.Element {
   const [displayText, setDisplayText] = useState<string>('');
