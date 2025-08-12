@@ -213,6 +213,13 @@ const config = {
   isBeepEnabled: false,
 
   /**
+   * Determines whether a vibration is triggered upon a successful MRZ scan.
+   * When enabled (true), the scanner will produce a brief vibration to provide visual feedback.
+   * Default is false.
+   */
+  isVibrateEnabled: false,
+
+  /**
    * Determines whether the close button is visible on the scanner UI.
    * This button allows users to exit the scanning interface. Default is true.
    */
