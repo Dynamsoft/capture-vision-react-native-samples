@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "dynamsoft-capture-vision-react-native": "^3.0.5100",
+    "dynamsoft-capture-vision-react-native": "^3.0.5200",
     "react": "19.0.0",
     "react-native": "0.79.0"
   },
