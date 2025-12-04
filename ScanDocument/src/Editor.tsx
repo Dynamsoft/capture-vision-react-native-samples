@@ -4,7 +4,7 @@ import {
   EnumDrawingLayerId,
   ImageData,
   ImageEditorView,
-  ImageManager,
+  ImageProcessor,
 } from 'dynamsoft-capture-vision-react-native';
 import {StackNavigation} from './App.tsx';
 
@@ -13,22 +13,14 @@ export function Editor({navigation}: StackNavigation) {
 
   useEffect(() => {
     editorView.current!!.setOriginalImage(global.originalImage);
-    editorView.current!!.setQuads(
-      global.processedDocumentResult.detectedQuadResultItems?.map(item => item.location),
-      EnumDrawingLayerId.DDN_LAYER_ID,
-    );
-
-    return () => {
-      if (global.originalImage && typeof global.originalImage.release === 'function') {
-        global.originalImage.release();
-      }
-    };
+    editorView.current!!.setQuads([global.sourceDeskewQuad], EnumDrawingLayerId.DDN_LAYER_ID);
   }, [editorView]);
 
-  const getSelectedQuadAndNormalize = async (): Promise<ImageData | null | undefined> => {
+  const getSelectedQuadAndDeskew = async (): Promise<ImageData | null | undefined> => {
     const quad = await editorView.current!!.getSelectedQuad().catch(e => console.log(e));
     if (quad) {
-      return new ImageManager().cropImage(global.originalImage, quad);
+      global.sourceDeskewQuad = quad;
+      return new ImageProcessor().cropAndDeskewImage(global.originalImage, quad);
     } else {
       console.log('Please select an item');
       return null;
@@ -39,12 +31,15 @@ export function Editor({navigation}: StackNavigation) {
     <ImageEditorView style={styles.fullScreen} ref={editorView}>
       <View style={styles.bottomView}>
         <Button
-          title={'Normalize'}
+          title={'Confirm'}
           onPress={async () => {
-            const normalizedImage = await getSelectedQuadAndNormalize();
-            if (normalizedImage) {
-              global.normalizedImage = normalizedImage;
-              navigation.navigate('NormalizedImage');
+            const deskewedImage = await getSelectedQuadAndDeskew();
+            if (deskewedImage) {
+              if(global.deskewedImage) {
+                global.deskewedImage.release();
+              }
+              global.deskewedImage = deskewedImage;
+              navigation.pop(1);
             }
           }}
         />

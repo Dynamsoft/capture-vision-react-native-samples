@@ -62,7 +62,7 @@ export function ScannerView({onComplete}: ScannerViewProps) {
           } else if(result.items.length > 1) {
             for (let item of result.items) {
               //Information extracted from a barcode should have a higher priority
-              if(item.targetROIDefName === 'roi-vin-barcode') {
+              if(item.targetROIDefName?.includes('vin-barcode')) {
                 parsedItem = item;
               }
             }
@@ -95,6 +95,7 @@ export function ScannerView({onComplete}: ScannerViewProps) {
       cvr.removeFilter(filter);
       cvr.stopCapturing();
       camera.close();
+      camera.setCameraView(null);
     };
   }, [camera, cameraView, cvr, onComplete]);
 

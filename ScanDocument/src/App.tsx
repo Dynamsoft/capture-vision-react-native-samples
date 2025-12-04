@@ -9,15 +9,16 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {createNativeStackNavigator, NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {ProcessedDocumentResult, ImageData, LicenseManager} from 'dynamsoft-capture-vision-react-native';
+import {Quadrilateral, ProcessedDocumentResult, ImageData, LicenseManager} from 'dynamsoft-capture-vision-react-native';
 import {Scanner} from './Scanner.tsx';
 import {Editor} from './Editor.tsx';
 import {NormalizedImage} from './NormalizedImage.tsx';
 
 declare global {
   var originalImage: ImageData; //Used in Scanner.tsx and Editor.tsx
-  var processedDocumentResult: ProcessedDocumentResult; //Used in Scanner.tsx and Editor.tsx
-  var normalizedImage: ImageData;  //Used in Editor.tsx and NormalizedImage.tsx
+  var deskewedImage: ImageData;  //Used in Editor.tsx and NormalizedImage.tsx
+  var showingImage: ImageData;  //Used in Editor.tsx and NormalizedImage.tsx
+  var sourceDeskewQuad: Quadrilateral;  //Used in Editor.tsx
 }
 
 export type ScreenNames = ['Home', 'Scanner', 'Editor', 'NormalizedImage'];

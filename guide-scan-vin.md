@@ -182,7 +182,7 @@ export function Scanner() {
           } else if(result.items.length > 1) {
             for (let item of result.items) {
               //Information extracted from a barcode should have a higher priority
-              if(item.targetROIDefName === 'roi-vin-barcode') {
+              if(item.targetROIDefName?.includes('vin-barcode')) {
                 parsedItem = item;
               }
             }
