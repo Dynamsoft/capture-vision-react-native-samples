@@ -24,6 +24,9 @@ export function ScannerView({onComplete}: ScannerViewProps) {
 
   // License and permission setup
   useEffect(() => {
+    // Initialize the license.
+    // The license string here is a trial license. Note that network connection is required for this license to work.
+    // You can request an extension via the following link: https://www.dynamsoft.com/customer/license/trialLicense?product=cvs&utm_source=samples&package=react-native
     LicenseManager.initLicense('DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9').catch(() => {
       // Ignore error here; it will be handled by startCapturing
     });

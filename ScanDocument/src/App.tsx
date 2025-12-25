@@ -41,6 +41,9 @@ function App(): React.JSX.Element {
 
 function HomeScreen({navigation}: StackNavigation) {
   const [error, setError] = useState<string | null>(null);
+  // Initialize the license.
+  // The license string here is a trial license. Note that network connection is required for this license to work.
+  // You can request an extension via the following link: https://www.dynamsoft.com/customer/license/trialLicense?product=cvs&utm_source=samples&package=react-native
   const initLicense = () =>
     LicenseManager.initLicense('DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9').catch(e => {
       console.log('Init license failed. Error: ' + e.message);

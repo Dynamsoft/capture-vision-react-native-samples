@@ -122,6 +122,9 @@ import { MRZScanner, MRZScanResult, MRZScanConfig } from 'dynamsoft-mrz-scanner-
 
 async function scanMRZ() {
   const config = {
+    // Initialize the license.
+    // The license string here is a trial license. Note that network connection is required for this license to work.
+    // You can request an extension via the following link: https://www.dynamsoft.com/customer/license/trialLicense?product=mrz&utm_source=samples&package=react-native
     license: 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
   } as MRZScanConfig;
   const result = await MRZScanner.launch(config);
@@ -188,9 +191,11 @@ import {MRZScanConfig, EnumDocumentType} from 'dynamsoft-mrz-scanner-bundle-reac
 
 const config = {
   /**
-   * The license key required to initialize the MRZ Scanner.
+   * Initialize the license.
+   * The license string here is a trial license. Note that network connection is required for this license to work.
+   * You can request an extension via the following link: https://www.dynamsoft.com/customer/license/trialLicense?product=mrz&utm_source=samples&package=react-native
    */
-  license: "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9", //The license string here grants a time-limited free trial which requires network connection to work.
+  license: "DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9",
   
   /**
    * Determines whether the torch (flashlight) button is visible in the scanning UI.

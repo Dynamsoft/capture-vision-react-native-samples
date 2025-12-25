@@ -7,6 +7,9 @@ function App(): React.JSX.Element {
   const [isError, setIsError] = useState<boolean>(false);
   const ScanMRZ = async () => {
     let mrzScanConfig = {
+      // Initialize the license.
+      // The license string here is a trial license. Note that network connection is required for this license to work.
+      // You can request an extension via the following link: https://www.dynamsoft.com/customer/license/trialLicense?product=mrz&utm_source=samples&package=react-native
       license: 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9',
     } as MRZScanConfig;
     let mrzResult = await MRZScanner.launch(mrzScanConfig);
