@@ -68,6 +68,8 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
       cvr.removeResultReceiver(receiver);
       cvr.stopCapturing().catch(/*no-op*/);
       camera.setCameraView(null);
+      cvr.dispose();
+      camera.dispose();
     };
   }, [cvr, camera, cameraView, ifBtnClick, navigation]);
 
