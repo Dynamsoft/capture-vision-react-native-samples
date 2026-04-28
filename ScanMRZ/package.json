@@ -10,10 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "dynamsoft-capture-vision-react-native": "3.2.5002",
-    "dynamsoft-mrz-scanner-bundle-react-native": "3.2.5002",
+    "dynamsoft-capture-vision-react-native": "3.4.1200",
+    "dynamsoft-mrz-scanner-bundle-react-native": "3.4.1300",
+    "@react-native-camera-roll/camera-roll": "^7.10.2",
     "react": "19.0.0",
-    "react-native": "0.79.0"
+    "react-native": "0.79.0",
+    "react-native-fs": "^2.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
