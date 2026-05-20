@@ -4,22 +4,13 @@ This repository contains multiple samples that demonstrate how to use the Dynams
 
 ## Integration Guide For Your Project
 
-- [MRZ Scanner Integration Guide](./guide-scan-mrz.md)
 - [Document Scanner Integration Guide](./guide-scan-document.md)
-- [VIN Scanner Integration Guide](./guide-scan-vin.md)
-
-## API References
-
-- [Ready-to-use MRZScanner APIs](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/dynamsoft-mrz-scanner-bundle-react-native)
-- [Foundational APIs](https://dynamsoft.github.io/capture-vision-react-native-samples/APIReferences/dynamsoft-capture-vision-react-native)
 
 ## Samples
 
 | Sample Name                                          | Description                                                                                                            |
 |------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| [ScanMRZ](ScanMRZ) | This sample illustrates how to scan passport and ID cards from video streaming.                                        |
 | [ScanDocument](ScanDocument) | This sample illustrates how to detect and deskew document pages from the video stream.                                 |
-| [ScanVIN](ScanVIN) | This sample illustrates how to Scan the VIN code from a barcode or a text line and extract the vehicle information  from video streaming. |
 
 ### How to build and run a sample
 
@@ -27,18 +18,6 @@ This repository contains multiple samples that demonstrate how to use the Dynams
 
 ```bash
 cd ScanDocument
-```
-
-or
-
-```bash
-cd ScanMRZ
-```
-
-or
-
-```bash
-cd ScanVIN
 ```
 
 2. Install node modules
