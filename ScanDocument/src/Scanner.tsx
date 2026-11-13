@@ -8,9 +8,10 @@ import {
   EnumCapturedResultItemType,
   EnumCrossVerificationStatus,
   EnumPresetTemplate,
+  ImageData,
   MultiFrameResultCrossFilter,
 } from 'dynamsoft-capture-vision-react-native';
-import {StackNavigation} from './App.tsx';
+import {StackNavigation} from './App';
 
 export function Scanner({navigation}: StackNavigation): React.JSX.Element {
   const ifBtnClick = useRef(false);
@@ -24,7 +25,6 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
       camera.open();
 
       return () => {
-
         //Close camera when the Scanner screen is unfocused.
         camera.close();
       };
@@ -37,7 +37,10 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
     camera.setCameraView(cameraView.current!!);
 
     let filter = new MultiFrameResultCrossFilter();
-    filter.enableResultCrossVerification(EnumCapturedResultItemType.CRIT_DESKEWED_IMAGE, true);
+    filter.enableResultCrossVerification(
+      EnumCapturedResultItemType.CRIT_DESKEWED_IMAGE,
+      true,
+    );
     cvr.addFilter(filter);
 
     let receiver = cvr.addResultReceiver({
@@ -47,22 +50,33 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
           result.deskewedImageResultItems.length > 0 &&
           /*This means you can manually click the button to navigate to the next page,
           or navigate to the next page when the item's crossVerificationStatus is PASSED.*/
-          (ifBtnClick.current || result.deskewedImageResultItems[0].crossVerificationStatus === EnumCrossVerificationStatus.CVS_PASSED)
+          (ifBtnClick.current ||
+            result.deskewedImageResultItems[0].crossVerificationStatus ===
+              EnumCrossVerificationStatus.CVS_PASSED)
         ) {
           ifBtnClick.current = false;
           /*Since the originalImage corresponding to originalImageHashId may be released after the callback ends,
           if you want to get the originalImage,
           you should call getOriginalImage(result.originalImageHashId) within the callback.*/
-          global.originalImage = cvr.getIntermediateResultManager().getOriginalImage(result.originalImageHashId);
+          global.originalImage = cvr
+            .getIntermediateResultManager()
+            .getOriginalImage(result.originalImageHashId) as ImageData;
           global.deskewedImage = result.deskewedImageResultItems[0].imageData;
-          global.sourceDeskewQuad = result.deskewedImageResultItems[0].sourceDeskewQuad;
-          if (global.originalImage.width > 0 && global.originalImage.height > 0) {
+          global.sourceDeskewQuad =
+            result.deskewedImageResultItems[0].sourceDeskewQuad;
+          if (
+            global.originalImage &&
+            global.originalImage.width > 0 &&
+            global.originalImage.height > 0
+          ) {
             navigation.navigate('NormalizedImage');
           }
         }
       },
     });
-    cvr.startCapturing(EnumPresetTemplate.PT_DETECT_AND_NORMALIZE_DOCUMENT).catch(/*no-op*/);
+    cvr
+      .startCapturing(EnumPresetTemplate.PT_DETECT_AND_NORMALIZE_DOCUMENT)
+      .catch(/*no-op*/);
 
     return () => {
       cvr.removeResultReceiver(receiver);
@@ -84,5 +98,11 @@ export function Scanner({navigation}: StackNavigation): React.JSX.Element {
 
 const styles = StyleSheet.create({
   fullScreen: {flex: 1},
-  bottomView: {position: 'absolute', bottom: 10, left: 0, right: 0, alignItems: 'center'},
+  bottomView: {
+    position: 'absolute',
+    bottom: 10,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
 });

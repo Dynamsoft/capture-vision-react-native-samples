@@ -16,8 +16,8 @@ import {
 import {
   ExternalCachesDirectoryPath,
   TemporaryDirectoryPath,
-} from 'react-native-fs';
-import {StackNavigation} from './App.tsx';
+} from '@dr.pogodin/react-native-fs';
+import {StackNavigation} from './App';
 import {useFocusEffect} from '@react-navigation/native';
 
 const ColourMode = {
@@ -32,7 +32,7 @@ export const NormalizedImage = ({navigation}: StackNavigation) => {
   useFocusEffect(
     useCallback(() => {
       global.showingImage = global.deskewedImage;
-      setBase64(imageDataToBase64(global.showingImage));
+      setBase64(imageDataToBase64(global.showingImage) ?? '');
     }, []),
   );
 
@@ -66,7 +66,7 @@ export const NormalizedImage = ({navigation}: StackNavigation) => {
         )!!;
         break;
     }
-    setBase64(imageDataToBase64(global.showingImage));
+    setBase64(imageDataToBase64(global.showingImage) ?? '');
   };
 
   const onTabPress = (index: number) => {
